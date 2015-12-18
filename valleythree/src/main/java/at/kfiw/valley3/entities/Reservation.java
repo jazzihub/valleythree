@@ -1,4 +1,4 @@
-package valleythree.entities;
+package at.kfiw.valley3.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -22,12 +22,12 @@ public class Reservation implements Serializable {
 
 	//bi-directional many-to-one association to Visitor
 	@ManyToOne
-	@JoinColumn(name="r_b_bnr")
+	@JoinColumn(name="r_b_bnr", insertable=false, updatable=false)
 	private Visitor visitor;
 
 	//bi-directional many-to-one association to Event
 	@ManyToOne
-	@JoinColumn(name="r_vg_vgnr")
+	@JoinColumn(name="r_vg_vgnr", insertable=false, updatable=false)
 	private Event event;
 
 	public Reservation() {

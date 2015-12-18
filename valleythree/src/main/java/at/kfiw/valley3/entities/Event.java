@@ -1,4 +1,4 @@
-package valleythree.entities;
+package at.kfiw.valley3.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -12,9 +12,11 @@ import java.util.List;
  */
 @Entity
 @Table(name="vg_veranstaltungen")
-@NamedQuery(name="Event.findAll", query="SELECT e FROM Event e")
+@NamedQuery(name=Event.NQ_FIND_ALL, query="SELECT e FROM Event e")
 public class Event implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
+	public static final String NQ_FIND_ALL = "Event.findAll";
 
 	@Id
 	@Column(name="vg_vgnr")

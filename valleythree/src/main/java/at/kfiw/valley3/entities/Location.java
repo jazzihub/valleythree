@@ -1,4 +1,4 @@
-package valleythree.entities;
+package at.kfiw.valley3.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;

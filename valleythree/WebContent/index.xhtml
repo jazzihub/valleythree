@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<h:html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:m="http://code.google.com/p/gmaps4jsf/">
+
+
+<h:head>
+	<h:title>
+		<ui:insert name="title"></ui:insert>
+	</h:title>
+	<h:outputStylesheet >
+	</h:outputStylesheet>
+	<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+</h:head>
+
+<h:body>
+
+
+	<h:form>
+		<div>
+			<label>was</label>
+			<h:inputText autofocus="true">
+				<f:validateLength maximum="45" />
+			</h:inputText>
+		</div>
+		<div>
+			<label>von</label>
+			<h:inputText type="date" pattern="dd.MM.yyyy" >
+			</h:inputText>
+
+		</div>
+		<div>
+			<label>bis</label>
+			<h:inputText type="date" pattern="dd.MM.yyyy" >
+			</h:inputText>
+		</div>
+		<div>
+			<label>Wo</label>
+			<h:inputText >
+				<f:validateLength maximum="45" />
+			</h:inputText>
+		</div>
+
+		<div>
+			<h:commandButton value="Suche starten" 
+				type="submit"></h:commandButton>
+		</div>
+
+	</h:form>
+	
+	<div>
+	<h:dataTable value="#{eventController.eventsFromNow}" var="e">
+		<h:column>#{e.name}</h:column>
+		<h:column>#{e.begin}</h:column>
+		<h:column>#{e.end}</h:column>
+		<h:column>#{e.kind}</h:column>
+		<h:column>#{e.description}</h:column>
+		<h:column>#{e.detail}</h:column>
+		<h:column>#{e.ticketsTotal}</h:column>
+		<h:column>#{e.ticketInfo}</h:column>
+		<h:column>#{e.contributor}</h:column>		 
+		<h:column>
+			<m:map width="200px" height="100px"  latitude="46.672315" longitude="12.999523"/>
+		</h:column>
+		
+	
+	</h:dataTable>
+	</div>
+
+
+</h:body>
+</h:html>

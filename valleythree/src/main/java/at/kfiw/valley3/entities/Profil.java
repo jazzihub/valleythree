@@ -16,6 +16,7 @@ public class Profil implements Serializable {
 
 	@Id
 	@Column(name="vp_vr_vrnr")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int vnr;
 
 	@Lob
@@ -32,7 +33,7 @@ public class Profil implements Serializable {
 	//bi-directional one-to-one association to Organzizer
 	@OneToOne
 	@JoinColumn(name="vp_vr_vrnr")
-	private Organzizer organizer;
+	private Organizer organizer;
 
 	public Profil() {
 	}
@@ -69,11 +70,11 @@ public class Profil implements Serializable {
 		this.website = website;
 	}
 
-	public Organzizer getOrganizer() {
+	public Organizer getOrganizer() {
 		return this.organizer;
 	}
 
-	public void setOrganizer(Organzizer organizer) {
+	public void setOrganizer(Organizer organizer) {
 		this.organizer = organizer;
 	}
 

@@ -1,147 +1,187 @@
 package at.kfiw.valley3.entities;
 
 import java.io.Serializable;
-import javax.persistence.*;
-import java.util.List;
 
+import javax.persistence.*;
+
+import java.util.List;
 
 /**
  * The persistent class for the b_besucher database table.
  * 
  */
 @Entity
-@Table(name="b_besucher")
-@NamedQuery(name="Visitor.findAll", query="SELECT v FROM Visitor v")
-public class Visitor implements Serializable {
+@Table(name = "b_besucher")
+@NamedQueries({
+		@NamedQuery(name = Visitor.NQ_FIND_ALL, query = "SELECT v FROM Visitor v"),
+		@NamedQuery(name = Visitor.NQ_GET_USER_BY_EMAIL, query = "SELECT v FROM Visitor v WHERE v.email = :email"),
+		@NamedQuery(name = Visitor.NQ_GET_USER_BY_EMAIL_PASSWORD, query = "SELECT v FROM Visitor v WHERE v.email = :email and v.password = :password"),
+		@NamedQuery(name = Visitor.NQ_GET_USER_BY_LASTNAME, query = "SELECT v FROM Visitor v WHERE v.lastname = :lastname"),
+		@NamedQuery(name = Visitor.NQ_GET_USER_BY_FIRSTNAME, query = "SELECT v FROM Visitor v WHERE v.firstname = :firstname"),
+		@NamedQuery(name = Visitor.NQ_GET_USER_BY_FIRST_AND_LASTNAME, query = "SELECT v FROM Visitor v WHERE v.lastname = :lastname AND v.firstname = :firstname")
+})
+public class Visitor implements Serializable
+{
 	private static final long serialVersionUID = 1L;
 
+	public static final String NQ_FIND_ALL = "Visitor.findAll";
+	public static final String NQ_GET_USER_BY_EMAIL = "Visitor.getUserByEmail";
+	public static final String NQ_GET_USER_BY_EMAIL_PASSWORD = "Visitor.getUserByEmailAndPassword";
+	public static final String NQ_GET_USER_BY_LASTNAME = "Visitor.getUserByLastName";
+	public static final String NQ_GET_USER_BY_FIRSTNAME = "Visitor.getUserByFirstname";
+	public static final String NQ_GET_USER_BY_FIRST_AND_LASTNAME = "Visitor.getUserByFirstAndLastname";
+	
 	@Id
-	@Column(name="b_bnr")
+	@Column(name = "b_bnr")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int nr;
 
-	@Column(name="b_email")
+	@Column(name = "b_email")
 	private String email;
 
-	@Column(name="b_nachname")
+	@Column(name = "b_nachname")
 	private String lastname;
 
-	@Column(name="b_passwort")
+	@Column(name = "b_passwort")
 	private String password;
 
-	@Column(name="b_telefon")
+	@Column(name = "b_telefon")
 	private String tel;
 
-	@Column(name="b_username")
+	@Column(name = "b_username")
 	private String username;
 
-	@Column(name="b_vorname")
+	@Column(name = "b_vorname")
 	private String firstname;
 
-	//bi-directional many-to-one association to Command
-	@OneToMany(mappedBy="visitor")
-	private List<Command> comments;
+	// bi-directional many-to-one association to Command
+	@OneToMany(mappedBy = "visitor")
+	private List<Comment> comments;
 
-	//bi-directional many-to-one association to Reservation
-	@OneToMany(mappedBy="visitor")
+	// bi-directional many-to-one association to Reservation
+	@OneToMany(mappedBy = "visitor")
 	private List<Reservation> reservations;
 
-	public Visitor() {
+	public Visitor()
+	{
 	}
 
-	public int getNr() {
+	public int getNr()
+	{
 		return this.nr;
 	}
 
-	public void setNr(int nr) {
+	public void setNr(int nr)
+	{
 		this.nr = nr;
 	}
 
-	public String getEmail() {
+	public String getEmail()
+	{
 		return this.email;
 	}
 
-	public void setEmail(String email) {
+	public void setEmail(String email)
+	{
 		this.email = email;
 	}
 
-	public String getLastname() {
+	public String getLastname()
+	{
 		return this.lastname;
 	}
 
-	public void setLastname(String lastname) {
+	public void setLastname(String lastname)
+	{
 		this.lastname = lastname;
 	}
 
-	public String getPassword() {
+	public String getPassword()
+	{
 		return this.password;
 	}
 
-	public void setPassword(String password) {
+	public void setPassword(String password)
+	{
 		this.password = password;
 	}
 
-	public String getTel() {
+	public String getTel()
+	{
 		return this.tel;
 	}
 
-	public void setTel(String tel) {
+	public void setTel(String tel)
+	{
 		this.tel = tel;
 	}
 
-	public String getUsername() {
+	public String getUsername()
+	{
 		return this.username;
 	}
 
-	public void setUsername(String username) {
+	public void setUsername(String username)
+	{
 		this.username = username;
 	}
 
-	public String getFirstname() {
+	public String getFirstname()
+	{
 		return this.firstname;
 	}
 
-	public void setFirstname(String firstname) {
+	public void setFirstname(String firstname)
+	{
 		this.firstname = firstname;
 	}
 
-	public List<Command> getComments() {
+	public List<Comment> getComments()
+	{
 		return this.comments;
 	}
 
-	public void setComments(List<Command> comments) {
+	public void setComments(List<Comment> comments)
+	{
 		this.comments = comments;
 	}
 
-	public Command addComment(Command comment) {
+	public Comment addComment(Comment comment)
+	{
 		getComments().add(comment);
 		comment.setVisitor(this);
 
 		return comment;
 	}
 
-	public Command removeComment(Command comment) {
+	public Comment removeComment(Comment comment)
+	{
 		getComments().remove(comment);
 		comment.setVisitor(null);
 
 		return comment;
 	}
 
-	public List<Reservation> getReservations() {
+	public List<Reservation> getReservations()
+	{
 		return this.reservations;
 	}
 
-	public void setReservations(List<Reservation> reservations) {
+	public void setReservations(List<Reservation> reservations)
+	{
 		this.reservations = reservations;
 	}
 
-	public Reservation addReservation(Reservation reservation) {
+	public Reservation addReservation(Reservation reservation)
+	{
 		getReservations().add(reservation);
 		reservation.setVisitor(this);
 
 		return reservation;
 	}
 
-	public Reservation removeReservation(Reservation reservation) {
+	public Reservation removeReservation(Reservation reservation)
+	{
 		getReservations().remove(reservation);
 		reservation.setVisitor(null);
 

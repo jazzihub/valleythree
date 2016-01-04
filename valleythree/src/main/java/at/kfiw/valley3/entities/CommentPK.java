@@ -8,7 +8,7 @@ import javax.persistence.*;
  * 
  */
 @Embeddable
-public class CommandPK implements Serializable {
+public class CommentPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
@@ -18,7 +18,7 @@ public class CommandPK implements Serializable {
 	@Column(name="k_b_bnr", insertable=false, updatable=false)
 	private int kBBnr;
 
-	public CommandPK() {
+	public CommentPK() {
 	}
 	public int getKVgVgnr() {
 		return this.kVgVgnr;
@@ -37,10 +37,10 @@ public class CommandPK implements Serializable {
 		if (this == other) {
 			return true;
 		}
-		if (!(other instanceof CommandPK)) {
+		if (!(other instanceof CommentPK)) {
 			return false;
 		}
-		CommandPK castOther = (CommandPK)other;
+		CommentPK castOther = (CommentPK)other;
 		return 
 			(this.kVgVgnr == castOther.kVgVgnr)
 			&& (this.kBBnr == castOther.kBBnr);

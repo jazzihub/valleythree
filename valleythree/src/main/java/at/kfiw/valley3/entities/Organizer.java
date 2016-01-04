@@ -11,12 +11,13 @@ import java.util.List;
  */
 @Entity
 @Table(name="vr_veranstalter")
-@NamedQuery(name="Organzizer.findAll", query="SELECT o FROM Organzizer o")
-public class Organzizer implements Serializable {
+@NamedQuery(name="Organizer.findAll", query="SELECT o FROM Organizer o")
+public class Organizer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name="vr_vrnr")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int nr;
 
 	@Column(name="vr_email")
@@ -47,7 +48,7 @@ public class Organzizer implements Serializable {
 	@JoinColumn(name="vr_o_plz")
 	private Place place;
 
-	public Organzizer() {
+	public Organizer() {
 	}
 
 	public int getNr() {

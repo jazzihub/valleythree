@@ -9,6 +9,7 @@ import at.kfiw.valley3.services.Service;
 
 public class EventListController
 {
+	//Dependency Injection
 	@EJB
 	Service service;
 	

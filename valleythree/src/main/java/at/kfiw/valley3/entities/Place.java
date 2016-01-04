@@ -1,7 +1,11 @@
 package at.kfiw.valley3.entities;
 
 import java.io.Serializable;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.persistence.*;
+
 import java.util.List;
 
 
@@ -9,6 +13,8 @@ import java.util.List;
  * The persistent class for the o_orte database table.
  * 
  */
+@ManagedBean
+@SessionScoped
 @Entity
 @Table(name="o_orte")
 @NamedQuery(name="Place.findAll", query="SELECT p FROM Place p")
@@ -26,9 +32,9 @@ public class Place implements Serializable {
 	@OneToMany(mappedBy="place")
 	private List<Location> locations;
 
-	//bi-directional many-to-one association to Organzizer
+	//bi-directional many-to-one association to Organizer
 	@OneToMany(mappedBy="place")
-	private List<Organzizer> organizers;
+	private List<Organizer> organizers;
 
 	public Place() {
 	}
@@ -71,22 +77,22 @@ public class Place implements Serializable {
 		return location;
 	}
 
-	public List<Organzizer> getOrganizers() {
+	public List<Organizer> getOrganizers() {
 		return this.organizers;
 	}
 
-	public void setOrganizers(List<Organzizer> organizers) {
+	public void setOrganizers(List<Organizer> organizers) {
 		this.organizers = organizers;
 	}
 
-	public Organzizer addOrganizer(Organzizer organizer) {
+	public Organizer addOrganizer(Organizer organizer) {
 		getOrganizers().add(organizer);
 		organizer.setPlace(this);
 
 		return organizer;
 	}
 
-	public Organzizer removeOrganizer(Organzizer organizer) {
+	public Organizer removeOrganizer(Organizer organizer) {
 		getOrganizers().remove(organizer);
 		organizer.setPlace(null);
 

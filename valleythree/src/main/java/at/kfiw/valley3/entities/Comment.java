@@ -10,12 +10,12 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="k_kommentare")
-@NamedQuery(name="Command.findAll", query="SELECT c FROM Command c")
-public class Command implements Serializable {
+@NamedQuery(name="Comment.findAll", query="SELECT c FROM Comment c")
+public class Comment implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private CommandPK id;
+	private CommentPK id;
 
 	@Column(name="k_bewertung")
 	private byte rating;
@@ -38,14 +38,14 @@ public class Command implements Serializable {
 	@JoinColumn(name="k_vg_vgnr", insertable=false, updatable=false)
 	private Event event;
 
-	public Command() {
+	public Comment() {
 	}
 
-	public CommandPK getId() {
+	public CommentPK getId() {
 		return this.id;
 	}
 
-	public void setId(CommandPK id) {
+	public void setId(CommentPK id) {
 		this.id = id;
 	}
 

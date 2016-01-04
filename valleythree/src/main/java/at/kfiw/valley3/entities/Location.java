@@ -1,7 +1,11 @@
 package at.kfiw.valley3.entities;
 
 import java.io.Serializable;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.persistence.*;
+
 import java.util.List;
 
 
@@ -9,6 +13,8 @@ import java.util.List;
  * The persistent class for the l_location database table.
  * 
  */
+@ManagedBean
+@SessionScoped
 @Entity
 @Table(name="l_location")
 @NamedQuery(name="Location.findAll", query="SELECT l FROM Location l")
@@ -17,6 +23,7 @@ public class Location implements Serializable {
 
 	@Id
 	@Column(name="l_mnr")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int nr;
 
 	@Column(name="l_latitude")
@@ -35,7 +42,7 @@ public class Location implements Serializable {
 	private String type;
 
 	//bi-directional many-to-one association to Place
-	@ManyToOne
+	@ManyToOne//(cascade={CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name="l_o_plz")
 	private Place place;
 

@@ -1,19 +1,31 @@
 package at.kfiw.valley3.entities;
 
 import java.io.Serializable;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.persistence.*;
+
 import java.util.List;
 
 
-/**
- * The persistent class for the vr_veranstalter database table.
- * 
- */
+
+@ManagedBean
+@SessionScoped
 @Entity
 @Table(name="vr_veranstalter")
-@NamedQuery(name="Organizer.findAll", query="SELECT o FROM Organizer o")
+@NamedQueries({
+@NamedQuery(name="Organizer.findAll", query="SELECT o FROM Organizer o"),
+@NamedQuery(name=Organizer.NQ_GET_ORGANIZER_BY_EMAIL, query="SELECT o FROM Organizer o WHERE o.email = :email"),
+@NamedQuery(name=Organizer.NQ_EXISTING_PASSWORD, query="SELECT o FROM Organizer o WHERE o.password = :password"),
+@NamedQuery(name=Organizer.NQ_GET_ORGANIZER_BY_EMAIL_AND_PASSWORD, query="SELECT o FROM Organizer o WHERE o.password = :password AND o.email = :email")
+})
 public class Organizer implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
+	public static final String NQ_EXISTING_PASSWORD = "Organizer.existingPassword";
+	public static final String NQ_GET_ORGANIZER_BY_EMAIL = "Organizer.getOrganizerByEmail";
+	public static final String NQ_GET_ORGANIZER_BY_EMAIL_AND_PASSWORD = "Organizer.getOrganizerByEmailAndPassword";
 
 	@Id
 	@Column(name="vr_vrnr")
@@ -32,7 +44,7 @@ public class Organizer implements Serializable {
 	@Column(name="vr_strasse")
 	private String street;
 
-	@Column(name="vr_telefon")
+	@Column()
 	private String tel;
 
 	//bi-directional many-to-one association to Event
@@ -44,7 +56,7 @@ public class Organizer implements Serializable {
 	private Profil profil;
 
 	//bi-directional many-to-one association to Place
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="vr_o_plz")
 	private Place place;
 

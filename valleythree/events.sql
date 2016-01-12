@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `events`.`vr_veranstalter` (
   `vr_name` VARCHAR(45) NOT NULL,
   `vr_strasse` VARCHAR(45) NOT NULL,
   `vr_email` VARCHAR(45) NOT NULL,
-  `vr_telefon` VARCHAR(45) NOT NULL,
+  `vr_telefon` VARCHAR(45) NOT NULL DEFAULT '111111111111',
   `vr_passwort` VARCHAR(45) NOT NULL,
   `vr_o_plz` SMALLINT(6) NOT NULL,
   PRIMARY KEY (`vr_vrnr`),
@@ -47,6 +47,7 @@ CREATE TABLE IF NOT EXISTS `events`.`vr_veranstalter` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
 
 
 -- -----------------------------------------------------
@@ -86,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `events`.`vg_veranstaltungen` (
   `vg_karteninfo` TEXT NOT NULL,
   `vg_plakat` BLOB NULL,
   `vg_kartengesamt` SMALLINT(6) NULL,
-  `vg_m_mnr` INT NOT NULL,
+  `vg_m_mnr` NULL,
   PRIMARY KEY (`vg_vgnr`),
   INDEX `fk_vg_veranstaltung_vr_veranstalter_idx` (`vg_vr_vrnr` ASC),
   INDEX `fk_vg_veranstaltungen_m_markers1_idx` (`vg_m_mnr` ASC),

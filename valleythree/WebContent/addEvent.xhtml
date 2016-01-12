@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<h:html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+
+<h:head>
+	<h:title>
+		<ui:insert name="title"></ui:insert>
+	</h:title>
+	<h:outputStylesheet>
+	</h:outputStylesheet>
+</h:head>
+
+<h:body>
+	<h:form>
+		<div>
+			<label>Name</label>
+			<h:inputText p:type="text" value="#{event.name}" autofocus="true">
+				<f:validateLength maximum="45" />
+			</h:inputText>
+		</div>
+		<div>
+			<label>Datum von</label>
+			<h:inputText p:type="date" value="#{event.begin}">
+				<f:convertDateTime pattern="yyyy-MM-dd" />
+				
+			</h:inputText>
+		</div>
+		<div>
+			<label>Datum bis</label>
+			<h:inputText p:type="date" value="#{event.end}">
+				<f:convertDateTime pattern="yyyy-MM-dd" />
+			</h:inputText>
+
+		</div>
+		<div>
+			<label>Art</label>
+			<h:inputText  value="#{event.kind}">
+			</h:inputText>
+		</div>
+		<div>
+			<label>Detailbeschreibung</label>
+			<h:inputTextarea value="#{event.detail}" required="true">
+				<f:validateLength maximum="45" />
+			</h:inputTextarea>
+		</div>
+		<div>
+			<label>Kurzbeschreibung</label>
+			<h:inputTextarea value="#{event.description}">
+				<f:validateLength maximum="45" />
+			</h:inputTextarea>
+		</div>
+		<div>
+			<label>Anzahl Tickets</label>
+			<h:inputText value="#{event.ticketsTotal}">
+			</h:inputText>
+		</div>
+		<div>
+			<label>Ticket Info</label>
+			<h:inputText type="text" value="#{event.ticketInfo}">
+				<f:validateLength maximum="45" />
+			</h:inputText>
+		</div>
+		<div>
+			<label>Mitwirkende</label>
+			<h:inputText type="text" value="#{event.contributor}">
+				<f:validateLength maximum="45" />
+			</h:inputText>
+		</div>
+		<div>
+			<h:commandButton value="Hinzufuegen"
+				action="#{eventController.addEvent()}" type="submit"></h:commandButton>
+		</div>
+	</h:form>
+
+
+</h:body>
+</h:html>

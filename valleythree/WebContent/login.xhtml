@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<h:html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head></h:head>
+<h:body>
+	<h1>Login</h1>
+
+	<h:form>
+		<div>
+		<label for="email">E-mail:</label>
+		<h:inputText id="email" value="#{organizer.email}" p:placeholder="ihre@adresse.at" p:type="email" required="true" requiredMessage="Geben Sie eine gueltige E-Mail-Adresse ein"></h:inputText>
+		<h:message for="email"></h:message><br/>
+		</div>
+		<div>
+		<label for="pw">Passwort:</label>
+		<h:inputSecret id="pw" value="#{organizer.password}"  required="true" requiredMessage="Geben Sie eine Passwort ein"></h:inputSecret>
+		<h:message for="pw"></h:message><br/>
+		</div>
+		
+		<h:commandButton action="#{loginValidator.validLogin()}" value="Anmelden" />
+	</h:form>
+
+</h:body>
+</h:html>

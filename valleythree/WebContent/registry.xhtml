@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<h:html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+      
+      
+<h:head>
+  <h:title><ui:insert name="title"></ui:insert></h:title>
+  
+</h:head>
+
+<h:body>
+<h1>Registrierung</h1>
+
+ <h:form>
+        <div>
+        <label for="name">Name:</label>            
+            <h:inputText id="name" value="#{organizer.name}" 
+            			  requiredMessage="Geben Sie Ihren Namen ein" autofocus="true" required="true">
+            <f:validateLength minimum="1" maximum="45" />
+            </h:inputText>
+            <h:message for="name"></h:message><br/>
+        </div>
+        <div>
+        <label for="strasse">Strasse:</label>            
+            <h:inputText id="strasse" value="#{organizer.street}" required="true" 
+            			requiredMessage="Geben Sie die Strasse ein">
+            <f:validateLength minimum="1" maximum="45" />		
+            </h:inputText>
+            <h:message for="strasse"></h:message><br/>
+        </div>
+        
+        <div>
+        <label for="plz">PLZ:</label>            
+            <h:inputText id="plz" value="#{place.plz}"  p:placeholder="1234"  required="true" 
+            			requiredMessage="Geben Sie die PLZ ein">
+            <f:validateLongRange minimum="1000" maximum="99999" />	
+            </h:inputText>
+            <h:message for="plz"></h:message><br/>
+        </div>
+        <div>
+        <label for="ort">Ort:</label>            
+            <h:inputText id="ort" value="#{place.place}" required="true" 
+            			requiredMessage="Geben Sie den Ort ein">
+            <f:validateLength minimum="1" maximum="45" />				
+            
+            </h:inputText>
+            <h:message for="ort"></h:message><br/>
+        </div>
+        <div>
+        <label for="tel">Telefon:</label>            
+            <h:inputText id="tel" value="#{organizer.tel}" required="true" p:placeholder="+43 660 1111111"
+            			requiredMessage="Geben Sie eine gueltige Telefonnummer ein" >
+            <f:validateLength minimum="4" maximum="45" />	
+            </h:inputText>
+            <h:message for="tel"></h:message><br/>
+        </div>
+        <div>
+        <label for="email">E-Mail:</label>            
+            <h:inputText id="email" value="#{organizer.email}" p:type="email" 
+            maxlength="30" p:placeholder="ihre@adresse.at" required="true" requiredMessage="Geben Sie eine gueltige E-Mail-Adresse ein">
+            <f:validator validatorId="registryValidator" />
+            </h:inputText>
+       		<h:message for="email"></h:message><br/>
+        </div>
+        <div>
+        <label for="pw">Passwort:</label>            
+            <h:inputSecret id="pw" value="#{organizer.password}" p:placeholder="min. 7 Zeichen" required="true"
+            			requiredMessage="Geben Sie ein Passwort ein">
+            <f:validateLength minimum="7" maximum="15" />
+            </h:inputSecret>
+            <h:message for="pw"></h:message><br/>
+        </div><br/>
+        <div>
+        	<h:commandButton id="btn" value="Registrieren" action="#{organizerController.addOrganizer()}" type="submit" ></h:commandButton>
+        </div>
+        <br/>
+    </h:form>   
+</h:body>
+</h:html>

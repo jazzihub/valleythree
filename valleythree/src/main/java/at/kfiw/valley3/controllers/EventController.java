@@ -36,7 +36,7 @@ public class EventController
 			System.out.println("EventController.addEvent ok");
 		} catch (Throwable t)
 		{
-			logger.error("Fehler Controller: Event konnte nicht hinzugefügt werden");
+			logger.error("Fehler EventController: Event konnte nicht hinzugefügt werden");
 		}
 
 	}

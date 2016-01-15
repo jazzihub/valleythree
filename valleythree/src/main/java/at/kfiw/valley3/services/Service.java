@@ -23,7 +23,6 @@ import at.kfiw.valley3.entities.Visitor;
 
 @ApplicationScoped
 @ManagedBean(eager = true)
-
 // If you want to control the Tx demarcation you should add:
 // @TransactionManagement(TransactionManagementType.BEAN)
 // @TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -298,12 +297,13 @@ public class Service
 		return false;
 
 	}
-	
+
 	public boolean getOrganizerByEmailAndPassword(String email, String password)
 	{
-		
+
 		TypedQuery<Organizer> query = entityManager.createNamedQuery(
-				Organizer.NQ_GET_ORGANIZER_BY_EMAIL_AND_PASSWORD, Organizer.class);
+				Organizer.NQ_GET_ORGANIZER_BY_EMAIL_AND_PASSWORD,
+				Organizer.class);
 		query.setParameter("email", email);
 		query.setParameter("password", password);
 
@@ -315,51 +315,59 @@ public class Service
 		{
 			return false;
 		}
-
-		return true;
+		
+			return true;
+		
 	}
 
-//	public boolean getExistingPassword(String password)
-//	{
-//
-//		TypedQuery<Organizer> query = entityManager.createNamedQuery(
-//				Organizer.NQ_EXISTING_PASSWORD, Organizer.class);
-//		query.setParameter("password", password);
-//
-//		Organizer o;
-//		try
-//		{
-//			o = (Organizer) query.getSingleResult();
-//		} catch (NoResultException e)
-//		{
-//			return false;
-//		}
-//
-//		return true;
-//
-//	}
-	
-	//Place
+	// public boolean getExistingPassword(String password)
+	// {
+	//
+	// TypedQuery<Organizer> query = entityManager.createNamedQuery(
+	// Organizer.NQ_EXISTING_PASSWORD, Organizer.class);
+	// query.setParameter("password", password);
+	//
+	// Organizer o;
+	// try
+	// {
+	// o = (Organizer) query.getSingleResult();
+	// } catch (NoResultException e)
+	// {
+	// return false;
+	// }
+	//
+	// return true;
+	//
+	// }
+
+	// Place
 	public void addPlace(Place p)
 	{
 		try
 		{
-			// entityManager.getTransaction().begin();
+
 			if (!entityManager.contains(p))
 			{
 				entityManager.persist(p);
 			}
-			else
-			{
-				entityManager.merge(p);
-			}
-			// entityManager.getTransaction().commit();
+
 			System.out.println("Service.addPlace ok");
 		} catch (Throwable t)
 		{
 			logger.error(
-					"Fehler Service.addEvent: Place konnte nicht hinzugefügt werden",
+					"Fehler Service.addEPlace: Place konnte nicht hinzugefügt werden",
 					t);
 		}
+	}
+
+	public Place getPlaceByPlz(short plz)
+	{
+
+		Place place = entityManager.find(Place.class, plz);
+		if (place == null)
+			return null;
+
+		else
+			return place;
 	}
 }

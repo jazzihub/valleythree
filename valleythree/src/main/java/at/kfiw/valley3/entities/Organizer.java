@@ -44,7 +44,7 @@ public class Organizer implements Serializable {
 	@Column(name="vr_strasse")
 	private String street;
 
-	@Column()
+	@Column(name="vr_telefon")
 	private String tel;
 
 	//bi-directional many-to-one association to Event
@@ -56,7 +56,7 @@ public class Organizer implements Serializable {
 	private Profil profil;
 
 	//bi-directional many-to-one association to Place
-	@ManyToOne(cascade=CascadeType.PERSIST)
+	@ManyToOne//(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="vr_o_plz")
 	private Place place;
 

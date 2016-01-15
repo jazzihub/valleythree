@@ -11,17 +11,26 @@
 
 	<h:form>
 		<div>
-		<label for="email">E-mail:</label>
-		<h:inputText id="email" value="#{organizer.email}" p:placeholder="ihre@adresse.at" p:type="email" required="true" requiredMessage="Geben Sie eine gueltige E-Mail-Adresse ein"></h:inputText>
-		<h:message for="email"></h:message><br/>
+			<label for="email">E-mail:</label>
+			<h:inputText id="email" value="#{organizer.email}"
+				p:placeholder="ihre@adresse.at" p:type="email" required="true"
+				requiredMessage="Geben Sie eine gueltige E-Mail-Adresse ein">
+				<f:validator validatorId="loginValidator" />
+			</h:inputText>
+			<h:message for="email"></h:message>
+			<br />
+
 		</div>
 		<div>
-		<label for="pw">Passwort:</label>
-		<h:inputSecret id="pw" value="#{organizer.password}"  required="true" requiredMessage="Geben Sie eine Passwort ein"></h:inputSecret>
-		<h:message for="pw"></h:message><br/>
+			<label for="pw">Passwort:</label>
+			<h:inputSecret id="pw" value="#{organizer.password}" required="true"
+				requiredMessage="Geben Sie eine Passwort ein"></h:inputSecret>
+			<h:message for="pw"></h:message>
+			<br />
 		</div>
-		
-		<h:commandButton action="#{loginValidator.validLogin()}" value="Anmelden" />
+
+		<h:commandButton action="#{loginController.validLogin()}"
+			value="Anmelden" />
 	</h:form>
 
 </h:body>

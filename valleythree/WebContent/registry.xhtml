@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <h:html xmlns="http://www.w3.org/1999/xhtml"
@@ -9,6 +10,7 @@
       
 <h:head>
   <h:title><ui:insert name="title"></ui:insert></h:title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   
 </h:head>
 
@@ -75,7 +77,7 @@
             <h:message for="pw"></h:message><br/>
         </div><br/>
         <div>
-        	<h:commandButton id="btn" value="Registrieren" action="#{organizerController.addOrganizer()}" type="submit" ></h:commandButton>
+        	<h:commandButton id="btn" value="Weiter" action="#{navigation.showData()}" type="submit" ></h:commandButton>
         </div>
         <br/>
     </h:form>   

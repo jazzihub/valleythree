@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `events`.`vr_veranstalter` (
     FOREIGN KEY (`vr_o_plz`)
     REFERENCES `events`.`o_orte` (`o_plz`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `events`.`vg_veranstaltungen` (
   `vg_karteninfo` TEXT NOT NULL,
   `vg_plakat` BLOB NULL,
   `vg_kartengesamt` SMALLINT(6) NULL,
-  `vg_m_mnr` NULL,
+  `vg_m_mnr` int NULL,
   PRIMARY KEY (`vg_vgnr`),
   INDEX `fk_vg_veranstaltung_vr_veranstalter_idx` (`vg_vr_vrnr` ASC),
   INDEX `fk_vg_veranstaltungen_m_markers1_idx` (`vg_m_mnr` ASC),

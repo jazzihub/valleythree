@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<h:html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+
+<h:head>
+	<h:title>
+		<ui:insert name="title"></ui:insert>
+	</h:title>
+	<h:outputStylesheet>
+	</h:outputStylesheet>
+</h:head>
+
+<h:body>
+<h1>Veranstaltung hinzufügen</h1>
+	<h:form enctype="multipart/form-data">
+		<div>
+			<label>Name</label>
+			<h:inputText p:type="text" value="#{event.name}" autofocus="true">
+				<f:validateLength maximum="45" />
+			</h:inputText>
+		</div>
+		<div>
+			<label>Datum von</label>
+			<h:inputText p:type="date" value="#{event.begin}">
+				<f:convertDateTime pattern="dd.MM.yyyy" />
+			</h:inputText>
+		</div>
+		<div>
+			<label>Datum bis</label>
+			<h:inputText p:type="date" value="#{event.end}">
+				<f:convertDateTime pattern="dd.MM.yyyy" />
+			</h:inputText>
+
+		</div>
+		<div>
+			<label>Art</label>
+			<h:inputText value="#{event.kind}">
+			</h:inputText>
+		</div>
+		<div>
+			<label>Detailbeschreibung</label>
+			<h:inputTextarea value="#{event.detail}" required="true">
+				<f:validateLength maximum="45" />
+			</h:inputTextarea>
+		</div>
+		<div>
+			<label>Kurzbeschreibung</label>
+			<h:inputTextarea value="#{event.description}">
+				<f:validateLength maximum="45" />
+			</h:inputTextarea>
+		</div>
+		<div>
+			<label for="strasse">Strasse:</label>
+			<h:inputText id="strasse" value="#{location.street}" required="true"
+				requiredMessage="Geben Sie die Strasse ein">
+				<f:validateLength minimum="1" maximum="45" />
+			</h:inputText>
+			<h:message for="strasse"></h:message>
+
+		</div>
+
+		<div>
+			<label for="plz">PLZ:</label>
+			<h:inputText id="plz" value="#{place.plz}" p:placeholder="1234"
+				required="true" pattern="^[0-9]*$"
+				requiredMessage="Geben Sie die PLZ ein">
+				<f:validateLongRange minimum="1000" maximum="99999" />
+			</h:inputText>
+			<h:message for="plz"></h:message>
+			<br />
+		</div>
+		<div>
+			<label for="ort">Ort:</label>
+			<h:inputText id="ort" value="#{place.place}" required="true"
+				requiredMessage="Geben Sie den Ort ein">
+				<f:validateLength minimum="1" maximum="45" />
+			</h:inputText>
+			<h:message for="ort"></h:message>
+			<br />
+		</div>
+		<div>
+			<label for="location">Location:</label>
+			<h:inputText id="location" value="#{location.name}" required="true"
+				requiredMessage="Geben Sie den Veranstaltungsort ein">
+				<f:validateLength minimum="1" maximum="45" />
+			</h:inputText>
+			<h:message for="location"></h:message>
+		</div>
+		<div>
+			<label>Anzahl Tickets</label>
+			<h:inputText value="#{event.ticketsTotal}">
+			</h:inputText>
+		</div>
+		<div>
+			<label>Ticket Info</label>
+			<h:inputText type="text" value="#{event.ticketInfo}">
+				<f:validateLength maximum="45" />
+			</h:inputText>
+		</div>
+		<div>
+			<label>Mitwirkende</label>
+			<h:inputText type="text" value="#{event.contributor}">
+				<f:validateLength maximum="45" />
+			</h:inputText>
+		</div>
+		<!--  
+		<h:form>
+			<div>
+				<label>Foto</label>
+
+				<h:inputFile sizeLimit="100000"
+					value="#{fileUploadController.tempPoster}"
+					allowTypes="/(\.|\/)(gif|jpe?g|png)$/">
+
+				</h:inputFile>
+				<h:outputText value="Datei auswählen"
+					rendered="#{fileUploadController.tempPoster == null}"></h:outputText>
+				<h:commandButton action="#{fileUploadController.upload()}"
+					value="Upload" />
+				<h:outputText value="Datei erfolgreich hochgeladen"
+					rendered="#{fileUploadController.tempPoster != null}"></h:outputText>
+
+
+			</div>
+		</h:form>
+		-->
+		<div>
+			<h:commandButton value="Hinzufuegen"
+				action="#{eventController.addEvent()}" type="submit" ></h:commandButton>
+			<h:button outcome="#{navigation.organizerArea()}"
+				value="Zurück zum Veranstalterbereich" />
+		</div>
+	</h:form>
+
+
+</h:body>
+</h:html>

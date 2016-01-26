@@ -22,7 +22,9 @@ public class OrganizerController
 	Service service;
 
 	private static final Logger logger = LoggerFactory.getLogger(Service.class);
-
+	private EncodingPassword password;
+	
+	
 
 	public String addOrganizer()
 	{
@@ -34,8 +36,11 @@ public class OrganizerController
 		
 		try
 		{			
-			existingPlace = service.getPlaceByPlz(p.getPlz());
+			password = new EncodingPassword();
 			
+			existingPlace = service.getPlaceByPlz(p.getPlz());
+			String securePassword = password.encrypt(o.getPassword());
+			o.setPassword(securePassword);
 			
 			//wenn PLZ bereits in DB in vorhanden, dann neuen Place hinzufügen
 			if(existingPlace == null)

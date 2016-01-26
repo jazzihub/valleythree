@@ -33,4 +33,9 @@ public class Navigation implements Serializable
 	{
 		return "index";
 	}
+	
+	public String organizerArea()
+	{
+		return "organizerArea";
+	}
 }

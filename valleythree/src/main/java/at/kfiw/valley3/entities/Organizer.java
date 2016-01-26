@@ -6,6 +6,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -48,7 +49,7 @@ public class Organizer implements Serializable {
 	private String tel;
 
 	//bi-directional many-to-one association to Event
-	@OneToMany(mappedBy="organizer")
+	@OneToMany(mappedBy="organizer", cascade=CascadeType.PERSIST)
 	private List<Event> events;
 
 	//bi-directional one-to-one association to Profil
@@ -61,6 +62,7 @@ public class Organizer implements Serializable {
 	private Place place;
 
 	public Organizer() {
+		events = new ArrayList<Event>();
 	}
 
 	public int getNr() {

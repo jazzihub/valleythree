@@ -10,6 +10,7 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
+import at.kfiw.valley3.entities.Organizer;
 import at.kfiw.valley3.services.Service;
 
 @ManagedBean
@@ -29,11 +30,11 @@ public class RegistryValidator implements Validator
 	{
 		String email = String.valueOf(value);
 		
-		boolean e = false;
+		Organizer o = null;
 		try
 		{
 			// boolean
-			e = service.getOrganizerByEmail(email);
+			o = service.getOrganizerByEmail(email);
 					
 		} catch (Exception ex)
 		{
@@ -42,7 +43,7 @@ public class RegistryValidator implements Validator
 			throw new ValidatorException(message);
 		}
 
-		if (e == false)
+		if (o != null)
 		{
 			message = new FacesMessage(
 					"Eine Registrierung mit dieser email existiert bereits");

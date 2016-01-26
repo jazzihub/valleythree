@@ -6,6 +6,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -17,7 +18,12 @@ import java.util.List;
 @SessionScoped
 @Entity
 @Table(name="l_location")
-@NamedQuery(name="Location.findAll", query="SELECT l FROM Location l")
+@NamedQueries({
+@NamedQuery(name="Location.findAll", query="SELECT l FROM Location l"),
+@NamedQuery(name="Location.getLocationByNameAndPlz", query="SELECT l FROM Location l JOIN l.place p WHERE l.name = :name AND p.plz = :plz")
+})
+
+
 public class Location implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -51,6 +57,7 @@ public class Location implements Serializable {
 	private List<Event> events;
 
 	public Location() {
+		events = new ArrayList<Event>();
 	}
 
 	public int getNr() {

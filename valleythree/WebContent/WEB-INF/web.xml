@@ -14,4 +14,9 @@
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
 	
+	<mime-mapping>
+        <extension>java</extension>
+        <mime-type>text/plain</mime-type>
+    </mime-mapping>
+	
 </web-app>

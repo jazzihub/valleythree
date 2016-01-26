@@ -1,80 +1,227 @@
 package at.kfiw.valley3.controllers;
 
-
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import at.kfiw.valley3.entities.Event;
+import at.kfiw.valley3.entities.Location;
+import at.kfiw.valley3.entities.Organizer;
+import at.kfiw.valley3.entities.Place;
 import at.kfiw.valley3.services.Service;
 
 @ManagedBean
-@RequestScoped
-public class EventController
+@ViewScoped
+public class EventController implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8812813254216636592L;
+
 	@EJB
 	Service service;
+	
+	@ManagedProperty(value="#{event}")
+	private Event e;
+	
+	@ManagedProperty(value="#{location}")
+	private Location l;
+	
+	@ManagedProperty(value="#{place}")
+	private Place p;
 
 	private static final Logger logger = LoggerFactory.getLogger(Service.class);
 
-
-	public void addEvent()
+	public String addEvent()
 	{
-		Event e = (Event) FacesContext.getCurrentInstance()
-				.getExternalContext().getSessionMap().get("event");
+//		Event e = (Event) FacesContext.getCurrentInstance()
+//				.getExternalContext().getSessionMap().get("event");
+//
+//		Place p = (Place) FacesContext.getCurrentInstance()
+//				.getExternalContext().getSessionMap().get("place");
+		
+		Place existingPlace = null;
+		
+		Location existingLocation = null;
+
+//		Location l = (Location) FacesContext.getCurrentInstance()
+//				.getExternalContext().getSessionMap().get("location");
+		
+		HttpServletRequest req = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		HttpSession session = req.getSession(true);		
+		
+		Organizer tempOrganizer = (Organizer) session.getAttribute("currentUser");
+		Organizer o = service.getOrganizerByEmail(tempOrganizer.getEmail());
 
 		try
 		{
+			existingPlace = service.getPlaceByPlz(p.getPlz());
+			existingLocation = service.getLocationByNameAndPlz(l.getName(), p.getPlz());
+			
+			//service.addEvent(existingPlace, existingLocation, e, p, l, o);
+			// wenn PLZ bereits in DB in vorhanden, dann neuen Place hinzufügen
+			if (existingPlace == null)
+			{
+
+				p.addLocation(l);
+				service.addPlace(p);
+			} else
+			{
+				l.setPlace(existingPlace);
+			}
+			
+			if (existingLocation == null)
+			{
+				l.addEvent(e);
+				service.addLocation(l);
+			}
+			else
+			{
+				e.setLocation(existingLocation);
+			}
+			
+//			o.addEvent(e);
+//			service.updateOrganizer(o);
+			e.setOrganizer(o);
 			service.addEvent(e);
-			System.out.println("EventController.addEvent ok");
+			logger.info("EventController.addEvent ok");
+			return "organizerArea";
+			
 		} catch (Throwable t)
 		{
-			logger.error("Fehler EventController: Event konnte nicht hinzugefügt werden");
+			logger.error("Fehler EventController.addEvent(): Event konnte nicht hinzugefügt werden",t);
 		}
+		finally
+		{
+			clear();
+		}
+		
+		return null;
 
 	}
+	
+	public void clear()
+	{
+		e.setName(null);
+		e.setBegin(null);
+		e.setEnd(null);
+		e.setKind(null);
+		e.setDetail(null);
+		e.setDescription(null);
+		l.setStreet(null);
+		p.setPlz((short)0);
+		p.setPlace(null);
+		l.setName(null);
+		e.setTicketsTotal((short)0);
+		e.setTicketInfo(null);
+		e.setContributor(null);
+		
+	}
+	
 
 	public List<Event> getEvents()
 	{
 
 		try
 		{
-			System.out.println("EventController.getEvents ok");
+			logger.info("EventController.getEvents ok");
 			return service.getAllEvents();
 
 		} catch (Throwable t)
 		{
-			logger.error("Fehler Controller: Event konnte nicht hinzugefügt werden");
+			logger.error("Fehler Controller: Event konnte nicht hinzugefügt werden", t);
+		}
+
+		return null;
+
+	}
+
+	public List<Event> getEventsFromNow()
+	{
+
+		try
+		{
+			logger.info("EventController.getEventsFromNow ok");
+			return service.getEventFromNow();
+
+		} catch (Throwable t)
+		{
+			logger.error("Fehler Controller: Event konnte nicht hinzugefügt werden", t);
 		}
 
 		return null;
 
 	}
 	
-	public List<Event> getEventsFromNow()
+	public List<Event> getEventsFromOrganizer()
 	{
-
 		try
 		{
-			System.out.println("EventController.getEventsFromNow ok");
-			return service.getEventFromNow();
+			//beim Login wurde Session Attribut "currentUser" gesetzt		
+			HttpServletRequest req = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+			HttpSession session = req.getSession(true);		
+			
+			Organizer temp = (Organizer) session.getAttribute("currentUser");
+			Organizer o = service.getOrganizerByEmail(temp.getEmail());
+			
+			
+			
+			logger.info("EventController.getEventsFromOrganizer ok");
+			return service.getEventsFromOrganizer(o);
 
 		} catch (Throwable t)
 		{
-			logger.error("Fehler Controller: Event konnte nicht hinzugefügt werden");
+			logger.error("Fehler Controller: Event konnte nicht hinzugefügt werden", t);
 		}
 
 		return null;
-
 	}
 
+	public Event getE()
+	{
+		return e;
+	}
+
+	public void setE(Event e)
+	{
+		this.e = e;
+	}
+
+	public Location getL()
+	{
+		return l;
+	}
+
+	public void setL(Location l)
+	{
+		this.l = l;
+	}
+
+	public Place getP()
+	{
+		return p;
+	}
+
+	public void setP(Place p)
+	{
+		this.p = p;
+	}
+	
+	//Getter Setter
+	
 	
 
 }

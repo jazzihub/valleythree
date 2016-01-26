@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.persistence.*;
+import javax.servlet.http.Part;
 
 import java.util.Date;
 import java.util.List;
@@ -23,6 +24,7 @@ import java.util.List;
 		@NamedQuery(name = Event.NQ_GET_EVENT_BY_BEGIN_END, query = "SELECT e FROM Event e WHERE e.begin = :begin AND e.end = :end order by e.begin"),
 		@NamedQuery(name = Event.NQ_GET_EVENT_FROM_NOW, query = "SELECT e FROM Event e WHERE e.end > CURRENT_DATE order by e.begin"),
 		@NamedQuery(name = Event.NQ_GET_EVENT_BY_KIND, query = "SELECT e FROM Event e WHERE e.kind = :kind order by e.begin"),
+		@NamedQuery(name = Event.NQ_GET_EVENTS_FROM_ORGANIZER, query = "SELECT e FROM Event e JOIN e.organizer o WHERE (o.nr = :nr) AND (e.end > CURRENT_DATE) order by e.begin")
 		//@NamedQuery(name = Event.NQ_GET_EVENT_BY_PLACE, query = "SELECT e FROM Event e JOIN Location l JOIN Place p WHERE p.place = :place order by e.begin")
 })
 public class Event implements Serializable
@@ -35,6 +37,7 @@ public class Event implements Serializable
 	public static final String NQ_GET_EVENT_FROM_NOW = "Event.getEventFromNow";
 	public static final String NQ_GET_EVENT_BY_KIND = "Event.getEventByKind";
 	public static final String NQ_GET_EVENT_BY_PLACE = "Event.getEventByPlace";
+	public static final String NQ_GET_EVENTS_FROM_ORGANIZER = "Event.getEventsFromOrganizer";
 
 	@Id
 	@Column(name = "vg_vgnr")
@@ -95,6 +98,8 @@ public class Event implements Serializable
 	@ManyToOne
 	@JoinColumn(name = "vg_vr_vrnr")
 	private Organizer organizer;
+	
+	//private Part tempPoster;
 
 	public Event()
 	{
@@ -104,6 +109,17 @@ public class Event implements Serializable
 	{
 		return this.nr;
 	}
+	
+	
+//	public Part getTempPoster()
+//	{
+//		return tempPoster;
+//	}
+//
+//	public void setTempPoster(Part tempPoster)
+//	{
+//		this.tempPoster = tempPoster;
+//	}
 
 	public void setNr(int nr)
 	{

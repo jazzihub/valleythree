@@ -17,7 +17,7 @@
 				requiredMessage="Geben Sie eine gueltige E-Mail-Adresse ein">
 				<f:validator validatorId="loginValidator" />
 			</h:inputText>
-			<h:message for="email"></h:message>
+			<!--  <h:message for="email"></h:message>-->
 			<br />
 
 		</div>
@@ -25,12 +25,15 @@
 			<label for="pw">Passwort:</label>
 			<h:inputSecret id="pw" value="#{organizer.password}" required="true"
 				requiredMessage="Geben Sie eine Passwort ein"></h:inputSecret>
-			<h:message for="pw"></h:message>
+			<!-- <h:message for="pw"></h:message>  -->
 			<br />
 		</div>
 
 		<h:commandButton action="#{loginController.validLogin()}"
 			value="Anmelden" />
+		<h:button value="Abbrechen" outcome="index" />
+		
+		<br><h:messages /></br>
 	</h:form>
 
 </h:body>

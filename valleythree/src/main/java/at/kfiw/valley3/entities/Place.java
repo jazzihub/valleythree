@@ -43,6 +43,7 @@ public class Place implements Serializable
 	public Place()
 	{
 		organizers = new ArrayList<Organizer>();
+		locations = new ArrayList<Location>();
 	}
 
 	public short getPlz()

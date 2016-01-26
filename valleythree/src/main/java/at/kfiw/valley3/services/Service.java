@@ -17,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import at.kfiw.valley3.entities.Event;
+import at.kfiw.valley3.entities.Location;
 import at.kfiw.valley3.entities.Organizer;
 import at.kfiw.valley3.entities.Place;
 import at.kfiw.valley3.entities.Visitor;
@@ -86,6 +87,22 @@ public class Service
 
 		return new ArrayList<Event>();
 	}
+	
+	public List<Event> getEventsFromOrganizer(Organizer o)
+	{
+		try
+		{
+			TypedQuery<Event> query = entityManager.createNamedQuery(
+					Event.NQ_GET_EVENTS_FROM_ORGANIZER, Event.class);
+			query.setParameter("nr", o.getNr());
+			return query.getResultList();
+		} catch (Throwable t)
+		{
+			logger.error("Fehler: Service.getEventsFromOrganizer", t);
+		}
+
+		return new ArrayList<Event>();
+	}
 
 	public List<Event> getEventFromNow()
 	{
@@ -151,6 +168,42 @@ public class Service
 					"Fehler Service.addEvent: Event konnte nicht hinzugefügt werden",
 					t);
 		}
+	}
+	
+	
+	public void addEvent(Place existingPlace, Location existingLocation, Event e, Place p, Location l, Organizer o)
+	{
+		try
+		{
+			// entityManager.getTransaction().begin();
+			
+				entityManager.persist(e);
+			
+			// entityManager.getTransaction().commit();
+			System.out.println("Service.addEvent ok");
+		} catch (Throwable t)
+		{
+			logger.error(
+					"Fehler Service.addEvent: Event konnte nicht hinzugefügt werden",
+					t);
+		}
+	}
+	
+	
+	public List<Event> searchEvent(String sql)
+	{
+		try
+		{
+			TypedQuery<Event> query = entityManager.createQuery(sql, Event.class);
+			logger.info("Service.searchEvent ok");
+			return query.getResultList();
+			
+		} catch (Throwable t)
+		{
+			logger.error("Fehler: Service.searchEvent",t);
+		}
+		
+		return new ArrayList<Event>();
 	}
 
 	public void removeEvent(Event e)
@@ -277,8 +330,20 @@ public class Service
 					t);
 		}
 	}
+	
+	public void updateOrganizer(Organizer o)
+	{
+		try
+		{
+			entityManager.merge(o);
+			
+		}catch(Throwable t)
+		{
+			logger.error("Fehler Service.updateOrganizer");
+		}
+	}
 
-	public boolean getOrganizerByEmail(String email)
+	public Organizer getOrganizerByEmail(String email)
 	{
 
 		TypedQuery<Organizer> query = entityManager.createNamedQuery(
@@ -291,10 +356,10 @@ public class Service
 			o = (Organizer) query.getSingleResult();
 		} catch (NoResultException e)
 		{
-			return true;
+			return null;
 		}
 
-		return false;
+		return o;
 
 	}
 
@@ -320,26 +385,6 @@ public class Service
 		
 	}
 
-	// public boolean getExistingPassword(String password)
-	// {
-	//
-	// TypedQuery<Organizer> query = entityManager.createNamedQuery(
-	// Organizer.NQ_EXISTING_PASSWORD, Organizer.class);
-	// query.setParameter("password", password);
-	//
-	// Organizer o;
-	// try
-	// {
-	// o = (Organizer) query.getSingleResult();
-	// } catch (NoResultException e)
-	// {
-	// return false;
-	// }
-	//
-	// return true;
-	//
-	// }
-
 	// Place
 	public void addPlace(Place p)
 	{
@@ -351,11 +396,11 @@ public class Service
 				entityManager.persist(p);
 			}
 
-			System.out.println("Service.addPlace ok");
+			logger.info("Service.addPlace ok");
 		} catch (Throwable t)
 		{
 			logger.error(
-					"Fehler Service.addEPlace: Place konnte nicht hinzugefügt werden",
+					"Fehler Service.addPlace: Place konnte nicht hinzugefügt werden",
 					t);
 		}
 	}
@@ -370,4 +415,55 @@ public class Service
 		else
 			return place;
 	}
+	
+	//Location
+	public int addLocation(Location l)
+	{
+		try
+		{
+			if (!entityManager.contains(l))
+			{
+				entityManager.persist(l);
+				logger.info("Service.addLocation ok");
+				return 0;
+			}
+			else
+			{
+				logger.info("Service.addLocation ok, Location existiert bereits in DB");
+				return -1;
+				
+			}
+		} catch (Throwable t)
+		{
+			logger.error(
+					"Fehler Service.addLocation: Location konnte nicht hinzugefügt werden",
+					t);
+		}
+		return 1;
+	}
+	
+	public Location getLocationByNameAndPlz(String name, short plz)
+	{
+		
+		TypedQuery<Location> query = entityManager.createNamedQuery(
+				"Location.getLocationByNameAndPlz",
+				Location.class);
+		query.setParameter("name", name);
+		query.setParameter("plz", plz);
+
+		Location l = null;
+		try
+		{
+			l = (Location) query.getSingleResult();
+			return l;
+		} catch (NoResultException e)
+		{
+			return null;
+		}
+		
+			
+		
+	}
+	
+	
 }

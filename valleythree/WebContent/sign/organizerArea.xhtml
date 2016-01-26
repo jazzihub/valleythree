@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<h:html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+
+<h:head>
+	<h:title>
+		<ui:insert name="title"></ui:insert>
+	</h:title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+</h:head>
+
+<h:body>
+	<a href="addEvent.xhtml">Veranstaltung hinzufügen</a>
+	<br></br>
+
+
+	<h1>Meine Veranstaltungen</h1>
+
+	<div>
+		<h:form>
+			<h:dataTable value="#{eventController.eventsFromOrganizer}" var="e">
+
+				<h:column>
+					<f:facet name="header">Bezeichnung</f:facet>
+				#{e.name}
+				</h:column>
+				<h:column pattern="dd.MM.yyyy">
+					<f:facet name="header">Beginn</f:facet>
+				#{e.begin}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Ende</f:facet>
+				#{e.end}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Art</f:facet>
+				#{e.kind}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Kurzbeschreibung</f:facet>
+				#{e.description}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Details</f:facet>
+				#{e.detail}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Straße</f:facet>
+				#{e.location.street}
+				</h:column>
+				<h:column>
+					<f:facet name="header">PLZ</f:facet>
+				#{e.location.place.plz}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Ort</f:facet>
+				#{e.location.place.place}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Location</f:facet>
+				#{e.location.name}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Tickets gesamt</f:facet>
+				#{e.ticketsTotal}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Ticket Info</f:facet>
+				#{e.ticketInfo}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Mitwirkende</f:facet>
+				#{e.contributor}
+				</h:column>
+				<h:column>
+					<h:commandLink value="Löschen"></h:commandLink>
+				</h:column>
+				<h:column>
+					<h:commandLink value="Bearbeiten"></h:commandLink>
+				</h:column>
+
+
+			</h:dataTable>
+
+			<h:panelGroup rendered="#{empty eventController.eventsFromOrganizer}">
+				<p>Keine Veranstaltungen hinzugefügt</p>
+			</h:panelGroup>
+			<h:button value="Startseite" outcome="/index"/>
+		</h:form>
+
+	</div>
+</h:body>
+</h:html>

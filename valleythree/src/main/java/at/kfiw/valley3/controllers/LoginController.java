@@ -3,10 +3,10 @@ package at.kfiw.valley3.controllers;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.faces.component.UIComponent;
+
+import javax.faces.bean.SessionScoped;
+
 import javax.faces.context.FacesContext;
-import javax.faces.validator.ValidatorException;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -16,7 +16,7 @@ import at.kfiw.valley3.entities.Organizer;
 import at.kfiw.valley3.services.Service;
 
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class LoginController
 {
 	FacesMessage message;
@@ -25,6 +25,8 @@ public class LoginController
 	Service service;
 
 	private static final Logger logger = LoggerFactory.getLogger(Service.class);
+
+	boolean validLogin;
 
 	public LoginController()
 	{
@@ -35,11 +37,13 @@ public class LoginController
 	{
 		Organizer o = (Organizer) FacesContext.getCurrentInstance()
 				.getExternalContext().getSessionMap().get("organizer");
-		boolean validLogin = false;
+		validLogin = false;
 		try
 		{
+			EncodingPassword pw = new EncodingPassword();
+			String securePassword = pw.encrypt(o.getPassword());
 			validLogin = service.getOrganizerByEmailAndPassword(o.getEmail(),
-					o.getPassword());
+					securePassword);
 			logger.info("LoginController.validLogin() ok");
 		} catch (Throwable t)
 		{
@@ -51,50 +55,48 @@ public class LoginController
 			FacesContext facesContext = FacesContext.getCurrentInstance();
 			HttpSession session = (HttpSession) facesContext
 					.getExternalContext().getSession(true);
-			session.setAttribute("email", o.getEmail());
-			session.setAttribute("email", o.getEmail());
+			session.setAttribute("currentUser", o);
 			logger.info("Sessionattribut hinzugefügt");
 			return "index";
 		} else
 		{
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_WARN,
-							"Invalid Login!", "Please Try Again!"));
+			FacesContext.getCurrentInstance()
+					.addMessage(
+							null,
+							new FacesMessage(FacesMessage.SEVERITY_WARN,
+									"Ungültiger Login!",
+									"Versuchen Sie es nocheinmal!"));
+			// FacesContext.getCurrentInstance().addMessage("form:email",
+			// message);
 
 			// invalidate session, and redirect to other pages
-			return "login";
+			return null; // null, wenn man auf gleicher Seite bleiben soll
 		}
 
 	}
+
+	public String logout()
+	{
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+
+		HttpSession session = (HttpSession) facesContext.getExternalContext()
+				.getSession(true);
+		session.removeAttribute("currentUser");
+		session.invalidate();
+		validLogin = false;
+		logger.info("logout ok, Session invalidate");		
+		return null;
+	}
+
+	// Getter Setter
+	public boolean getValidLogin()
+	{
+		return validLogin;
+	}
+
+	public void setValidLogin(boolean validLogin)
+	{
+		this.validLogin = validLogin;
+	}
+
 }
-
-// public String loginProject() {
-// boolean result = UserDAO.login(uname, password);
-// if (result) {
-// // get Http Session and store username
-// HttpSession session = Util.getSession();
-// session.setAttribute("username", uname);
-//
-// return "home";
-// } else {
-//
-// FacesContext.getCurrentInstance().addMessage(
-// null,
-// new FacesMessage(FacesMessage.SEVERITY_WARN,
-// "Invalid Login!",
-// "Please Try Again!"));
-//
-// // invalidate session, and redirect to other pages
-//
-// //message = "Invalid Login. Please Try Again!";
-// return "login";
-// }
-// }
-//
-// public String logout() {
-// HttpSession session = Util.getSession();
-// session.invalidate();
-// return "login";
-// }
-

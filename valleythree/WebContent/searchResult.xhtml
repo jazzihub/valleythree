@@ -22,56 +22,17 @@
 </h:head>
 
 <h:body>
-	<a href="registry.xhtml">registrieren</a>
-	<a href="sign/organizerArea.xhtml">Veranstalterbereich</a>
-	<h:form>
-		<div>
-			<h:panelGrid rendered="#{loginController.validLogin}">
-				<h:commandButton action="#{loginController.logout()}" value="Logout" />
-				<h:outputText value="Sie sind eingeloggt" />
-			</h:panelGrid>
-			<h:panelGrid rendered="#{loginController.validLogin == false}">
-				<h:link outcome="#{navigation.login()}"  value="Login" />
-				<h:outputText value="Sie sind ausgeloggt" />
-			</h:panelGrid>
-		</div>
-	</h:form>
-
-	<h:form>
-		<br></br>
-		<br></br>
-		<div>
-			<label>Was</label>
-			<h:inputText p:type="text" autofocus="true" value="#{event.name}">
-				<f:validateLength maximum="45" />
-			</h:inputText>
-		</div>
-		<div>
-			<label>Wann</label>
-			<h:inputText p:type="date" value="#{event.begin}">
-			<f:convertDateTime pattern="dd.MM.yyyy" />
-			</h:inputText>
-		</div>
-		<div>
-			<label>Wo</label>
-			<h:inputText  value="#{place.place}">
-				<f:validateLength maximum="45"/>
-			</h:inputText>
-		</div>
-
-		<div>
-			<h:commandButton value="Suche starten" type="submit" action="#{searchEvent.search()}"></h:commandButton>
-		</div>
-
-	</h:form>
+	
+<h1>Suchergebnis</h1>	
 	
 	<br></br>
-	<div>
-		<h:dataTable value="#{eventController.eventsFromNow}" var="e">
+	
+		<h:dataTable value="#{searchEvent.events}" var="e">
 			<h:column>
 				<f:facet name="header">Bezeichnung</f:facet>
 				#{e.name}
 				</h:column>
+				<!--  
 			<h:column pattern="dd.MM.yyyy">
 				<f:facet name="header">Beginn</f:facet>
 				#{e.begin}
@@ -127,22 +88,10 @@
 			<h:column>
 
 			</h:column>
-
+-->
 
 		</h:dataTable>
-	</div>
-
-	<f:view>
-		<h:form id="form">
-			<m:map zoom="16" width="500px" height="500px" address="White house">
-				<m:mapControl name="GLargeMapControl"
-					position="G_ANCHOR_BOTTOM_LEFT" />
-				<m:mapControl name="GMapTypeControl" />
-				<m:htmlInformationWindow htmlText="White house"></m:htmlInformationWindow>
-			</m:map>
-		</h:form>
-	</f:view>
-
+	
 
 </h:body>
 </h:html>

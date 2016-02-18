@@ -195,9 +195,13 @@ public class Service
 		try
 		{
 			TypedQuery<Event> query = entityManager.createQuery(sql, Event.class);
-			logger.info("Service.searchEvent ok");
-			return query.getResultList();
+//			TypedQuery<Event> query = entityManager.createQuery("SELECT e from Event e WHERE LOWER(e.name) LIKE %:name%", Event.class);
+//			query.setParameter("name", name);
 			
+			logger.info("Service.searchEvent ok");
+			//return 
+					query.getResultList();
+			return query.getResultList();
 		} catch (Throwable t)
 		{
 			logger.error("Fehler: Service.searchEvent",t);

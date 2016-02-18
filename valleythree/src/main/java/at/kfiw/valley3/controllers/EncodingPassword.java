@@ -24,28 +24,7 @@ public class EncodingPassword
 
 	public String encrypt(String strToEncrypt)
 	{
-		// MessageDigest md;
-		// String out = "";
-		//
-		// md = MessageDigest.getInstance("SHA-512");
-		//
-		// md.update(message.getBytes());
-		// byte[] mb = md.digest();
-		//
-		// for (int i = 0; i < mb.length; i++)
-		// {
-		// byte temp = mb[i];
-		// String s = Integer.toHexString(new Byte(temp));
-		// while (s.length() < 2)
-		// {
-		// s = "0" + s;
-		// }
-		// s = s.substring(s.length() - 2);
-		// out += s;
-		// }
-		// logger.info("EncodingPassword.encoding() ok");
-		// return out;
-
+		
 		try
 		{
 			Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");

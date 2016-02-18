@@ -76,10 +76,10 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `events`.`vg_veranstaltungen` (
   `vg_vgnr` INT NOT NULL AUTO_INCREMENT,
-  `vg_anfang` DATETIME NOT NULL,
+  `vg_anfang` DATE NOT NULL,
   `vg_name` VARCHAR(45) NOT NULL,
   `vg_vr_vrnr` INT NOT NULL,
-  `vg_ende` DATETIME NULL,
+  `vg_zeit` TIME NULL,
   `vg_art` VARCHAR(45) NOT NULL,
   `vg_mitwirkende` TEXT NULL,
   `vg_kurzbeschreibung` TEXT NOT NULL,

@@ -4,11 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ejb.EJB;
+import javax.ejb.EJB;import javax.enterprise.context.Dependent;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
+
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -23,12 +24,11 @@ import at.kfiw.valley3.entities.Place;
 import at.kfiw.valley3.services.Service;
 
 @ManagedBean
-@ViewScoped
+@RequestScoped
+
 public class EventController implements Serializable
 {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 8812813254216636592L;
 
 	@EJB
@@ -117,7 +117,7 @@ public class EventController implements Serializable
 	{
 		e.setName(null);
 		e.setBegin(null);
-		e.setEnd(null);
+		e.setTime(null);
 		e.setKind(null);
 		e.setDetail(null);
 		e.setDescription(null);

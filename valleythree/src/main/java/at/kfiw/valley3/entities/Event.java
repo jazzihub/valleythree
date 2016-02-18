@@ -5,8 +5,8 @@ import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.persistence.*;
-import javax.servlet.http.Part;
 
+import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 
@@ -21,10 +21,10 @@ import java.util.List;
 @NamedQueries({
 		@NamedQuery(name = Event.NQ_FIND_ALL, query = "SELECT e FROM Event e"),
 		@NamedQuery(name = Event.NQ_GET_EVENT_BY_BEGIN, query = "SELECT e FROM Event e WHERE e.begin = :begin order by e.begin"), 
-		@NamedQuery(name = Event.NQ_GET_EVENT_BY_BEGIN_END, query = "SELECT e FROM Event e WHERE e.begin = :begin AND e.end = :end order by e.begin"),
-		@NamedQuery(name = Event.NQ_GET_EVENT_FROM_NOW, query = "SELECT e FROM Event e WHERE e.end > CURRENT_DATE order by e.begin"),
+		@NamedQuery(name = Event.NQ_GET_EVENT_BY_BEGIN_END, query = "SELECT e FROM Event e WHERE e.begin = :begin AND e.begin = :end order by e.begin"),
+		@NamedQuery(name = Event.NQ_GET_EVENT_FROM_NOW, query = "SELECT e FROM Event e WHERE e.begin >= CURRENT_DATE order by e.begin"),
 		@NamedQuery(name = Event.NQ_GET_EVENT_BY_KIND, query = "SELECT e FROM Event e WHERE e.kind = :kind order by e.begin"),
-		@NamedQuery(name = Event.NQ_GET_EVENTS_FROM_ORGANIZER, query = "SELECT e FROM Event e JOIN e.organizer o WHERE (o.nr = :nr) AND (e.end > CURRENT_DATE) order by e.begin")
+		@NamedQuery(name = Event.NQ_GET_EVENTS_FROM_ORGANIZER, query = "SELECT e FROM Event e JOIN e.organizer o WHERE (o.nr = :nr) AND (e.begin >= CURRENT_DATE) order by e.begin")
 		//@NamedQuery(name = Event.NQ_GET_EVENT_BY_PLACE, query = "SELECT e FROM Event e JOIN Location l JOIN Place p WHERE p.place = :place order by e.begin")
 })
 public class Event implements Serializable
@@ -55,9 +55,9 @@ public class Event implements Serializable
 	@Column(name = "vg_detailbeschreibung")
 	private String detail;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "vg_ende")
-	private Date end;
+	@Temporal(TemporalType.TIME)
+	@Column(name = "vg_zeit")
+	private Date time;
 
 	@Column(name = "vg_kartengesamt")
 	private short ticketsTotal;
@@ -156,14 +156,14 @@ public class Event implements Serializable
 		this.detail = detail;
 	}
 
-	public Date getEnd()
+	public Date getTime()
 	{
-		return this.end;
+		return this.time;
 	}
 
-	public void setEnd(Date end)
+	public void setTime(Date time)
 	{
-		this.end = end;
+		this.time = time;
 	}
 
 	public short getTicketsTotal()

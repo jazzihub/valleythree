@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
 import javax.persistence.*;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import java.util.List;
 @ManagedBean
 @SessionScoped
 @Entity
+
 @Table(name="l_location")
 @NamedQueries({
 @NamedQuery(name="Location.findAll", query="SELECT l FROM Location l"),

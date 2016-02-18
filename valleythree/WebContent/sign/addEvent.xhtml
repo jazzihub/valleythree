@@ -26,15 +26,15 @@
 			</h:inputText>
 		</div>
 		<div>
-			<label>Datum von</label>
+			<label>Datum</label>
 			<h:inputText p:type="date" value="#{event.begin}">
 				<f:convertDateTime pattern="dd.MM.yyyy" />
 			</h:inputText>
 		</div>
 		<div>
-			<label>Datum bis</label>
-			<h:inputText p:type="date" value="#{event.end}">
-				<f:convertDateTime pattern="dd.MM.yyyy" />
+			<label>Uhrzeit</label>
+			<h:inputText p:type="date" p:placeholder="HH:mm" value="#{event.time}">
+				<f:convertDateTime pattern="HH:mm" />
 			</h:inputText>
 
 		</div>

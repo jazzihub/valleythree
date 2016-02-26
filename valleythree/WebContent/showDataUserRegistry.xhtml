@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<h:html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+
+<h:head>
+	<h:title>
+		<ui:insert name="title"></ui:insert>
+	</h:title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+</h:head>
+
+<h:body>
+	<h1>Daten bestätigen</h1>
+
+	<table>
+		<tr>
+			<td>Vorname</td>
+			<td><h:outputText value="#{visitor.firstname}" /></td>
+		</tr>
+		
+		<tr>
+			<td>Nachame</td>
+			<td><h:outputText value="#{visitor.lastname}" /></td>
+		</tr>
+		<tr>
+			<td>Telefon:</td>
+			<td><h:outputText value="#{visitor.tel}" /></td>
+		</tr>
+		<tr>
+			<td>E-Mail:</td>
+			<td><h:outputLink value="mailto:#{visitor.email}">
+					<h:outputText value="#{visitor.email}" />
+				</h:outputLink>
+			</td>
+		</tr>
+		<tr>
+			<td>Anzahl Tickets</td>
+			<td>
+					<h:outputText value="#{ticket.number}" />
+				
+			</td>
+		</tr>
+		
+		
+		
+	</table>
+
+<h:form>
+	<div>
+		<h:commandButton id="btn" value="Daten ändern"
+			action="#{navigation.userRegistry()}" type="submit"></h:commandButton>
+	</div>
+</h:form>
+<h:form>
+	<div>
+		<h:commandButton id="btn" value="Tickets reservieren"
+			 type="submit"></h:commandButton>
+	</div>
+	</h:form>
+
+
+</h:body>
+</h:html>

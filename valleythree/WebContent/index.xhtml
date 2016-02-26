@@ -48,13 +48,14 @@
 		</div>
 		<div>
 			<label>Wann</label>
-			<h:inputText p:type="date" value="#{event.begin}">
-			<f:convertDateTime pattern="dd.MM.yyyy" />
+			<h:inputText id="wann" value="#{searchEvent.date}" requiredMessage="Format: dd.MM.yyyy" p:placeholder="dd.MM.yyyy">
+				<f:convertDateTime pattern="dd.MM.yyyy" />
 			</h:inputText>
+			<h:message for="wann"></h:message>
 		</div>
 		<div>
 			<label>Wo</label>
-			<h:inputText  value="#{place.place}">
+			<h:inputText  value="#{searchEvent.place}">
 				<f:validateLength maximum="45"/>
 			</h:inputText>
 		</div>
@@ -117,9 +118,12 @@
 				#{e.location.name}
 				</h:column>
 			<h:column>
+				
 				<f:facet name="header">Tickets gesamt</f:facet>
 				#{e.ticketsTotal}
+				<h:link outcome="#{navigation.userRegistry()}"  value="Ticket reservieren" />
 				</h:column>
+				
 			<h:column>
 				<f:facet name="header">Ticket Info</f:facet>
 				#{e.ticketInfo}

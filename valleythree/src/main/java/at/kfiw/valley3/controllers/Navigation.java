@@ -19,6 +19,16 @@ public class Navigation implements Serializable
 		return "showData.xhtml?faces-redirect=true";
 	}
 	
+	public String userRegistry()
+	{
+		return "userRegistry.xhtml";
+	}
+	
+	public String showDataUserRegistry()
+	{
+		return "showDataUserRegistry.xhtml";
+	}
+	
 	public String registry()
 	{
 		return "registry.xhtml?faces-redirect=true";

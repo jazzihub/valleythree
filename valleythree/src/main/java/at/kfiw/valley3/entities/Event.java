@@ -24,7 +24,9 @@ import java.util.List;
 		@NamedQuery(name = Event.NQ_GET_EVENT_BY_BEGIN_END, query = "SELECT e FROM Event e WHERE e.begin = :begin AND e.begin = :end order by e.begin"),
 		@NamedQuery(name = Event.NQ_GET_EVENT_FROM_NOW, query = "SELECT e FROM Event e WHERE e.begin >= CURRENT_DATE order by e.begin"),
 		@NamedQuery(name = Event.NQ_GET_EVENT_BY_KIND, query = "SELECT e FROM Event e WHERE e.kind = :kind order by e.begin"),
-		@NamedQuery(name = Event.NQ_GET_EVENTS_FROM_ORGANIZER, query = "SELECT e FROM Event e JOIN e.organizer o WHERE (o.nr = :nr) AND (e.begin >= CURRENT_DATE) order by e.begin")
+		@NamedQuery(name = Event.NQ_GET_EVENT_FROM_ORGANIZER, query = "SELECT e FROM Event e WHERE e.organizer.nr = :organizerNr order by e.begin"),
+		@NamedQuery(name = Event.NQ_GET_EVENT_BY_DATE_TIME, query = "SELECT e FROM Event e WHERE e.begin = :begin")
+		//@NamedQuery(name = Event.NQ_GET_EVENTS_FROM_ORGANIZER, query = "SELECT e FROM Event e JOIN e.organizer o WHERE (o.nr = :nr) AND (e.begin >= CURRENT_DATE) order by e.begin")
 		//@NamedQuery(name = Event.NQ_GET_EVENT_BY_PLACE, query = "SELECT e FROM Event e JOIN Location l JOIN Place p WHERE p.place = :place order by e.begin")
 })
 public class Event implements Serializable
@@ -37,7 +39,9 @@ public class Event implements Serializable
 	public static final String NQ_GET_EVENT_FROM_NOW = "Event.getEventFromNow";
 	public static final String NQ_GET_EVENT_BY_KIND = "Event.getEventByKind";
 	public static final String NQ_GET_EVENT_BY_PLACE = "Event.getEventByPlace";
-	public static final String NQ_GET_EVENTS_FROM_ORGANIZER = "Event.getEventsFromOrganizer";
+	public static final String NQ_GET_EVENT_FROM_ORGANIZER = "Event.getEventFromOrganizer";
+	public static final String NQ_GET_EVENT_BY_DATE_TIME = "Event.getEventByDateTime";
+	//public static final String NQ_GET_EVENTS_FROM_ORGANIZER = "Event.getEventsFromOrganizer";
 
 	@Id
 	@Column(name = "vg_vgnr")
@@ -109,6 +113,7 @@ public class Event implements Serializable
 	{
 		return this.nr;
 	}
+	
 	
 	
 //	public Part getTempPoster()

@@ -24,12 +24,10 @@ import at.kfiw.valley3.entities.Visitor;
 
 @ApplicationScoped
 @ManagedBean(eager = true)
-// If you want to control the Tx demarcation you should add:
-// @TransactionManagement(TransactionManagementType.BEAN)
-// @TransactionAttribute(TransactionAttributeType.REQUIRED)
+
 // im Gegensatz zu @Statefull kann ein stateless Klasse keine Informationen
 // speichern
-// bei jedem Aufruf müssen alle Parameter mitgegeben werden
+// bei jedem Aufruf mÃ¼ssen alle Parameter mitgegeben werden
 @Stateless
 public class Service
 {
@@ -88,17 +86,16 @@ public class Service
 		return new ArrayList<Event>();
 	}
 	
-	public List<Event> getEventsFromOrganizer(Organizer o)
+	public List<Event> getEventFromOrganizer(int organizerNr)
 	{
 		try
 		{
 			TypedQuery<Event> query = entityManager.createNamedQuery(
-					Event.NQ_GET_EVENTS_FROM_ORGANIZER, Event.class);
-			query.setParameter("nr", o.getNr());
+					Event.NQ_GET_EVENT_FROM_ORGANIZER, Event.class).setParameter("organizerNr", organizerNr);
 			return query.getResultList();
 		} catch (Throwable t)
 		{
-			logger.error("Fehler: Service.getEventsFromOrganizer", t);
+			logger.error("Fehler: getEventFromNow", t);
 		}
 
 		return new ArrayList<Event>();
@@ -161,11 +158,15 @@ public class Service
 				entityManager.persist(e);
 			}
 			// entityManager.getTransaction().commit();
+			else
+			{
+				//entityManager.merge(e);
+			}
 			System.out.println("Service.addEvent ok");
 		} catch (Throwable t)
 		{
 			logger.error(
-					"Fehler Service.addEvent: Event konnte nicht hinzugefügt werden",
+					"Fehler Service.addEvent: Event konnte nicht hinzugefï¿½gt werden",
 					t);
 		}
 	}
@@ -184,7 +185,7 @@ public class Service
 		} catch (Throwable t)
 		{
 			logger.error(
-					"Fehler Service.addEvent: Event konnte nicht hinzugefügt werden",
+					"Fehler Service.addEvent: Event konnte nicht hinzugefï¿½gt werden",
 					t);
 		}
 	}
@@ -200,8 +201,8 @@ public class Service
 			
 			logger.info("Service.searchEvent ok");
 			//return 
-					query.getResultList();
-			return query.getResultList();
+			List <Event> result = query.getResultList();
+			return result;
 		} catch (Throwable t)
 		{
 			logger.error("Fehler: Service.searchEvent",t);
@@ -209,6 +210,44 @@ public class Service
 		
 		return new ArrayList<Event>();
 	}
+	
+	public List<Event> searchEvent(Date date)
+	{
+		try
+		{
+			TypedQuery<Event> query = entityManager.createQuery("SELECT e FROM Event e where e.begin = :date", Event.class);
+			query.setParameter("date", date);
+			
+			logger.info("Service.searchEvent ok");
+			//return 
+			List <Event> result = query.getResultList();
+			return result;
+		} catch (Throwable t)
+		{
+			logger.error("Fehler: Service.searchEvent",t);
+		}
+		
+		return new ArrayList<Event>();
+	}
+	
+	public List<Event> getEventbyDateTime(Date begin)
+	{
+		try
+		{
+			TypedQuery<Event> query = entityManager.createNamedQuery(
+					Event.NQ_GET_EVENT_BY_DATE_TIME, Event.class);			
+			query.setParameter("begin", begin);
+			//query.setParameter("time", time);
+			return query.getResultList();
+		} catch (Throwable t)
+		{
+			logger.error("Fehler: getEventByKind", t);
+		}
+
+		return new ArrayList<Event>();
+	}
+	
+	
 
 	public void removeEvent(Event e)
 	{
@@ -246,21 +285,21 @@ public class Service
 		return null;
 	}
 
-	public Visitor getUserByEmailAndPassword(String email, String password)
-	{
-		try
-		{
-			TypedQuery<Visitor> query = entityManager.createNamedQuery(
-					Visitor.NQ_GET_USER_BY_EMAIL_PASSWORD, Visitor.class);
-			query.setParameter("email", email);
-			query.setParameter("password", password);
-			return query.getSingleResult();
-		} catch (Throwable t)
-		{
-			logger.error("Fehler: getUserByEmailAndPassword", t);
-		}
-		return null;
-	}
+//	public Visitor getUserByEmailAndPassword(String email, String password)
+//	{
+//		try
+//		{
+//			TypedQuery<Visitor> query = entityManager.createNamedQuery(
+//					Visitor.NQ_GET_USER_BY_EMAIL_PASSWORD, Visitor.class);
+//			query.setParameter("email", email);
+//			query.setParameter("password", password);
+//			return query.getSingleResult();
+//		} catch (Throwable t)
+//		{
+//			logger.error("Fehler: getUserByEmailAndPassword", t);
+//		}
+//		return null;
+//	}
 
 	public List<Visitor> getUsersbyLastname(String lastname)
 	{
@@ -304,10 +343,26 @@ public class Service
 			return query.getResultList();
 		} catch (Throwable t)
 		{
-			logger.error("Fehler: getUserByFirstAndLastname", t);
+			logger.error("Fehler: service.getUserByFirstAndLastname", t);
 		}
 
 		return new ArrayList<Visitor>();
+	}
+	
+	public short countTickets()
+	{
+		try
+		{
+			Query query = entityManager.createQuery(
+					"Select e.ticketsTotal from Event e");
+			
+			return (short) query.getSingleResult();
+		} catch (Throwable t)
+		{
+			logger.error("Fehler: service.countTickets", t);
+		}
+
+		return 0;
 	}
 
 	public void addVisitor(Visitor v)
@@ -330,7 +385,7 @@ public class Service
 		} catch (Throwable t)
 		{
 			logger.error(
-					"Fehler Service.addOrganizer: Organizer konnte nicht hinzugefügt werden",
+					"Fehler Service.addOrganizer: Organizer konnte nicht hinzugefï¿½gt werden",
 					t);
 		}
 	}
@@ -399,12 +454,16 @@ public class Service
 			{
 				entityManager.persist(p);
 			}
+			else
+			{
+				entityManager.merge(p);
+			}
 
 			logger.info("Service.addPlace ok");
 		} catch (Throwable t)
 		{
 			logger.error(
-					"Fehler Service.addPlace: Place konnte nicht hinzugefügt werden",
+					"Fehler Service.addPlace: Place konnte nicht hinzugefï¿½gt werden",
 					t);
 		}
 	}
@@ -434,13 +493,14 @@ public class Service
 			else
 			{
 				logger.info("Service.addLocation ok, Location existiert bereits in DB");
+				//entityManager.merge(l);
 				return -1;
 				
 			}
 		} catch (Throwable t)
 		{
 			logger.error(
-					"Fehler Service.addLocation: Location konnte nicht hinzugefügt werden",
+					"Fehler Service.addLocation: Location konnte nicht hinzugefï¿½gt werden",
 					t);
 		}
 		return 1;

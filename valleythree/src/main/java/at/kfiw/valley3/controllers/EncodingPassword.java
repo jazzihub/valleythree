@@ -1,7 +1,6 @@
 package at.kfiw.valley3.controllers;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<h:html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+      
+      
+<h:head>
+  <h:title><ui:insert name="title"></ui:insert></h:title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  
+</h:head>
+
+<h:body>
+<h1>Ticketreservierung</h1>
+
+ <h:form>
+        <div>
+        <label for="name">Nachname:</label>            
+            <h:inputText id="name" value="#{visitor.lastname}" 
+            			  requiredMessage="Geben Sie Ihren Namen ein" autofocus="true" required="true">
+            <f:validateLength minimum="1" maximum="45" />
+            </h:inputText>
+            <h:message for="name"></h:message><br/>
+        </div>
+        <div>
+        <label for="name">Vorname:</label>            
+            <h:inputText id="vorname" value="#{visitor.firstname}" 
+            			  requiredMessage="Geben Sie Ihren Namen ein" autofocus="true" required="true">
+            <f:validateLength minimum="1" maximum="45" />
+            </h:inputText>
+            <h:message for="name"></h:message><br/>
+        </div>
+        
+        <div>
+        <label for="tel">Telefon:</label>            
+            <h:inputText id="tel" value="#{visitor.tel}" required="true" p:placeholder="+43 660 1111111"
+            			requiredMessage="Geben Sie eine gueltige Telefonnummer ein"  >
+            <f:validateLength minimum="4" maximum="45" />	
+            </h:inputText>
+            <h:message for="tel"></h:message><br/>
+        </div>
+        <div>
+        <label for="email">E-Mail:</label>            
+            <h:inputText id="email" value="#{visitor.email}" p:type="email" 
+            maxlength="30" p:placeholder="ihre@adresse.at" required="true" requiredMessage="Geben Sie eine gueltige E-Mail-Adresse ein">
+            </h:inputText>
+       		<h:message for="email"></h:message><br/>
+        </div>
+        <div>
+        <label for="tickettotal">Tickets verfügbar:</label>
+			<h:outputText value="#{ticket.howManyTicketsLeft()}" />
+		</div>
+		<div>
+		<label for="ticket">Anzahl der Tickets, die Sie reservieren möchten:</label>            
+            <h:inputText id ="ticket" value="#{ticket.number}" required="true"  requiredMessage="Geben Sie eine ganze Zahl ein">
+            </h:inputText>
+       		<h:message for="ticket"></h:message><br/>
+		</div>
+        <div>
+        	<h:commandButton id="btn" value="Weiter" action="#{navigation.showDataUserRegistry()}" type="submit" ></h:commandButton>
+        </div>
+        <br/>
+    </h:form>   
+</h:body>
+</h:html>

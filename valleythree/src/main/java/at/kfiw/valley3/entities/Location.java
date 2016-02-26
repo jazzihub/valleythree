@@ -62,6 +62,8 @@ public class Location implements Serializable {
 		events = new ArrayList<Event>();
 	}
 
+	
+	
 	public int getNr() {
 		return this.nr;
 	}

@@ -1,4 +1,4 @@
-package at.kfiw.valley3.valdidator;
+package at.kfiw.valley3.validator;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -13,17 +13,17 @@ import javax.faces.validator.ValidatorException;
 import at.kfiw.valley3.entities.Organizer;
 import at.kfiw.valley3.services.Service;
 
-
 @ManagedBean
 @RequestScoped
-@FacesValidator(value="loginValidator")
-public class LoginValidator implements Validator
+@FacesValidator(value="registryValidator")
+public class RegistryValidator implements Validator
 {
-
+		
 	FacesMessage message;
 	@EJB
 	Service service;
 	
+		
 	@Override
 	public void validate(FacesContext context,
 			UIComponent componentToValidate, Object value)
@@ -43,12 +43,13 @@ public class LoginValidator implements Validator
 			throw new ValidatorException(message);
 		}
 
-		if (o == null)
+		if (o != null)
 		{
 			message = new FacesMessage(
-					"ungültige E-Mail-Adresse");
+					"Eine Registrierung mit dieser email existiert bereits");
 			throw new ValidatorException(message);
 		}
 
 	}
+	
 }

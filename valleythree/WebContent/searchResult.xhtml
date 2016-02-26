@@ -24,20 +24,26 @@
 <h1>Suchergebnis</h1>	
 	
 	<br></br>
-	
+	<h:panelGroup rendered="#{!empty searchEvent.events}">
+				
+			
 		<h:dataTable value="#{searchEvent.events}" var="e">
 			<h:column>
 				<f:facet name="header">Bezeichnung</f:facet>
 				#{e.name}
 				</h:column>
-				<!--  
-			<h:column pattern="dd.MM.yyyy">
-				<f:facet name="header">Beginn</f:facet>
-				#{e.begin}
+				 
+			<h:column>
+				<f:facet name="header">am</f:facet>
+				<h:outputText value="#{e.begin}">
+				<f:convertDateTime pattern="dd.MM.yyyy"/>
+				</h:outputText>				
 				</h:column>
 			<h:column>
-				<f:facet name="header">Ende</f:facet>
-				#{e.end}
+				<f:facet name="header">um</f:facet>
+					<h:outputText value="#{e.time}">
+						<f:convertDateTime pattern="HH:mm"/>
+					</h:outputText>
 				</h:column>
 			<h:column>
 				<f:facet name="header">Art</f:facet>
@@ -83,13 +89,12 @@
 				<f:facet name="header">Mitwirkende</f:facet>
 				#{e.contributor}
 				</h:column>
-			<h:column>
-
-			</h:column>
--->
-
+			
 		</h:dataTable>
+	</h:panelGroup>	
+		<h:panelGroup rendered="#{empty searchEvent.events}">
+				<p>Keine Veranstaltungen gefunden</p>
+			</h:panelGroup>
 	
-
 </h:body>
 </h:html>

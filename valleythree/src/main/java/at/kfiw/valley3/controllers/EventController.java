@@ -1,7 +1,6 @@
 package at.kfiw.valley3.controllers;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;import javax.enterprise.context.Dependent;
@@ -47,19 +46,11 @@ public class EventController implements Serializable
 
 	public String addEvent()
 	{
-//		Event e = (Event) FacesContext.getCurrentInstance()
-//				.getExternalContext().getSessionMap().get("event");
-//
-//		Place p = (Place) FacesContext.getCurrentInstance()
-//				.getExternalContext().getSessionMap().get("place");
-		
+
 		Place existingPlace = null;
 		
 		Location existingLocation = null;
 
-//		Location l = (Location) FacesContext.getCurrentInstance()
-//				.getExternalContext().getSessionMap().get("location");
-		
 		HttpServletRequest req = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
 		HttpSession session = req.getSession(true);		
 		
@@ -72,7 +63,7 @@ public class EventController implements Serializable
 			existingLocation = service.getLocationByNameAndPlz(l.getName(), p.getPlz());
 			
 			//service.addEvent(existingPlace, existingLocation, e, p, l, o);
-			// wenn PLZ bereits in DB in vorhanden, dann neuen Place hinzufügen
+			// wenn PLZ bereits in DB in vorhanden, dann neuen Place hinzufï¿½gen
 			if (existingPlace == null)
 			{
 
@@ -102,7 +93,7 @@ public class EventController implements Serializable
 			
 		} catch (Throwable t)
 		{
-			logger.error("Fehler EventController.addEvent(): Event konnte nicht hinzugefügt werden",t);
+			logger.error("Fehler EventController.addEvent(): Event konnte nicht hinzugefï¿½gt werden",t);
 		}
 		finally
 		{
@@ -142,7 +133,7 @@ public class EventController implements Serializable
 
 		} catch (Throwable t)
 		{
-			logger.error("Fehler Controller: Event konnte nicht hinzugefügt werden", t);
+			logger.error("Fehler Controller: Event konnte nicht hinzugefï¿½gt werden", t);
 		}
 
 		return null;
@@ -159,7 +150,7 @@ public class EventController implements Serializable
 
 		} catch (Throwable t)
 		{
-			logger.error("Fehler Controller: Event konnte nicht hinzugefügt werden", t);
+			logger.error("Fehler Controller: Event konnte nicht hinzugefï¿½gt werden", t);
 		}
 
 		return null;
@@ -180,11 +171,11 @@ public class EventController implements Serializable
 			
 			
 			logger.info("EventController.getEventsFromOrganizer ok");
-			return service.getEventsFromOrganizer(o);
+			return service.getEventFromOrganizer(o.getNr());
 
 		} catch (Throwable t)
 		{
-			logger.error("Fehler Controller: Event konnte nicht hinzugefügt werden", t);
+			logger.error("Fehler Controller: Event konnte nicht hinzugefï¿½gt werden", t);
 		}
 
 		return null;

@@ -27,10 +27,11 @@ public class LoginController
 	private static final Logger logger = LoggerFactory.getLogger(Service.class);
 
 	boolean validLogin;
+	//FacesContext facesContext  = FacesContext.getCurrentInstance();;
 
 	public LoginController()
 	{
-
+		
 	}
 
 	public String validLogin()
@@ -48,6 +49,12 @@ public class LoginController
 		} catch (Throwable t)
 		{
 			logger.error("LoginController.validLogin(): Fehler beim Login");
+			FacesContext.getCurrentInstance()
+			.addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN,
+							"Fehler beim Überprüfen der Daten!",
+							"Versuchen Sie es nocheinmal!"));
 		}
 
 		if (validLogin == true)
@@ -57,7 +64,7 @@ public class LoginController
 					.getExternalContext().getSession(true);
 			session.setAttribute("currentUser", o);
 			logger.info("Sessionattribut hinzugefügt");
-			return "index";
+			return "index.xhtml";
 		} else
 		{
 			FacesContext.getCurrentInstance()

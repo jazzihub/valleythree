@@ -42,31 +42,10 @@ public class FileUploadController
 		//converter = new TypeConverter();
 	}
 	
-	public Event getE()
-	{
-		return e;
-	}
-
-	public void setE(Event e)
-	{
-		this.e = e;
-	}
-		
-	public Part getTempPoster()
-	{
-		return tempPoster;
-	}
-
-	public void setTempPoster(Part tempPoster)
-	{
-		this.tempPoster = tempPoster;
-	}
+	
 
 	public void upload() throws IOException
 	{
-//		Event e = (Event) FacesContext.getCurrentInstance()
-//				.getExternalContext().getSessionMap().get("event");
-
 		
 		try
 		{
@@ -107,7 +86,25 @@ public class FileUploadController
 		//return -1;
 	}
 
-	
+	public Event getE()
+	{
+		return e;
+	}
+
+	public void setE(Event e)
+	{
+		this.e = e;
+	}
+		
+	public Part getTempPoster()
+	{
+		return tempPoster;
+	}
+
+	public void setTempPoster(Part tempPoster)
+	{
+		this.tempPoster = tempPoster;
+	}
 	
 	
 }

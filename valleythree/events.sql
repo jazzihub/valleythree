@@ -109,12 +109,10 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `events`.`b_besucher` (
   `b_bnr` INT NOT NULL AUTO_INCREMENT,
-  `b_username` VARCHAR(45) NOT NULL,
   `b_vorname` VARCHAR(45) NOT NULL,
   `b_nachname` VARCHAR(45) NOT NULL,
   `b_email` VARCHAR(45) NOT NULL,
   `b_telefon` VARCHAR(45) NULL,
-  `b_passwort` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`b_bnr`),
   UNIQUE INDEX `b_username_UNIQUE` (`b_username` ASC))
 ENGINE = InnoDB;

@@ -1,6 +1,8 @@
 package at.kfiw.valley3.entities;
 
 import java.io.Serializable;
+
+import javax.faces.bean.ManagedBean;
 import javax.persistence.*;
 
 /**
@@ -12,9 +14,11 @@ public class ReservationPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
+	
 	@Column(name="r_vg_vgnr", insertable=false, updatable=false)
 	private int rVgVgnr;
 
+	
 	@Column(name="r_b_bnr", insertable=false, updatable=false)
 	private int rBBnr;
 
@@ -32,6 +36,23 @@ public class ReservationPK implements Serializable {
 	public void setRBBnr(int rBBnr) {
 		this.rBBnr = rBBnr;
 	}
+	
+//	public int hashCode()
+//    {
+//    return (int) (rVgVgnr + rBBnr);
+//  }
+//    
+//    @Override
+//    public boolean equals(Object obj)
+//    {
+//          if(obj instanceof ReservationPK)
+//          {
+//        	  ReservationPK otherID = (ReservationPK) obj;
+//                return (otherID.rVgVgnr == this.rVgVgnr) && (otherID.rBBnr == this.rBBnr);
+//          }
+//          return false;
+//    }
+
 
 	public boolean equals(Object other) {
 		if (this == other) {

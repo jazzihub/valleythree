@@ -22,7 +22,7 @@ import at.kfiw.valley3.services.Service;
 
 @ManagedBean
 @RequestScoped
-public class FileUploadController
+public class FileUploadController 
 {
 	private Part tempPoster;
 	InputStream input = null;

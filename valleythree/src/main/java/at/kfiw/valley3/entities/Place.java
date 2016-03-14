@@ -6,6 +6,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,7 @@ import java.util.List;
 @Entity
 @Table(name = "o_orte")
 @NamedQuery(name = "Place.findAll", query = "SELECT p FROM Place p")
+
 public class Place implements Serializable
 {
 	private static final long serialVersionUID = 1L;

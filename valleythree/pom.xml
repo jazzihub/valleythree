@@ -5,6 +5,21 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
   <dependencies>
+  	<dependency>
+		<groupId>commons-fileupload</groupId>
+		<artifactId>commons-fileupload</artifactId>
+		<version>1.2</version>
+	</dependency> 
+	<dependency>
+		<groupId>commons-io</groupId>
+		<artifactId>commons-io</artifactId>
+		<version>2.4</version>
+	</dependency>
+	<dependency>
+		<groupId>commons-codec</groupId>
+		<artifactId>commons-codec</artifactId>
+		<version>1.9</version>
+	</dependency>	 
     <dependency>
       <groupId>org.eclipse.persistence</groupId>
       <artifactId>eclipselink</artifactId>
@@ -195,11 +210,38 @@
       <artifactId>jboss-logging</artifactId>
       <version>3.1.4.GA</version>
     </dependency>
+    
+     
+    <dependency>
+		<groupId>org.glassfish.jersey.core</groupId>
+		<artifactId>jersey-server</artifactId>
+		<version>2.7</version>
+	</dependency>
+	<dependency>
+		<groupId>org.glassfish.jersey.containers</groupId>
+		<artifactId>jersey-container-servlet-core</artifactId>
+		<version>2.7</version>
+	</dependency>
+		<dependency>
+		<groupId>org.glassfish.jersey.containers</groupId>
+		<artifactId>jersey-container-jetty-http</artifactId>
+		<version>2.7</version>
+	</dependency>
+	<dependency>
+		<groupId>org.glassfish.jersey.media</groupId>
+		<artifactId>jersey-media-moxy</artifactId>
+		<version>2.7</version>
+	</dependency>
+	
+    
+	
+    <!-- 
     <dependency>
       <groupId>org.jboss.resteasy</groupId>
       <artifactId>resteasy-jaxb-provider</artifactId>
       <version>3.0.10.Final</version>
     </dependency>
+    
     <dependency>
       <groupId>org.jboss.resteasy</groupId>
       <artifactId>async-http-servlet-3.0</artifactId>
@@ -220,6 +262,9 @@
       <artifactId>resteasy-multipart-provider</artifactId>
       <version>3.0.10.Final</version>
     </dependency>
+    -->
+    
+    
     <dependency>
       <groupId>org.jboss.ejb3</groupId>
       <artifactId>jboss-ejb3-ext-api</artifactId>

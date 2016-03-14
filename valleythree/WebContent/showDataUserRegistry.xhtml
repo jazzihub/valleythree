@@ -43,13 +43,10 @@
 		<tr>
 			<td>Anzahl Tickets</td>
 			<td>
-					<h:outputText value="#{ticket.number}" />
+					<h:outputText value="#{reservation.numberTickets}" />
 				
 			</td>
 		</tr>
-		
-		
-		
 	</table>
 
 <h:form>
@@ -60,7 +57,7 @@
 </h:form>
 <h:form>
 	<div>
-		<h:commandButton id="btn" value="Tickets reservieren"
+		<h:commandButton id="btn" value="Tickets reservieren" action="#{ticket.reservation()}"
 			 type="submit"></h:commandButton>
 	</div>
 	</h:form>

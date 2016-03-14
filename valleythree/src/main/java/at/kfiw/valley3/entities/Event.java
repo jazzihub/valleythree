@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import java.sql.Time;
 import java.util.Date;
@@ -29,6 +30,7 @@ import java.util.List;
 		//@NamedQuery(name = Event.NQ_GET_EVENTS_FROM_ORGANIZER, query = "SELECT e FROM Event e JOIN e.organizer o WHERE (o.nr = :nr) AND (e.begin >= CURRENT_DATE) order by e.begin")
 		//@NamedQuery(name = Event.NQ_GET_EVENT_BY_PLACE, query = "SELECT e FROM Event e JOIN Location l JOIN Place p WHERE p.place = :place order by e.begin")
 })
+
 public class Event implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -48,7 +50,7 @@ public class Event implements Serializable
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int nr;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "vg_anfang")
 	private Date begin;
 
@@ -59,7 +61,7 @@ public class Event implements Serializable
 	@Column(name = "vg_detailbeschreibung")
 	private String detail;
 
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "vg_zeit")
 	private Date time;
 

@@ -52,11 +52,11 @@
         </div>
         <div>
         <label for="tickettotal">Tickets verfügbar:</label>
-			<h:outputText value="#{ticket.howManyTicketsLeft()}" />
+			<h:outputText value="#{ticket.anz}" />
 		</div>
 		<div>
 		<label for="ticket">Anzahl der Tickets, die Sie reservieren möchten:</label>            
-            <h:inputText id ="ticket" value="#{ticket.number}" required="true"  requiredMessage="Geben Sie eine ganze Zahl ein">
+            <h:inputText id ="ticket" value="#{reservation.numberTickets}" required="true"  requiredMessage="Geben Sie eine ganze Zahl ein">
             </h:inputText>
        		<h:message for="ticket"></h:message><br/>
 		</div>

@@ -6,6 +6,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,7 +38,7 @@ public class Visitor implements Serializable
 	
 	@Id
 	@Column(name = "b_bnr")
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	
 	private int nr;
 
 	@Column(name = "b_email")
@@ -63,11 +64,12 @@ public class Visitor implements Serializable
 	private List<Comment> comments;
 
 	// bi-directional many-to-one association to Reservation
-	@OneToMany(mappedBy = "visitor")
+	@OneToMany(mappedBy = "visitor",cascade = CascadeType.PERSIST)
 	private List<Reservation> reservations;
 
 	public Visitor()
 	{
+		reservations = new ArrayList<Reservation>();
 	}
 
 	public int getNr()

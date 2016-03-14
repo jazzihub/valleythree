@@ -200,8 +200,9 @@ public class Service
 //			query.setParameter("name", name);
 			
 			logger.info("Service.searchEvent ok");
-			//return 
+			
 			List <Event> result = query.getResultList();
+			System.out.println(result);
 			return result;
 		} catch (Throwable t)
 		{
@@ -349,13 +350,13 @@ public class Service
 		return new ArrayList<Visitor>();
 	}
 	
-	public short countTickets()
+	public short countTickets(int nr)
 	{
 		try
 		{
 			Query query = entityManager.createQuery(
-					"Select e.ticketsTotal from Event e");
-			
+					"Select e.ticketsTotal from Event e where e.nr = :nr");
+			query.setParameter("nr", nr);
 			return (short) query.getSingleResult();
 		} catch (Throwable t)
 		{
@@ -367,7 +368,20 @@ public class Service
 
 	public void addVisitor(Visitor v)
 	{
-
+		try
+		{
+			if (!entityManager.contains(v))
+			{
+				entityManager.persist(v);
+			}
+			// entityManager.getTransaction().commit();
+			System.out.println("Service.addVisitor ok");
+		} catch (Throwable t)
+		{
+			logger.error(
+					"Fehler Service.addVisitor: Besucher konnte nicht hinzugefügt werden",
+					t);
+		}
 	}
 
 	// Organizer

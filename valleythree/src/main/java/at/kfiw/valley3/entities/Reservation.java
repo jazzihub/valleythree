@@ -1,6 +1,9 @@
 package at.kfiw.valley3.entities;
 
 import java.io.Serializable;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.persistence.*;
 
 
@@ -9,8 +12,15 @@ import javax.persistence.*;
  * 
  */
 @Entity
+@SessionScoped
+@ManagedBean
 @Table(name="r_reservierungen")
 @NamedQuery(name="Reservation.findAll", query="SELECT r FROM Reservation r")
+//@AssociationOverrides({
+//	@AssociationOverride (name = "event",
+//			joinColumns = @JoinColumn(name = "vg_vgnr")),
+//	@AssociationOverride (name = "r_vg_vgnr",
+//			joinColumns = @JoinColumn(name = "b_bnr")) })			)
 public class Reservation implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -31,6 +41,7 @@ public class Reservation implements Serializable {
 	private Event event;
 
 	public Reservation() {
+		
 	}
 
 	public ReservationPK getId() {

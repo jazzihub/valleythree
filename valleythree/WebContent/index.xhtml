@@ -1,6 +1,8 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<h:html xmlns="http://www.w3.org/1999/xhtml"
+<h:html lang="de"
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
@@ -11,6 +13,7 @@
 
 
 <h:head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<h:title>
 		<ui:insert name="title"></ui:insert>
 	</h:title>
@@ -67,6 +70,7 @@
 	</h:form>
 	
 	<br></br>
+	<h:form>
 	<div>
 		<h:dataTable value="#{eventController.eventsFromNow}" var="e">
 			<h:column>
@@ -117,40 +121,26 @@
 				<f:facet name="header">Location</f:facet>
 				#{e.location.name}
 				</h:column>
-			<h:column>
-				
-				<f:facet name="header">Tickets gesamt</f:facet>
-				#{e.ticketsTotal}
-				<h:link outcome="#{navigation.userRegistry()}"  value="Ticket reservieren" />
+			
+				<h:column>
+				<f:facet name="header">Mitwirkende</f:facet>
+				#{e.contributor}
 				</h:column>
-				
+			
 			<h:column>
 				<f:facet name="header">Ticket Info</f:facet>
 				#{e.ticketInfo}
 				</h:column>
-			<h:column>
-				<f:facet name="header">Mitwirkende</f:facet>
-				#{e.contributor}
+				<h:column>
+				<h:panelGrid rendered="#{e.ticketsTotal != 0}">			
+				
+				<h:commandLink action="#{ticket.Event(e)}"  value="Ticket reservieren" />
+				</h:panelGrid>
 				</h:column>
-			<h:column>
-
-			</h:column>
-
-
+				
 		</h:dataTable>
 	</div>
-
-	<f:view>
-		<h:form id="form">
-			<m:map zoom="16" width="500px" height="500px" address="White house">
-				<m:mapControl name="GLargeMapControl"
-					position="G_ANCHOR_BOTTOM_LEFT" />
-				<m:mapControl name="GMapTypeControl" />
-				<m:htmlInformationWindow htmlText="White house"></m:htmlInformationWindow>
-			</m:map>
-		</h:form>
-	</f:view>
-
-
+</h:form>
+	
 </h:body>
 </h:html>

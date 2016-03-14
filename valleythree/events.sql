@@ -114,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `events`.`b_besucher` (
   `b_email` VARCHAR(45) NOT NULL,
   `b_telefon` VARCHAR(45) NULL,
   PRIMARY KEY (`b_bnr`),
-  UNIQUE INDEX `b_username_UNIQUE` (`b_username` ASC))
+  UNIQUE INDEX `b_bnr_UNIQUE` (`b_bnr` ASC))
 ENGINE = InnoDB;
 
 
@@ -161,26 +161,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mydb`.`k_kommentare`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `events`.`k_kommentare` (
-  `k_vg_vgnr` INT NOT NULL,
-  `k_b_bnr` INT NOT NULL,
-  `k_bewertung` TINYINT(4) NULL,
-  `k_kommentar` TEXT NOT NULL,
-  `k_foto` BLOB NULL,
-  PRIMARY KEY (`k_vg_vgnr`, `k_b_bnr`),
-  INDEX `fk_k_kommentare_vg_veranstaltungen1_idx` (`k_vg_vgnr` ASC),
-  INDEX `fk_k_kommentare_b_besucher1_idx` (`k_b_bnr` ASC),
-  CONSTRAINT `fk_k_kommentare_vg_veranstaltungen1`
-    FOREIGN KEY (`k_vg_vgnr`)
-    REFERENCES `events`.`vg_veranstaltungen` (`vg_vgnr`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_k_kommentare_b_besucher1`
-    FOREIGN KEY (`k_b_bnr`)
-    REFERENCES `events`.`b_besucher` (`b_bnr`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

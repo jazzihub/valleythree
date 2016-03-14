@@ -88,8 +88,8 @@ public class Event implements Serializable
 	private byte[] poster;
 
 	// bi-directional many-to-one association to Command
-	@OneToMany(mappedBy = "event")
-	private List<Comment> comments;
+	//@OneToMany(mappedBy = "event")
+	//private List<Comment> comments;
 
 	// bi-directional many-to-one association to Reservation
 	@OneToMany(mappedBy = "event")
@@ -233,31 +233,31 @@ public class Event implements Serializable
 		this.poster = poster;
 	}
 
-	public List<Comment> getComments()
-	{
-		return this.comments;
-	}
-
-	public void setComments(List<Comment> comments)
-	{
-		this.comments = comments;
-	}
-
-	public Comment addComment(Comment comment)
-	{
-		getComments().add(comment);
-		comment.setEvent(this);
-
-		return comment;
-	}
-
-	public Comment removeComment(Comment comment)
-	{
-		getComments().remove(comment);
-		comment.setEvent(null);
-
-		return comment;
-	}
+//	public List<Comment> getComments()
+//	{
+//		return this.comments;
+//	}
+//
+//	public void setComments(List<Comment> comments)
+//	{
+//		this.comments = comments;
+//	}
+//
+//	public Comment addComment(Comment comment)
+//	{
+//		getComments().add(comment);
+//		comment.setEvent(this);
+//
+//		return comment;
+//	}
+//
+//	public Comment removeComment(Comment comment)
+//	{
+//		getComments().remove(comment);
+//		comment.setEvent(null);
+//
+//		return comment;
+//	}
 
 	public List<Reservation> getReservations()
 	{

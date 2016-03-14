@@ -60,8 +60,8 @@ public class Visitor implements Serializable
 	private String firstname;
 
 	// bi-directional many-to-one association to Command
-	@OneToMany(mappedBy = "visitor")
-	private List<Comment> comments;
+//	@OneToMany(mappedBy = "visitor")
+//	private List<Comment> comments;
 
 	// bi-directional many-to-one association to Reservation
 	@OneToMany(mappedBy = "visitor",cascade = CascadeType.PERSIST)
@@ -142,31 +142,31 @@ public class Visitor implements Serializable
 		this.firstname = firstname;
 	}
 
-	public List<Comment> getComments()
-	{
-		return this.comments;
-	}
-
-	public void setComments(List<Comment> comments)
-	{
-		this.comments = comments;
-	}
-
-	public Comment addComment(Comment comment)
-	{
-		getComments().add(comment);
-		comment.setVisitor(this);
-
-		return comment;
-	}
-
-	public Comment removeComment(Comment comment)
-	{
-		getComments().remove(comment);
-		comment.setVisitor(null);
-
-		return comment;
-	}
+//	public List<Comment> getComments()
+//	{
+//		return this.comments;
+//	}
+//
+//	public void setComments(List<Comment> comments)
+//	{
+//		this.comments = comments;
+//	}
+//
+//	public Comment addComment(Comment comment)
+//	{
+//		getComments().add(comment);
+//		comment.setVisitor(this);
+//
+//		return comment;
+//	}
+//
+//	public Comment removeComment(Comment comment)
+//	{
+//		getComments().remove(comment);
+//		comment.setVisitor(null);
+//
+//		return comment;
+//	}
 
 	public List<Reservation> getReservations()
 	{

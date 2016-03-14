@@ -18,7 +18,7 @@ public class RestfulService
 	
 	@GET
 	@Path("/allEvents")
-	@Produces({MediaType.TEXT_XML})
+	@Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML})
 	public List<Event> getEvents()
 	{
 		return service.getEventFromNow();

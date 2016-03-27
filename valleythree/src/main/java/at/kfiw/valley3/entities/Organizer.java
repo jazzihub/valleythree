@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.persistence.*;
+import javax.transaction.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ import java.util.List;
 @NamedQuery(name=Organizer.NQ_EXISTING_PASSWORD, query="SELECT o FROM Organizer o WHERE o.password = :password"),
 @NamedQuery(name=Organizer.NQ_GET_ORGANIZER_BY_EMAIL_AND_PASSWORD, query="SELECT o FROM Organizer o WHERE o.password = :password AND o.email = :email")
 })
+@Transactional
 public class Organizer implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -49,8 +51,8 @@ public class Organizer implements Serializable {
 	private String tel;
 
 	//bi-directional many-to-one association to Event
-	@OneToMany(mappedBy="organizer", cascade=CascadeType.PERSIST)
-	private List<Event> events;
+//	@OneToMany(mappedBy="organizer", cascade=CascadeType.PERSIST)
+//	private List<Event> events;
 
 	//bi-directional one-to-one association to Profil
 	@OneToOne(mappedBy="organizer")
@@ -62,7 +64,7 @@ public class Organizer implements Serializable {
 	private Place place;
 
 	public Organizer() {
-		events = new ArrayList<Event>();
+		//events = new ArrayList<Event>();
 	}
 
 	public int getNr() {
@@ -113,27 +115,27 @@ public class Organizer implements Serializable {
 		this.tel = tel;
 	}
 
-	public List<Event> getEvents() {
-		return this.events;
-	}
-
-	public void setEvents(List<Event> events) {
-		this.events = events;
-	}
-
-	public Event addEvent(Event event) {
-		getEvents().add(event);
-		event.setOrganizer(this);
-
-		return event;
-	}
-
-	public Event removeEvent(Event event) {
-		getEvents().remove(event);
-		event.setOrganizer(null);
-
-		return event;
-	}
+//	public List<Event> getEvents() {
+//		return this.events;
+//	}
+//
+//	public void setEvents(List<Event> events) {
+//		this.events = events;
+//	}
+//
+//	public Event addEvent(Event event) {
+//		getEvents().add(event);
+//		event.setOrganizer(this);
+//
+//		return event;
+//	}
+//
+//	public Event removeEvent(Event event) {
+//		getEvents().remove(event);
+//		event.setOrganizer(null);
+//
+//		return event;
+//	}
 
 	public Profil getProfil() {
 		return this.profil;

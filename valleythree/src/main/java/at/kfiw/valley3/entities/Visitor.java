@@ -3,8 +3,10 @@ package at.kfiw.valley3.entities;
 import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.persistence.*;
+import javax.transaction.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +27,7 @@ import java.util.List;
 		@NamedQuery(name = Visitor.NQ_GET_USER_BY_FIRSTNAME, query = "SELECT v FROM Visitor v WHERE v.firstname = :firstname"),
 		@NamedQuery(name = Visitor.NQ_GET_USER_BY_FIRST_AND_LASTNAME, query = "SELECT v FROM Visitor v WHERE v.lastname = :lastname AND v.firstname = :firstname")
 })
+@Transactional
 public class Visitor implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -37,8 +40,7 @@ public class Visitor implements Serializable
 	public static final String NQ_GET_USER_BY_FIRST_AND_LASTNAME = "Visitor.getUserByFirstAndLastname";
 	
 	@Id
-	@Column(name = "b_bnr")
-	
+	@Column(name = "b_bnr")	
 	private int nr;
 
 	@Column(name = "b_email")
@@ -64,7 +66,7 @@ public class Visitor implements Serializable
 //	private List<Comment> comments;
 
 	// bi-directional many-to-one association to Reservation
-	@OneToMany(mappedBy = "visitor",cascade = CascadeType.PERSIST)
+	@OneToMany(mappedBy = "visitor", cascade = CascadeType.PERSIST)
 	private List<Reservation> reservations;
 
 	public Visitor()

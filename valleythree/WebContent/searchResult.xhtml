@@ -31,64 +31,64 @@
 			
 		<h:dataTable value="#{searchEvent.events}" var="e">
 			<h:column>
-				<f:facet name="header">Bezeichnung</f:facet>
+				<f:facet name="title">Bezeichnung</f:facet>
 				#{e.name}
 				</h:column>
 				 
 			<h:column>
-				<f:facet name="header">am</f:facet>
+				<f:facet name="date">am</f:facet>
 				<h:outputText value="#{e.begin}">
-				<f:convertDateTime pattern="dd.MM.yyyy"/>
+					<f:convertDateTime pattern="dd.MM.yyyy" timeZone="Europe/Berlin"/>
 				</h:outputText>				
 				</h:column>
 			<h:column>
-				<f:facet name="header">um</f:facet>
+				<f:facet name="time">um</f:facet>
 					<h:outputText value="#{e.time}">
-						<f:convertDateTime pattern="HH:mm"/>
+						<f:convertDateTime pattern="HH:mm" timeZone="Europe/Berlin"/>
 					</h:outputText>
 				</h:column>
 			<h:column>
-				<f:facet name="header">Art</f:facet>
+				<f:facet name="kind">Art</f:facet>
 				#{e.kind}
 				</h:column>
 			<h:column>
-				<f:facet name="header">Veranstalter</f:facet>
+				<f:facet name="organizer">Veranstalter</f:facet>
 				#{e.organizer.name};
 				</h:column>
 			<h:column>
-				<f:facet name="header">Kurzbeschreibung</f:facet>
+				<f:facet name="short">Kurzbeschreibung</f:facet>
 				#{e.description}
 				</h:column>
 			<h:column>
-				<f:facet name="header">Details</f:facet>
+				<f:facet name="detail">Details</f:facet>
 				#{e.detail}
 				</h:column>
 			<h:column>
-				<f:facet name="header">Straße</f:facet>
+				<f:facet name="street">Straße</f:facet>
 				#{e.location.street}
 				</h:column>
 			<h:column>
-				<f:facet name="header">PLZ</f:facet>
+				<f:facet name="plz">PLZ</f:facet>
 				#{e.location.place.plz}
 				</h:column>
 			<h:column>
-				<f:facet name="header">Ort</f:facet>
+				<f:facet name="place">Ort</f:facet>
 				#{e.location.place.place}
 				</h:column>
 			<h:column>
-				<f:facet name="header">Location</f:facet>
+				<f:facet name="location">Location</f:facet>
 				#{e.location.name}
 				</h:column>
 			<h:column>
-				<f:facet name="header">Tickets gesamt</f:facet>
+				<f:facet name="ticket">Tickets gesamt</f:facet>
 				#{e.ticketsTotal}
 				</h:column>
 			<h:column>
-				<f:facet name="header">Ticket Info</f:facet>
+				<f:facet name="info">Ticket Info</f:facet>
 				#{e.ticketInfo}
 				</h:column>
 			<h:column>
-				<f:facet name="header">Mitwirkende</f:facet>
+				<f:facet name="contributor">Mitwirkende</f:facet>
 				#{e.contributor}
 				</h:column>
 			

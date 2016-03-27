@@ -122,6 +122,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`r_reservierungen`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `events`.`r_reservierungen` (
+  `r_nr` INT NOT NULL AUTO_INCREMENT,
   `r_vg_vgnr` INT NOT NULL,
   `r_b_bnr` INT NOT NULL,
   `r_anzahlkarten` SMALLINT NOT NULL,

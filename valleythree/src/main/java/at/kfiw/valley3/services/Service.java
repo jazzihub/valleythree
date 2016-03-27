@@ -20,6 +20,7 @@ import at.kfiw.valley3.entities.Event;
 import at.kfiw.valley3.entities.Location;
 import at.kfiw.valley3.entities.Organizer;
 import at.kfiw.valley3.entities.Place;
+import at.kfiw.valley3.entities.Reservation;
 import at.kfiw.valley3.entities.Visitor;
 
 @ApplicationScoped
@@ -196,13 +197,10 @@ public class Service
 		try
 		{
 			TypedQuery<Event> query = entityManager.createQuery(sql, Event.class);
-//			TypedQuery<Event> query = entityManager.createQuery("SELECT e from Event e WHERE LOWER(e.name) LIKE %:name%", Event.class);
-//			query.setParameter("name", name);
 			
 			logger.info("Service.searchEvent ok");
 			
 			List <Event> result = query.getResultList();
-			System.out.println(result);
 			return result;
 		} catch (Throwable t)
 		{
@@ -220,7 +218,7 @@ public class Service
 			query.setParameter("date", date);
 			
 			logger.info("Service.searchEvent ok");
-			//return 
+	
 			List <Event> result = query.getResultList();
 			return result;
 		} catch (Throwable t)
@@ -253,6 +251,31 @@ public class Service
 	public void removeEvent(Event e)
 	{
 
+	}
+	
+	
+	//Reservation:
+	public void addReservation(Reservation r)
+	{
+		try
+		{
+			// entityManager.getTransaction().begin();
+			if (!entityManager.contains(r))
+			{
+				entityManager.persist(r);
+			}
+			// entityManager.getTransaction().commit();
+			else
+			{
+				//entityManager.merge(e);
+			}
+			System.out.println("Service.addReservation ok");
+		} catch (Throwable t)
+		{
+			logger.error(
+					"Fehler Service.addEvent: Reservation konnte nicht hinzugef�gt werden",
+					t);
+		}
 	}
 
 	// Visitor:

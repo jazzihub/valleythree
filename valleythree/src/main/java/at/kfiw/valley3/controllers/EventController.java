@@ -39,7 +39,7 @@ public class EventController implements Serializable
 	@ManagedProperty(value="#{location}")
 	private Location l;
 	
-	@ManagedProperty(value="#{place}")
+	@ManagedProperty(value="#{place}") 
 	private Place p;
 
 	private static final Logger logger = LoggerFactory.getLogger(Service.class);
@@ -63,11 +63,11 @@ public class EventController implements Serializable
 			existingLocation = service.getLocationByNameAndPlz(l.getName(), p.getPlz());
 			
 			//service.addEvent(existingPlace, existingLocation, e, p, l, o);
-			// wenn PLZ bereits in DB in vorhanden, dann neuen Place hinzuf�gen
+			// wenn PLZ bereits in DB in vorhanden, dann neuen Place hinzufügen
 			if (existingPlace == null)
 			{
 
-				p.addLocation(l);
+				//p.addLocation(l);
 				service.addPlace(p);
 			} else
 			{
@@ -76,7 +76,8 @@ public class EventController implements Serializable
 			
 			if (existingLocation == null)
 			{
-				l.addEvent(e);
+				//l.addEvent(e);
+				e.setLocation(l);
 				service.addLocation(l);
 			}
 			else
@@ -84,8 +85,6 @@ public class EventController implements Serializable
 				e.setLocation(existingLocation);
 			}
 			
-//			o.addEvent(e);
-//			service.updateOrganizer(o);
 			e.setOrganizer(o);
 			service.addEvent(e);
 			logger.info("EventController.addEvent ok");

@@ -8,9 +8,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import at.kfiw.valley3.entities.Event;
-import at.kfiw.valley3.entities.Organizer;
 import at.kfiw.valley3.entities.Reservation;
-import at.kfiw.valley3.entities.ReservationPK;
 import at.kfiw.valley3.entities.Visitor;
 import at.kfiw.valley3.services.Service;
 
@@ -21,10 +19,7 @@ public class Ticket
 	@EJB
 	Service service;
 	FacesMessage message;
-	
-	
 
-//	private int number;
 	private Event event;
 	private short anz;
 	
@@ -37,16 +32,18 @@ public class Ticket
 		Reservation r = (Reservation) FacesContext.getCurrentInstance()
 				.getExternalContext().getSessionMap().get("reservation");
 		
-		r.setEvent(event);	
+//		v.addReservation(r);
+//		event.addReservation(r);
+		r.setEvent(event);
 		r.setVisitor(v);
-		ReservationPK pk = new ReservationPK();
-		pk.setRBBnr(v.getNr());
-		pk.setRVgVgnr(event.getNr());
-		r.setId(pk);
-		v.addReservation(r);
+		
 		service.addVisitor(v);
+		service.addReservation(r);
+		
 		return "commitTicketReservation.xhtml";
 	}
+	
+	
 //	public int getNumber()
 //	{
 //		return number;

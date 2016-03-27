@@ -80,13 +80,13 @@
 			<h:column>
 				<f:facet name="header">am</f:facet>
 				<h:outputText value="#{e.begin}">
-				<f:convertDateTime pattern="dd.MM.yyyy"/>
+				<f:convertDateTime pattern="dd.MM.yyyy" timeZone="Europe/Berlin"/>
 				</h:outputText>				
 				</h:column>
 			<h:column>
 				<f:facet name="header">um</f:facet>
 					<h:outputText value="#{e.time}">
-						<f:convertDateTime pattern="HH:mm"/>
+						<f:convertDateTime pattern="HH:mm" timeZone="Europe/Berlin"/>
 					</h:outputText>
 				</h:column>
 			<h:column>

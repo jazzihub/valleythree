@@ -3,11 +3,14 @@ package at.kfiw.valley3.entities;
 import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,10 +18,11 @@ import java.util.List;
  * The persistent class for the vg_veranstaltungen database table.
  * 
  */
-@SessionScoped
+@RequestScoped
 @ManagedBean
 @Entity
 @Table(name = "vg_veranstaltungen")
+@Transactional
 @NamedQueries({
 		@NamedQuery(name = Event.NQ_FIND_ALL, query = "SELECT e FROM Event e"),
 		@NamedQuery(name = Event.NQ_GET_EVENT_BY_BEGIN, query = "SELECT e FROM Event e WHERE e.begin = :begin order by e.begin"), 
@@ -92,7 +96,7 @@ public class Event implements Serializable
 	//private List<Comment> comments;
 
 	// bi-directional many-to-one association to Reservation
-	@OneToMany(mappedBy = "event")
+	@OneToMany(fetch=FetchType.EAGER, mappedBy = "event", cascade = CascadeType.PERSIST)
 	private List<Reservation> reservations;
 
 	// bi-directional many-to-one association to Location
@@ -109,6 +113,7 @@ public class Event implements Serializable
 
 	public Event()
 	{
+		reservations = new ArrayList<Reservation>();
 	}
 
 	public int getNr()

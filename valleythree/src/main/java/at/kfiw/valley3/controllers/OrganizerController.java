@@ -46,7 +46,8 @@ public class OrganizerController
 			if(existingPlace == null)
 			{
 				
-				p.addOrganizer(o);
+				//p.addOrganizer(o);
+				o.setPlace(p);
 				service.addPlace(p);
 				service.addOrganizer(o);
 				logger.info("OrganizerController.addOrganizer(): Place neu angelegt; Veranstalter hinzugefügt");

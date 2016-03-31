@@ -109,27 +109,25 @@
 				<f:validateLength maximum="45" />
 			</h:inputText>
 		</div>
-		<!--  
-		<h:form>
+		  
+		
 			<div>
 				<label>Foto</label>
 
-				<h:inputFile sizeLimit="100000"
-					value="#{fileUploadController.tempPoster}"
-					allowTypes="/(\.|\/)(gif|jpe?g|png)$/">
-
+				<h:inputFile id="file" value="#{fileUploadController.tempPoster}">
+					<h:message for="file"></h:message>
 				</h:inputFile>
 				<h:outputText value="Datei auswählen"
 					rendered="#{fileUploadController.tempPoster == null}"></h:outputText>
-				<h:commandButton action="#{fileUploadController.upload()}"
+				<h:commandButton type="submit" action="#{fileUploadController.upload()}"
 					value="Upload" />
 				<h:outputText value="Datei erfolgreich hochgeladen"
 					rendered="#{fileUploadController.tempPoster != null}"></h:outputText>
 
 
 			</div>
-		</h:form>
-		-->
+		
+		
 		<div>
 			<h:commandButton value="Hinzufuegen"
 				action="#{eventController.addEvent()}" type="submit" ></h:commandButton>

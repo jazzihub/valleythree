@@ -56,6 +56,9 @@ public class EventController implements Serializable
 		
 		Organizer tempOrganizer = (Organizer) session.getAttribute("currentUser");
 		Organizer o = service.getOrganizerByEmail(tempOrganizer.getEmail());
+		
+//		Event e = (Event) FacesContext.getCurrentInstance()
+//				.getExternalContext().getSessionMap().get("event");
 
 		try
 		{
@@ -68,6 +71,7 @@ public class EventController implements Serializable
 			{
 
 				//p.addLocation(l);
+				l.setPlace(p);
 				service.addPlace(p);
 			} else
 			{
@@ -167,8 +171,6 @@ public class EventController implements Serializable
 			Organizer temp = (Organizer) session.getAttribute("currentUser");
 			Organizer o = service.getOrganizerByEmail(temp.getEmail());
 			
-			
-			
 			logger.info("EventController.getEventsFromOrganizer ok");
 			return service.getEventFromOrganizer(o.getNr());
 
@@ -178,6 +180,38 @@ public class EventController implements Serializable
 		}
 
 		return null;
+	}
+	
+	public void removeEvent(Event event)
+	{
+		try
+		{			
+			
+			service.removeEvent(event.getNr());
+			logger.info("EventController.removeEvent ok");
+			
+
+		} catch (Throwable t)
+		{
+			logger.error("Fehler EventController.removeEvent: Event konnte nicht gelöscht werden", t);
+		}
+
+	}
+	
+	public void updateEvent(Event event)
+	{
+		try
+		{			
+			
+			service.updateEvent(event.getNr());
+			logger.info("EventController.updateEvent ok");
+			
+
+		} catch (Throwable t)
+		{
+			logger.error("Fehler EventController.updateEvent: Event konnte nicht geändert werden", t);
+		}
+
 	}
 
 	public Event getE()

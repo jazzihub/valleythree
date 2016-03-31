@@ -248,10 +248,41 @@ public class Service
 	
 	
 
-	public void removeEvent(Event e)
+	public void removeEvent(int nr)
 	{
-
+		try
+		{
+				Event e = entityManager.getReference(Event.class, nr);
+				entityManager.remove(e);
+				logger.info("Service.removeEvent ok");
+			
+			
+		} catch (Throwable t)
+		{
+			logger.error(
+					"Fehler Service.removeEvent: Event konnte nicht gelöscht werden",
+					t);
+		}
 	}
+	
+	public void updateEvent(int nr)
+	{
+		try
+		{
+				Event e = entityManager.getReference(Event.class, nr);
+				entityManager.refresh(e);
+				logger.info("Service.updateEvent ok");
+			
+			
+		} catch (Throwable t)
+		{
+			logger.error(
+					"Fehler Service.updateEvent: Event konnte nicht geändert werden",
+					t);
+		}
+	}
+	
+	
 	
 	
 	//Reservation:

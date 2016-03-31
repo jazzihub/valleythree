@@ -59,17 +59,21 @@ public class SearchEvent implements Serializable
 			if (!name.isEmpty())
 			{
 				term = name.trim();
-				sql = sql + " AND (LOWER(e.name) LIKE LOWER('%" + term
+				sql = sql + " AND ((LOWER(e.name) LIKE LOWER('%" + term
 						+ "%')) OR (LOWER(e.kind) LIKE LOWER('%" + term
-						+ "%'))";
+						+ "%'))) ";
 
 				logger.info("Name is not empty");
 
 				if (date != null)
 				{
 					String dateNew = formatDate(date);
-					sql = sql + " AND e.begin = '" + dateNew + "'";
+					sql = sql + " AND e.begin = '" + dateNew + "' AND '" + dateNew + "' >= CURRENT_DATE";
 					logger.info("Date is not empty");
+				}
+				else
+				{
+					sql = sql + " AND e.begin >= CURRENT_DATE ";
 				}
 
 			} else
@@ -99,6 +103,10 @@ public class SearchEvent implements Serializable
 					logger.info("Date is not empty");
 					String dateNew = formatDate(date);
 					sql = sql + " AND e.begin = '" + dateNew + "' AND '" + dateNew + "' >= CURRENT_DATE";
+				}
+				else
+				{
+					sql = sql + " AND e.begin >= CURRENT_DATE ";
 				}
 
 			} else
@@ -121,87 +129,87 @@ public class SearchEvent implements Serializable
 
 	}
 	
-	public List<Event> searchForApp(String name)
-	{
-
-		this.name = name;
-		this.date = null;
-		this.place = "";
-		
-		String term;
-		String sql = "SELECT e FROM Event e ";
-
-		if (!place.isEmpty())
-		{
-			logger.info("Place is not empty");
-			sql = sql
-					+ "JOIN e.location l JOIN l.place p WHERE (LOWER(p.place) LIKE LOWER('%"
-					+ place + "%'))";
-
-			if (!name.isEmpty())
-			{
-				term = name.trim();
-				sql = sql + " AND (LOWER(e.name) LIKE LOWER('%" + term
-						+ "%')) OR (LOWER(e.kind) LIKE LOWER('%" + term
-						+ "%'))";
-
-				logger.info("Name is not empty");
-
-				if (date != null)
-				{
-					String dateNew = formatDate(date);
-					sql = sql + " AND e.begin = '" + dateNew + "'";
-					logger.info("Date is not empty");
-				}
-
-			} else
-			{
-				if (date != null)
-				{
-					logger.info("Date is not empty");
-					String dateNew = formatDate(date);
-					sql = sql + "AND e.begin = '" + dateNew + "' AND '" + dateNew + "' >= CURRENT_DATE";
-				}
-			}
-
-		} else
-		{
-			if (!name.isEmpty())
-			{
-				logger.info("Name is not empty");
-				term = name.trim();
-				sql = sql + " WHERE ((LOWER(e.name) LIKE LOWER('%" + term
-						+ "%')) OR (LOWER(e.kind) LIKE LOWER('%" + term
-						+ "%')))";
-				// sql = sql + "e.name LIKE '%" + term + "%'";
-				logger.info("SearchEvent.search ok");
-
-				if (date != null)
-				{
-					logger.info("Date is not empty");
-					String dateNew = formatDate(date);
-					sql = sql + " AND e.begin = '" + dateNew + "' AND '" + dateNew + "' >= CURRENT_DATE";
-				}
-
-			} else
-			{
-
-				if (date != null)
-				{
-					logger.info("Date is not empty");
-					String dateNew = formatDate(date);
-					sql = sql + " WHERE e.begin = '" + dateNew + "' AND '" + dateNew + "' >= CURRENT_DATE";
-				}
-			}
-		}
-		
-		sql = sql + " order by e.begin";
-		System.out.println(sql);
-		service = new Service();
-		events = service.searchEvent(sql);
-		return events;
-
-	}
+//	public List<Event> searchForApp(String name)
+//	{
+//
+//		this.name = name;
+//		this.date = null;
+//		this.place = "";
+//		
+//		String term;
+//		String sql = "SELECT e FROM Event e ";
+//
+//		if (!place.isEmpty())
+//		{
+//			logger.info("Place is not empty");
+//			sql = sql
+//					+ "JOIN e.location l JOIN l.place p WHERE (LOWER(p.place) LIKE LOWER('%"
+//					+ place + "%'))";
+//
+//			if (!name.isEmpty())
+//			{
+//				term = name.trim();
+//				sql = sql + " AND (LOWER(e.name) LIKE LOWER('%" + term
+//						+ "%')) OR (LOWER(e.kind) LIKE LOWER('%" + term
+//						+ "%'))";
+//
+//				logger.info("Name is not empty");
+//
+//				if (date != null)
+//				{
+//					String dateNew = formatDate(date);
+//					sql = sql + " AND e.begin = '" + dateNew + "' AND '" + dateNew + "' >= CURRENT_DATE";
+//					logger.info("Date is not empty");
+//				}
+//
+//			} else
+//			{
+//				if (date != null)
+//				{
+//					logger.info("Date is not empty");
+//					String dateNew = formatDate(date);
+//					sql = sql + "AND e.begin = '" + dateNew + "' AND '" + dateNew + "' >= CURRENT_DATE";
+//				}
+//			}
+//
+//		} else
+//		{
+//			if (!name.isEmpty())
+//			{
+//				logger.info("Name is not empty");
+//				term = name.trim();
+//				sql = sql + " WHERE ((LOWER(e.name) LIKE LOWER('%" + term
+//						+ "%')) OR (LOWER(e.kind) LIKE LOWER('%" + term
+//						+ "%')))";
+//				// sql = sql + "e.name LIKE '%" + term + "%'";
+//				logger.info("SearchEvent.search ok");
+//
+//				if (date != null)
+//				{
+//					logger.info("Date is not empty");
+//					String dateNew = formatDate(date);
+//					sql = sql + " AND e.begin = '" + dateNew + "' AND '" + dateNew + "' >= CURRENT_DATE";
+//				}
+//
+//			} else
+//			{
+//
+//				if (date != null)
+//				{
+//					logger.info("Date is not empty");
+//					String dateNew = formatDate(date);
+//					sql = sql + " WHERE e.begin = '" + dateNew + "' AND '" + dateNew + "' >= CURRENT_DATE";
+//				}
+//			}
+//		}
+//		
+//		sql = sql + " order by e.begin";
+//		System.out.println(sql);
+//		//service = new Service();
+//		events = service.searchEvent(sql);
+//		return events;
+//
+//	}
 
 	// Getter, Setter
 	public List<Event> getEvents()

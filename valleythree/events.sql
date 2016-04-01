@@ -126,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `events`.`r_reservierungen` (
   `r_vg_vgnr` INT NOT NULL,
   `r_b_bnr` INT NOT NULL,
   `r_anzahlkarten` SMALLINT NOT NULL,
-  PRIMARY KEY (`r_vg_vgnr`, `r_b_bnr`),
+  PRIMARY KEY (r_nr),
   INDEX `fk_r_reservierungen_vg_veranstaltungen1_idx` (`r_vg_vgnr` ASC),
   INDEX `fk_r_reservierungen_b_besucher1_idx` (`r_b_bnr` ASC),
   CONSTRAINT `fk_r_reservierungen_vg_veranstaltungen1`

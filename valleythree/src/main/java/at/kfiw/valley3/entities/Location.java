@@ -19,7 +19,7 @@ import java.util.List;
  * 
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 @Entity
 
 @Table(name="l_location")

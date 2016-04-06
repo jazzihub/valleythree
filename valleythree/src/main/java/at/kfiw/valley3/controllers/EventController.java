@@ -65,7 +65,7 @@ public class EventController implements Serializable
 			existingPlace = service.getPlaceByPlz(p.getPlz());
 			existingLocation = service.getLocationByNameAndPlz(l.getName(), p.getPlz());
 			
-			//service.addEvent(existingPlace, existingLocation, e, p, l, o);
+			
 			// wenn PLZ bereits in DB in vorhanden, dann neuen Place hinzufügen
 			if (existingPlace == null)
 			{
@@ -198,21 +198,21 @@ public class EventController implements Serializable
 
 	}
 	
-	public void updateEvent(Event event)
-	{
-		try
-		{			
-			
-			service.updateEvent(event.getNr());
-			logger.info("EventController.updateEvent ok");
-			
-
-		} catch (Throwable t)
-		{
-			logger.error("Fehler EventController.updateEvent: Event konnte nicht geändert werden", t);
-		}
-
-	}
+//	public void updateEvent(Event event)
+//	{
+//		try
+//		{			
+//			
+//			service.updateEvent(event.getNr());
+//			logger.info("EventController.updateEvent ok");
+//			
+//
+//		} catch (Throwable t)
+//		{
+//			logger.error("Fehler EventController.updateEvent: Event konnte nicht geändert werden", t);
+//		}
+//
+//	}
 
 	public Event getE()
 	{

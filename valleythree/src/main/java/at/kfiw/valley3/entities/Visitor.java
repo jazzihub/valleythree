@@ -41,6 +41,7 @@ public class Visitor implements Serializable
 	
 	@Id
 	@Column(name = "b_bnr")	
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int nr;
 
 	@Column(name = "b_email")

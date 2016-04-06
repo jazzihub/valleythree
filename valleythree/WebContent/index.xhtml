@@ -131,10 +131,10 @@
 				<f:facet name="header">Ticket Info</f:facet>
 				#{e.ticketInfo}
 				</h:column>
-				<h:column>
-				<h:panelGrid rendered="#{e.ticketsTotal != 0}">			
 				
-				<h:commandLink action="#{ticket.Event(e)}"  value="Ticket reservieren" />
+				<h:column>
+				<h:panelGrid rendered="#{e.ticketsTotal != 0}">						
+					<h:commandLink action="#{ticket.Event(e)}"  value="Ticket reservieren" />
 				</h:panelGrid>
 				</h:column>
 				

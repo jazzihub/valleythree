@@ -17,18 +17,19 @@ import javax.transaction.Transactional;
 @SessionScoped
 @ManagedBean
 @Table(name="r_reservierungen")
-@NamedQuery(name="Reservation.findAll", query="SELECT r FROM Reservation r")
-//@AssociationOverrides({
-//	@AssociationOverride (name = "event",
-//			joinColumns = @JoinColumn(name = "vg_vgnr")),
-//	@AssociationOverride (name = "r_vg_vgnr",
-//			joinColumns = @JoinColumn(name = "b_bnr")) })	)
+@NamedQueries({
+	@NamedQuery(name="Reservation.findAll", query="SELECT r FROM Reservation r"),
+	@NamedQuery(name= Reservation.NQ_GET_RESERVATIONS_FROM_EVENT,query="SELECT r FROM Reservation r WHERE r.event.nr = :nr")
+})
+		
 @Transactional
 public class Reservation implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 //	@EmbeddedId
 //	private ReservationPK id;
+	
+	public static final String NQ_GET_RESERVATIONS_FROM_EVENT = "Reservation.getReservationsFromOrganizer";
 	
 	@Id
 	@Column(name = "r_nr") 

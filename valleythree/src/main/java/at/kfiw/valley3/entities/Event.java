@@ -18,7 +18,7 @@ import java.util.List;
  * The persistent class for the vg_veranstaltungen database table.
  * 
  */
-@RequestScoped
+@SessionScoped
 @ManagedBean
 @Entity
 @Table(name = "vg_veranstaltungen")

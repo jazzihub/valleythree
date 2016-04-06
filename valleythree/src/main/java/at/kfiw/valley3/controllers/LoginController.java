@@ -73,7 +73,7 @@ public class LoginController
 							new FacesMessage(FacesMessage.SEVERITY_WARN,
 									"Ungültiger Login!",
 									"Versuchen Sie es nocheinmal!"));
-			// FacesContext.getCurrentInstance().addMessage("form:email",
+			// facesContext.addMessage("form:email",
 			// message);
 
 			// invalidate session, and redirect to other pages

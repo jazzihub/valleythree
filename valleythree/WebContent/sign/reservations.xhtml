@@ -1,0 +1,63 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<h:html lang="de"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:m="http://code.google.com/p/gmaps4jsf/"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+
+<h:head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<h:title>
+		<ui:insert name="title"></ui:insert>
+	</h:title>
+	<h:outputStylesheet>
+	</h:outputStylesheet>
+	
+</h:head>
+
+<h:body>
+	<h1>Reservierungen</h1>
+	<br></br>
+	
+		<h:dataTable value="#{reservationController.reservations}" var="r">
+		
+			<h:column>
+				<f:facet name="header">Kunde Nachname</f:facet>
+				#{r.visitor.lastname}
+				</h:column>
+			<h:column>
+				<f:facet name="header">Kunde Vorname</f:facet>
+				#{r.visitor.firstname}			
+				</h:column>
+				
+			<h:column>
+				<f:facet name="header">Anzahl Tickets</f:facet>
+				#{r.numberTickets}			
+				</h:column>
+				
+			<h:column>
+				<f:facet name="header">e-mail</f:facet>
+				#{r.visitor.email}
+				</h:column>
+				
+			<h:column>
+				<f:facet name="header">Telefon:</f:facet>
+				#{r.visitor.tel};
+				</h:column>
+			
+		</h:dataTable>
+		
+	 		<h:panelGroup rendered="#{empty reservationController.reservations}">
+				<p>Noch keine Reservierungen vorhanden!</p>
+			</h:panelGroup>
+			<h:button value="Zurück" outcome="organizerArea"/>
+	
+</h:body>
+</h:html>

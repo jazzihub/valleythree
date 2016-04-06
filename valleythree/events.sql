@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `events`.`vg_veranstaltungen` (
   `vg_kurzbeschreibung` TEXT NOT NULL,
   `vg_detailbeschreibung` MEDIUMTEXT NOT NULL,
   `vg_karteninfo` TEXT NOT NULL,
-  `vg_plakat` BLOB NULL,
+  `vg_plakat` LONGBLOB NULL,
   `vg_kartengesamt` SMALLINT(6) NULL,
   `vg_m_mnr` int NOT NULL,
   PRIMARY KEY (`vg_vgnr`),

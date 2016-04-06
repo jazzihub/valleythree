@@ -3,9 +3,11 @@ package at.kfiw.valley3.controllers;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import at.kfiw.valley3.entities.Event;
 import at.kfiw.valley3.entities.Reservation;
@@ -18,11 +20,12 @@ public class Ticket
 {
 	@EJB
 	Service service;
-	FacesMessage message;
+	
 
 	private Event event;
 	private short anz;
-	
+	private static final Logger logger = LoggerFactory.getLogger(Ticket.class);
+
 	
 	public String reservation()
 	{
@@ -32,38 +35,33 @@ public class Ticket
 		Reservation r = (Reservation) FacesContext.getCurrentInstance()
 				.getExternalContext().getSessionMap().get("reservation");
 		
-//		v.addReservation(r);
-//		event.addReservation(r);
 		r.setEvent(event);
 		r.setVisitor(v);
 		
 		service.addVisitor(v);
 		service.addReservation(r);
 		
-		return "commitTicketReservation.xhtml";
+		
+		if (r.getNumberTickets() > anz)
+		{
+			logger.info("Nur noch " + anz + " verfügbar!");
+			FacesContext.getCurrentInstance().addMessage(null , new FacesMessage("Nur noch " + anz + " Tickets verfügbar!"));
+			return null;
+		}
+		else
+		{
+			short number = (short) (event.getTicketsTotal() - r.getNumberTickets());
+			//event.setTicketsTotal(number);
+			service.updateEvent(event.getNr(), number);
+			System.out.println("Tickets übrig: " + number + ", Tickets abgezogen: " + r.getNumberTickets());
+			return "commitTicketReservation.xhtml";
+			
+		}
+				
+		
 	}
 	
 	
-//	public int getNumber()
-//	{
-//		return number;
-//	}
-//
-//	public void setNumber(int number)
-//	{
-//		if (number <= anz)
-//		{
-//			this.number = number;
-//		} else
-//		{
-//			message = new FacesMessage("Nur noch " + anz + " übrig!");
-//			FacesContext.getCurrentInstance()
-//					.addMessage("form:ticket", message);
-//		}
-//	}
-	
-	
-
 	public String Event(Event e)
 	{
 		this.event = e;
@@ -77,17 +75,5 @@ public class Ticket
 		return anz;
 	}
 
-	// public int howManyTicketsLeft()
-	// {
-	//
-	//
-	// short left = service.countTickets(event.getNr());
-	// if(number > left)
-	// {
-	//
-	// return 0;
-	// }
-	//
-	// return left;
-	// }
+	
 }

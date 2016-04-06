@@ -18,7 +18,7 @@ import java.util.List;
  * 
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 @Entity
 @Table(name = "o_orte")
 @NamedQuery(name = "Place.findAll", query = "SELECT p FROM Place p")

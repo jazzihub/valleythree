@@ -38,7 +38,7 @@ public class RestfulService
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		final List<Event> events;
-		
+		System.out.println(place);
 		Date date = null;
 		try
 		{
@@ -52,14 +52,15 @@ public class RestfulService
 		}
 		
 		String term;
+		String term1;
 		String sql = "SELECT e FROM Event e ";
 
 		if (!place.isEmpty())
 		{
-			
+			term1 = place.trim();
 			sql = sql
 					+ "JOIN e.location l JOIN l.place p WHERE (LOWER(p.place) LIKE LOWER('%"
-					+ place + "%'))";
+					+ term1 + "%'))";
 
 			if (!name.isEmpty())
 			{

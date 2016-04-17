@@ -200,11 +200,29 @@ public class Service
 			return query.getResultList();
 		} catch (Throwable t)
 		{
-			logger.error("Fehler: getEventByKind", t);
+			logger.error("Fehler: getEventByDateTime(Date begin)", t);
 		}
 
 		return new ArrayList<Event>();
 	}
+	
+	public List<Event> getEventsbyDate(String begin)
+	{
+		try
+		{
+			Query query = entityManager
+					.createQuery("SELECT e FROM Event e WHERE e.begin = '" + begin + "'");
+			
+			return query.getResultList();
+		} catch (Throwable t)
+		{
+			logger.error("Fehler: getEventsByDateTime(String date)", t);
+		}
+
+		return new ArrayList<Event>();
+	}
+	
+		
 	
 	
 	public void removeEvent(int nr)

@@ -48,4 +48,14 @@ public class Navigation implements Serializable
 	{
 		return "organizerArea";
 	}
+	
+	public String addEvent()
+	{
+		return "addEvent";
+	}
+	
+	public String showDataEvent()
+	{
+		return "showDataEvent";
+	}
 }

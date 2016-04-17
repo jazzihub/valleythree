@@ -27,9 +27,12 @@
 		</div>
 		<div>
 			<label>Datum</label>
-			<h:inputText p:type="date" value="#{event.begin}" p:placeholder="dd.MM.yyyy">
+			<h:inputText id="date" p:type="date" value="#{event.begin}" p:placeholder="dd.MM.yyyy">
 				<f:convertDateTime pattern="dd.MM.yyyy" timeZone="Europe/Berlin"/>
+				<!-- <f:ajax event="blur" render="result" listener="#{eventsToThisDate.countEvents()}"/> -->
+				<!-- <f:validator validatorId="dateValidator" /> -->
 			</h:inputText>
+			<h:message for="date"/>
 		</div>
 		<div>
 			<label>Uhrzeit</label>
@@ -64,7 +67,6 @@
 			<h:message for="strasse"></h:message>
 
 		</div>
-
 		<div>
 			<label for="plz">PLZ:</label>
 			<h:inputText id="plz" value="#{place.plz}" p:placeholder="1234"
@@ -127,11 +129,12 @@
 		
 		
 		<div>
-			<h:commandButton value="Hinzufuegen"
-				action="#{eventController.addEvent()}" type="submit" ></h:commandButton>
+			<h:commandButton id="btn" value="Weiter"
+				action="#{navigation.showDataEvent()}" type="submit" ></h:commandButton>
 			<h:button outcome="#{navigation.organizerArea()}"
 				value="Zurück zum Veranstalterbereich" />
 		</div>
+		<br><h:messages /></br>
 	</h:form>
 
 

@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `events`.`vg_veranstaltungen` (
   `vg_anfang` DATE NOT NULL,
   `vg_name` VARCHAR(45) NOT NULL,
   `vg_vr_vrnr` INT NOT NULL,
-  `vg_zeit` TIME NULL,
+  `vg_zeit` TIME NOT NULL,
   `vg_art` VARCHAR(45) NOT NULL,
   `vg_mitwirkende` TEXT NULL,
   `vg_kurzbeschreibung` TEXT NOT NULL,

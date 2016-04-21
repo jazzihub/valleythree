@@ -23,6 +23,8 @@ public class EventsToThisDate
 	Service service;
 	
 	private int count;
+	
+	
 //		if (count > 0)
 //		{
 //						
@@ -33,6 +35,7 @@ public class EventsToThisDate
 	
 	public List<Event> eventsAtThisDate()
 	{
+				
 		Event e = (Event) FacesContext.getCurrentInstance()
 				.getExternalContext().getSessionMap().get("event");
 		

@@ -30,9 +30,8 @@ import java.util.List;
 		@NamedQuery(name = Event.NQ_GET_EVENT_FROM_NOW, query = "SELECT e FROM Event e WHERE e.begin >= CURRENT_DATE order by e.begin"),
 		@NamedQuery(name = Event.NQ_GET_EVENT_BY_KIND, query = "SELECT e FROM Event e WHERE e.kind = :kind order by e.begin"),
 		@NamedQuery(name = Event.NQ_GET_EVENT_FROM_ORGANIZER, query = "SELECT e FROM Event e WHERE e.organizer.nr = :organizerNr order by e.begin"),
-		@NamedQuery(name = Event.NQ_GET_EVENT_BY_DATE_TIME, query = "SELECT e FROM Event e WHERE e.begin = :begin")
-		//@NamedQuery(name = Event.NQ_GET_EVENTS_FROM_ORGANIZER, query = "SELECT e FROM Event e JOIN e.organizer o WHERE (o.nr = :nr) AND (e.begin >= CURRENT_DATE) order by e.begin")
-		//@NamedQuery(name = Event.NQ_GET_EVENT_BY_PLACE, query = "SELECT e FROM Event e JOIN Location l JOIN Place p WHERE p.place = :place order by e.begin")
+		@NamedQuery(name = Event.NQ_GET_EVENT_BY_DATE_TIME, query = "SELECT e FROM Event e WHERE e.begin = :begin"),
+		@NamedQuery(name = Event.NQ_GET_EVENT_BY_NAME, query = "SELECT e FROM Event e WHERE e.name = :name")
 })
 
 public class Event implements Serializable
@@ -47,6 +46,7 @@ public class Event implements Serializable
 	public static final String NQ_GET_EVENT_BY_PLACE = "Event.getEventByPlace";
 	public static final String NQ_GET_EVENT_FROM_ORGANIZER = "Event.getEventFromOrganizer";
 	public static final String NQ_GET_EVENT_BY_DATE_TIME = "Event.getEventByDateTime";
+	public static final String NQ_GET_EVENT_BY_NAME = "Event.getEventByName";
 	//public static final String NQ_GET_EVENTS_FROM_ORGANIZER = "Event.getEventsFromOrganizer";
 
 	@Id

@@ -17,7 +17,7 @@
 <h:body>
 <h1>Registrierung</h1>
 
- <h:form>
+ <h:form id="registry">
         <div>
         <label for="name">Name:</label>            
             <h:inputText id="name" value="#{organizer.name}" 
@@ -37,7 +37,7 @@
         
         <div>
         <label for="plz">PLZ:</label>            
-            <h:inputText id="plz" value="#{place.plz}"  p:placeholder="1234"  required="true"
+            <h:inputText id="plz" value="#{place.plz}"  p:placeholder="1234"  required="true" p:pattern="^[0-9]+$"
             			requiredMessage="Geben Sie die PLZ ein">
             <f:validateLongRange minimum="1000" maximum="99999" />	
             </h:inputText>
@@ -54,7 +54,7 @@
         </div>
         <div>
         <label for="tel">Telefon:</label>            
-            <h:inputText id="tel" value="#{organizer.tel}" required="true" p:placeholder="+43 660 1111111"
+            <h:inputText id="tel" value="#{organizer.tel}" required="true" p:placeholder="+43 660 1111111" p:pattern="^\+(?:[0-9] ?){6,14}[0-9]$"
             			requiredMessage="Geben Sie eine gueltige Telefonnummer ein" >
             <f:validateLength minimum="4" maximum="45" />	
             </h:inputText>
@@ -70,11 +70,20 @@
         </div>
         <div>
         <label for="pw">Passwort:</label>            
-            <h:inputSecret id="pw" value="#{organizer.password}" p:placeholder="min. 7 Zeichen" required="true"
+            <h:inputSecret id="pw" value="#{organizer.password}" p:placeholder="min. 6 Zeichen" required="true"
             			requiredMessage="Geben Sie ein Passwort ein">
-            <f:validateLength minimum="7" maximum="15" />
+            <f:validateLength minimum="6" maximum="15" />
             </h:inputSecret>
             <h:message for="pw"></h:message><br/>
+        </div>
+        <div>
+        <label for="pw">Passwort wiederholen:</label>            
+            <h:inputSecret id="pw2" value="password2" p:placeholder="min. 6 Zeichen" required="true"
+            			requiredMessage="Geben Sie ein Passwort ein">
+            	<f:validator validatorId="passwordValidator" /> 
+            	<f:validateLength minimum="6" maximum="15" />
+            </h:inputSecret>
+            <h:message for="pw2"></h:message><br/>
         </div><br/>
         <div>
         	<h:commandButton id="btn" value="Weiter" action="#{navigation.showData()}" type="submit" ></h:commandButton>

@@ -15,31 +15,39 @@ import at.kfiw.valley3.services.Service;
 
 @ManagedBean
 @RequestScoped
-@FacesValidator(value="registryValidator")
+@FacesValidator(value = "registryValidator")
 public class RegistryValidator implements Validator
 {
-		
+
 	FacesMessage message;
 	@EJB
 	Service service;
-	
-		
+
 	@Override
-	public void validate(FacesContext context,
-			UIComponent componentToValidate, Object value)
+	public void validate(FacesContext context, UIComponent componentToValidate,
+			Object value)
 	{
 		String email = String.valueOf(value);
-		
+
 		Organizer o = null;
-		try
+
+		if (!email.isEmpty())
 		{
-			// boolean
-			o = service.getOrganizerByEmail(email);
-					
-		} catch (Exception ex)
+			try
+			{
+				// boolean
+				o = service.getOrganizerByEmail(email);
+
+			} catch (Exception ex)
+			{
+				message = new FacesMessage(
+						"Fehler beim Vergleichen der email-Adressen");
+				throw new ValidatorException(message);
+			}
+		} else
 		{
 			message = new FacesMessage(
-					"Fehler beim Vergleichen der email-Adressen");
+					"Email muss einen Wert enthalten");
 			throw new ValidatorException(message);
 		}
 
@@ -51,5 +59,5 @@ public class RegistryValidator implements Validator
 		}
 
 	}
-	
+
 }

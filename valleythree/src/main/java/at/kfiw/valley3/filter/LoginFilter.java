@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebFilter("/faces/sign/*")
+@WebFilter("/sign/*")
 public class LoginFilter implements Filter
 {
 
@@ -22,8 +22,7 @@ public class LoginFilter implements Filter
 	@Override
 	public void destroy()
 	{
-		// TODO Auto-generated method stub
-		
+				
 	}
 
 	public void doFilter(ServletRequest servletRequest,
@@ -40,15 +39,14 @@ public class LoginFilter implements Filter
 		} 
 		else
 		{
-			System.out.println("user is not logged in");
-			// user is not logged in, redirect to login page
+			// User ist nicht eingeloggt, Redirect zu Loginseite
 			httpServletResponse.sendRedirect("../login.xhtml");
 		}
 	}
 	@Override
 	public void init(FilterConfig arg0) throws ServletException
 	{
-		// TODO Auto-generated method stub
+		
 		
 	}
 

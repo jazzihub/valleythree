@@ -84,7 +84,11 @@
 					<f:facet name="header">Mitwirkende</f:facet>
 				#{e.contributor}
 				</h:column>
-				 
+				 <!--  
+				
+					<h:commandLink value="Bearbeiten"></h:commandLink>
+				
+				-->
 				<h:column>
 					<h:commandLink value="Löschen" action="#{eventController.removeEvent(e)}" ></h:commandLink>
 				</h:column>
@@ -94,14 +98,6 @@
 					<h:commandButton value="Reservierungen" action="#{reservationController.allReservations(e)}" ></h:commandButton>
 				</h:panelGrid>					
 				</h:column>
-				
-				<!--  
-				<h:column>
-					<h:commandLink value="Bearbeiten"></h:commandLink>
-				</h:column>
-				-->
-
-
 			</h:dataTable>
 
 			<h:panelGroup rendered="#{empty eventController.eventsFromOrganizer}">

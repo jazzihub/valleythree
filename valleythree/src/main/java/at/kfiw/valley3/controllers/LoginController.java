@@ -27,7 +27,7 @@ public class LoginController
 	private static final Logger logger = LoggerFactory.getLogger(Service.class);
 
 	boolean validLogin;
-	//FacesContext facesContext  = FacesContext.getCurrentInstance();;
+	
 
 	public LoginController()
 	{

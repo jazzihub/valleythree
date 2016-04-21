@@ -21,42 +21,45 @@
 	<h:form id="form" prependId = "false" enctype="multipart/form-data">
 		<div>
 			<label>Name</label>
-			<h:inputText p:type="text" value="#{event.name}" autofocus="true">
-				<f:validateLength maximum="45" />
+			<h:inputText id="name" p:type="text" value="#{event.name}" autofocus="true" required="true" requiredMessage="Geben Sie den Namen der Veranstaltung ein">
+				<f:validateLength minimum="1" maximum="45" />
 			</h:inputText>
+			<h:message for="name"/>
 		</div>
 		<div>
 			<label>Datum</label>
-			<h:inputText id="date" p:type="date" value="#{event.begin}" p:placeholder="dd.MM.yyyy">
+			<h:inputText id="date" p:type="date" value="#{event.begin}" p:placeholder="dd.MM.yyyy" required="true" requiredMessage="Geben Sie das Datum im Format dd.MM.yyyy ein">
 				<f:convertDateTime pattern="dd.MM.yyyy" timeZone="Europe/Berlin"/>
-				<!-- <f:ajax event="blur" render="result" listener="#{eventsToThisDate.countEvents()}"/> -->
-				<!-- <f:validator validatorId="dateValidator" /> -->
 			</h:inputText>
 			<h:message for="date"/>
 		</div>
 		<div>
 			<label>Uhrzeit</label>
-			<h:inputText p:type="date" p:placeholder="hh:mm" value="#{event.time}">
+			<h:inputText id="time" p:type="date" p:placeholder="hh:mm" value="#{event.time}" requiredMessage="Geben Sie die Uhrzeit im Format HH.mm ein" required="true">
 				<f:convertDateTime pattern="HH:mm" timeZone="Europe/Berlin"/>
 			</h:inputText>
-
+			<h:message for="time"/>
 		</div>
 		<div>
 			<label>Art</label>
-			<h:inputText value="#{event.kind}">
+			<h:inputText id="kind" value="#{event.kind}" required="true" requiredMessage="Geben Sie die Art der Veranstaltung ein">
+				<f:validateLength minimum="1" maximum="45" />
 			</h:inputText>
+			<h:message for="kind"/>
 		</div>
 		<div>
 			<label>Detailbeschreibung</label>
-			<h:inputTextarea value="#{event.detail}" required="true">
-				<f:validateLength maximum="45" />
+			<h:inputTextarea id="detail" value="#{event.detail}" required="true" requiredMessage="Geben Sie eine Dateilbeschreibung ein">
+				<f:validateLength minimum="1" maximum="500" />
 			</h:inputTextarea>
+			<h:message for="detail"/>
 		</div>
 		<div>
 			<label>Kurzbeschreibung</label>
-			<h:inputTextarea value="#{event.description}">
-				<f:validateLength maximum="45" />
+			<h:inputTextarea id="short" value="#{event.description}" required="true" requiredMessage="Geben Sie eine Kurzbeschreibung ein">
+				<f:validateLength maximum="120" />
 			</h:inputTextarea>
+			<h:message for="short"/>
 		</div>
 		<div>
 			<label for="strasse">Strasse:</label>
@@ -70,7 +73,7 @@
 		<div>
 			<label for="plz">PLZ:</label>
 			<h:inputText id="plz" value="#{place.plz}" p:placeholder="1234"
-				required="true" pattern="^[0-9]*$"
+				required="true" p:pattern="^[0-9]*$"
 				requiredMessage="Geben Sie die PLZ ein">
 				<f:validateLongRange minimum="1000" maximum="99999" />
 			</h:inputText>
@@ -95,9 +98,10 @@
 			<h:message for="location"></h:message>
 		</div>
 		<div>
-			<label>Anzahl Tickets</label>
-			<h:inputText value="#{event.ticketsTotal}">
+			<label for="anzahlTickets">Anzahl Tickets</label>
+			<h:inputText id="anzahlTickets" value="#{event.ticketsTotal}" p:pattern="^[0-9]*$">
 			</h:inputText>
+			<h:message for="anzahlTickets"></h:message>
 		</div>
 		<div>
 			<label>Ticket Info</label>
@@ -111,11 +115,9 @@
 				<f:validateLength maximum="45" />
 			</h:inputText>
 		</div>
-		  
-		
-			<div>
+			<!--<div>
 				<label>Foto</label>
-				<!-- LONGBLOB Größe: 4096 MB max -->
+				LONGBLOB Größe: 4096 MB max
 				<h:inputFile id="file" value="#{fileUploadController.tempPoster}" >
 					<h:message for="file"></h:message>
 				</h:inputFile>
@@ -125,8 +127,7 @@
 					value="Upload" />
 				<h:outputText value="Datei erfolgreich hochgeladen"
 					rendered="#{fileUploadController.tempPoster != null}"></h:outputText>
-			</div>
-		
+			</div> -->
 		
 		<div>
 			<h:commandButton id="btn" value="Weiter"
@@ -134,7 +135,7 @@
 			<h:button outcome="#{navigation.organizerArea()}"
 				value="Zurück zum Veranstalterbereich" />
 		</div>
-		<br><h:messages /></br>
+		
 	</h:form>
 
 

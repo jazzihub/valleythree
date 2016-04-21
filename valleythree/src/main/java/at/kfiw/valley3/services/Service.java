@@ -68,6 +68,22 @@ public class Service
 
 		return new ArrayList<Event>();
 	}
+	
+	public Event getEventByName(String name)
+	{
+		try
+		{
+			TypedQuery<Event> query = entityManager.createNamedQuery(
+					Event.NQ_GET_EVENT_BY_NAME, Event.class);
+			query.setParameter("name", name);
+			return query.getSingleResult();
+		} catch (Throwable t)
+		{
+			logger.error("Fehler: getEventByName", t);
+		}
+
+		return null;
+	}
 
 	public List<Event> getEventByBeginAndEnd(Date begin, Date end)
 	{

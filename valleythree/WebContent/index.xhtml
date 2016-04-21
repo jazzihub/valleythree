@@ -25,6 +25,7 @@
 </h:head>
 
 <h:body>
+<f:view>
 	<a href="registry.xhtml">registrieren</a>
 	<a href="sign/organizerArea.xhtml">Veranstalterbereich</a>
 	<h:form>
@@ -70,12 +71,12 @@
 	</h:form>
 	
 	<br></br>
-	<h:form>
+	<h:form enctype="multipart/form-data">
 	<div>
 		<h:dataTable value="#{eventController.eventsFromNow}" var="e">
 			<h:column>
 				<f:facet name="header">Bezeichnung</f:facet>
-				#{e.name}
+					<h:outputText name="title" value="#{e.name}"/>
 				</h:column>
 			<h:column>
 				<f:facet name="header">am</f:facet>
@@ -100,6 +101,10 @@
 			<h:column>
 				<f:facet name="header">Kurzbeschreibung</f:facet>
 				#{e.description}
+				</h:column>
+			<h:column>
+				<f:facet name="foto">Foto</f:facet>
+				 	<h:graphicImage id="image" url="/image" />
 				</h:column>
 			<h:column>
 				<f:facet name="header">Details</f:facet>
@@ -141,6 +146,7 @@
 		</h:dataTable>
 	</div>
 </h:form>
-	
+	</f:view>
 </h:body>
+
 </h:html>

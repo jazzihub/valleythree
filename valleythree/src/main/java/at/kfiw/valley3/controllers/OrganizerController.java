@@ -58,7 +58,7 @@ public class OrganizerController
 
 				return "commitRegistry";
 
-			} catch (Throwable t)
+			} catch (Exception t)
 			{
 				logger.error("Fehler OrganizerController: Veranstalter konnte nicht hinzugefügt werden");
 				return "denyRegistry";

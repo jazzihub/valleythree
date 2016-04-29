@@ -41,10 +41,6 @@ public class FileUploadController
 		{
 			if (tempPoster != null)
 			{
-				if(tempPoster.getSize() > 4096)
-				{
-					fc.addMessage("form:file", new FacesMessage("Datei zu groﬂ"));
-				}
 				
 				input = tempPoster.getInputStream();
 				byte[] bytes = IOUtils.toByteArray(input);

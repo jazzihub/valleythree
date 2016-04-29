@@ -1,14 +1,18 @@
 package at.kfiw.valley3.servlets;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import at.kfiw.valley3.entities.Event;
 import at.kfiw.valley3.services.Service;
 
@@ -27,12 +31,19 @@ public class ImageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		String title = request.getParameter("title");
-		Event e = service.getEventByName(title);
+		String number = request.getParameter("id");
+		int nr = Integer.parseInt(number);
+		Event e = service.getEventById(nr);
 		
 		if(e.getPoster() != null)
 		{
+			//response.setContentType("image/jpeg"); //Browser mitteilen, welches Format er erwarten kann
 			byte[] imageBytes = e.getPoster();
+			
+//			ByteArrayInputStream input = new ByteArrayInputStream(imageBytes);
+//			BufferedImage img = ImageIO.read(input);
+//			ImageIO.write(img, "JPG", response.getOutputStream()); //alles in Bild umwandeln
+			
 			response.getOutputStream().write(imageBytes);
 			response.getOutputStream().close();
 		}

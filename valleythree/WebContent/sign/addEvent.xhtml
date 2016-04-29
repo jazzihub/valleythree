@@ -18,6 +18,24 @@
 
 <h:body>
 <h1>Veranstaltung hinzufügen</h1>
+	<h:form id="formFoto" prependId = "false" enctype="multipart/form-data">
+		<div>
+				<label>Foto</label>
+				
+				<h:inputFile id="file" value="#{fileUploadController.tempPoster}">
+					<f:validator validatorId="fileUploadValidator"/>
+				</h:inputFile>
+				
+				<!-- <h:outputText id="datei" value="Datei auswählen"
+					rendered="#{fileUploadController.tempPoster == null}"></h:outputText> -->
+				<h:commandButton action="#{fileUploadController.upload()}"
+					value="Upload" />
+				
+				<h:outputText value="Datei erfolgreich hochgeladen"
+					rendered="#{fileUploadController.tempPoster != null}"></h:outputText>
+				<h:message for="file"></h:message>
+			</div> 
+</h:form>
 	<h:form id="form" prependId = "false" enctype="multipart/form-data">
 		<div>
 			<label>Name</label>
@@ -115,20 +133,7 @@
 				<f:validateLength maximum="45" />
 			</h:inputText>
 		</div>
-			<!--<div>
-				<label>Foto</label>
-				LONGBLOB Größe: 4096 MB max
-				<h:inputFile id="file" value="#{fileUploadController.tempPoster}" >
-					<h:message for="file"></h:message>
-				</h:inputFile>
-				<h:outputText value="Datei auswählen"
-					rendered="#{fileUploadController.tempPoster == null}"></h:outputText>
-				<h:commandButton action="#{fileUploadController.upload()}"
-					value="Upload" />
-				<h:outputText value="Datei erfolgreich hochgeladen"
-					rendered="#{fileUploadController.tempPoster != null}"></h:outputText>
-			</div> -->
-		
+					
 		<div>
 			<h:commandButton id="btn" value="Weiter"
 				action="#{navigation.showDataEvent()}" type="submit" ></h:commandButton>

@@ -31,7 +31,8 @@ import java.util.List;
 		@NamedQuery(name = Event.NQ_GET_EVENT_BY_KIND, query = "SELECT e FROM Event e WHERE e.kind = :kind order by e.begin"),
 		@NamedQuery(name = Event.NQ_GET_EVENT_FROM_ORGANIZER, query = "SELECT e FROM Event e WHERE e.organizer.nr = :organizerNr order by e.begin"),
 		@NamedQuery(name = Event.NQ_GET_EVENT_BY_DATE_TIME, query = "SELECT e FROM Event e WHERE e.begin = :begin"),
-		@NamedQuery(name = Event.NQ_GET_EVENT_BY_NAME, query = "SELECT e FROM Event e WHERE e.name = :name")
+		@NamedQuery(name = Event.NQ_GET_EVENT_BY_NAME, query = "SELECT e FROM Event e WHERE e.name = :name"),
+		@NamedQuery(name = Event.NQ_GET_EVENT_BY_ID, query = "SELECT e FROM Event e WHERE e.nr = :nr")
 })
 
 public class Event implements Serializable
@@ -47,7 +48,8 @@ public class Event implements Serializable
 	public static final String NQ_GET_EVENT_FROM_ORGANIZER = "Event.getEventFromOrganizer";
 	public static final String NQ_GET_EVENT_BY_DATE_TIME = "Event.getEventByDateTime";
 	public static final String NQ_GET_EVENT_BY_NAME = "Event.getEventByName";
-	//public static final String NQ_GET_EVENTS_FROM_ORGANIZER = "Event.getEventsFromOrganizer";
+	public static final String NQ_GET_EVENT_BY_ID = "Event.getEventById";
+	
 
 	@Id
 	@Column(name = "vg_vgnr")
@@ -96,7 +98,7 @@ public class Event implements Serializable
 	//private List<Comment> comments;
 
 	// bi-directional many-to-one association to Reservation
-	@OneToMany(fetch=FetchType.EAGER, mappedBy = "event", cascade = CascadeType.PERSIST)
+	@OneToMany(fetch=FetchType.EAGER, mappedBy = "event", cascade = CascadeType.ALL)
 	private List<Reservation> reservations;
 
 	// bi-directional many-to-one association to Location

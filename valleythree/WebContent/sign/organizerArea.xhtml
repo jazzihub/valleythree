@@ -84,11 +84,9 @@
 					<f:facet name="header">Mitwirkende</f:facet>
 				#{e.contributor}
 				</h:column>
-				 <!--  
-				
-					<h:commandLink value="Bearbeiten"></h:commandLink>
-				
-				-->
+				<!--<h:column>
+				 	<h:commandLink value="Bearbeiten" action="#{navigation.updateEvent()}" ></h:commandLink>
+				 </h:column> -->
 				<h:column>
 					<h:commandLink value="Löschen" action="#{eventController.removeEvent(e)}" ></h:commandLink>
 				</h:column>

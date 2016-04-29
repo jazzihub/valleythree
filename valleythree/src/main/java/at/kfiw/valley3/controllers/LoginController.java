@@ -3,9 +3,7 @@ package at.kfiw.valley3.controllers;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-
 import javax.faces.bean.SessionScoped;
-
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -26,19 +24,17 @@ public class LoginController
 
 	private static final Logger logger = LoggerFactory.getLogger(Service.class);
 
-	boolean validLogin;
-	
+	boolean validLogin;	
 
-	public LoginController()
-	{
-		
-	}
+	public LoginController() {}
 
 	public String validLogin()
 	{
 		Organizer o = (Organizer) FacesContext.getCurrentInstance()
 				.getExternalContext().getSessionMap().get("organizer");
+		
 		validLogin = false;
+		
 		try
 		{
 			EncodingPassword pw = new EncodingPassword();
@@ -46,7 +42,7 @@ public class LoginController
 			validLogin = service.getOrganizerByEmailAndPassword(o.getEmail(),
 					securePassword);
 			logger.info("LoginController.validLogin() ok");
-		} catch (Throwable t)
+		} catch (Exception e)
 		{
 			logger.error("LoginController.validLogin(): Fehler beim Login");
 			FacesContext.getCurrentInstance()
@@ -59,12 +55,25 @@ public class LoginController
 
 		if (validLogin == true)
 		{
-			FacesContext facesContext = FacesContext.getCurrentInstance();
-			HttpSession session = (HttpSession) facesContext
-					.getExternalContext().getSession(true);
-			session.setAttribute("currentUser", o);
-			logger.info("Sessionattribut hinzugefügt");
-			return "index.xhtml";
+			try
+			{
+				FacesContext facesContext = FacesContext.getCurrentInstance();
+				HttpSession session = (HttpSession) facesContext
+						.getExternalContext().getSession(true);
+				//Sessionattribut setzen
+				session.setAttribute("currentUser", o);
+				logger.info("Sessionattribut hinzugefügt");
+				return "index.xhtml";
+			} catch (Exception e)
+			{				
+				FacesContext.getCurrentInstance()
+				.addMessage(
+						null,
+						new FacesMessage(FacesMessage.SEVERITY_WARN,
+								"Beim Login ist ein Fehler aufgetreten",
+								"Versuchen Sie es nocheinmal!"));
+				return null;
+			}
 		} else
 		{
 			FacesContext.getCurrentInstance()
@@ -73,10 +82,7 @@ public class LoginController
 							new FacesMessage(FacesMessage.SEVERITY_WARN,
 									"Ungültiger Login!",
 									"Versuchen Sie es nocheinmal!"));
-			// facesContext.addMessage("form:email",
-			// message);
-
-			// invalidate session, and redirect to other pages
+			
 			return null; // null, wenn man auf gleicher Seite bleiben soll
 		}
 
@@ -84,15 +90,27 @@ public class LoginController
 
 	public String logout()
 	{
-		FacesContext facesContext = FacesContext.getCurrentInstance();
+		try
+		{
+			FacesContext facesContext = FacesContext.getCurrentInstance();
 
-		HttpSession session = (HttpSession) facesContext.getExternalContext()
-				.getSession(true);
-		session.removeAttribute("currentUser");
-		session.invalidate();
-		validLogin = false;
-		logger.info("logout ok, Session invalidate");		
-		return null;
+			HttpSession session = (HttpSession) facesContext.getExternalContext()
+					.getSession(true);
+			session.removeAttribute("currentUser");
+			session.invalidate();
+			validLogin = false;
+			logger.info("logout ok, Session invalidate");		
+			return null;
+		} catch (Exception e)
+		{
+			FacesContext.getCurrentInstance()
+			.addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN,
+							"Beim Ausloggen ist ein Fehler aufgetreten",
+							""));
+			return null;
+		}
 	}
 
 	// Getter Setter

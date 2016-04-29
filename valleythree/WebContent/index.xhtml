@@ -39,6 +39,7 @@
 				<h:outputText value="Sie sind ausgeloggt" />
 			</h:panelGrid>
 		</div>
+		<br><h:messages /></br>
 	</h:form>
 
 	<h:form>
@@ -76,7 +77,7 @@
 		<h:dataTable value="#{eventController.eventsFromNow}" var="e">
 			<h:column>
 				<f:facet name="header">Bezeichnung</f:facet>
-					<h:outputText name="title" value="#{e.name}"/>
+					<h:outputText id="title" name="title" value="#{e.name}"/>
 				</h:column>
 			<h:column>
 				<f:facet name="header">am</f:facet>
@@ -103,8 +104,10 @@
 				#{e.description}
 				</h:column>
 			<h:column>
-				<f:facet name="foto">Foto</f:facet>
-				 	<h:graphicImage id="image" url="/image" />
+				<h:panelGrid rendered="#{!empty e.poster}">
+					<f:facet name="foto">Foto</f:facet>
+				 		<h:graphicImage id="image" height="130" url="/image?id=#{e.nr}" />
+				 </h:panelGrid>
 				</h:column>
 			<h:column>
 				<f:facet name="header">Details</f:facet>

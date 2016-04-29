@@ -19,7 +19,7 @@ public class EncodingPasswordTest
 	}
 
 	@Test
-	public void encryptTest()
+	public void encryptTest() throws Exception
 	{
 		String strToEncrypt = "password";
 		String encrypt = ep.encrypt(strToEncrypt);
@@ -29,7 +29,7 @@ public class EncodingPasswordTest
 	}
 	
 	@Test
-	public void decryptTest()
+	public void decryptTest() throws Exception
 	{
 		final String strToDecrypt = "vfkkoy9AwmHG0SAuo/YeLw==";
 		final String decrypt = ep.decrypt(strToDecrypt);

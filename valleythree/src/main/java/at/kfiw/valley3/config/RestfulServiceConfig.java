@@ -8,6 +8,6 @@ public class RestfulServiceConfig extends Application
 {
 	public RestfulServiceConfig()
 	{
-		System.out.println("test1");
+		//System.out.println("test1");
 	}
 }

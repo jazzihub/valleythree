@@ -18,7 +18,7 @@
 
 <h:body>
 	<h1>Daten bestätigen</h1>
-
+<h:form enctype="multipart/form-data">
 	<table>
 		<tr>
 			<td>Name</td>
@@ -67,7 +67,12 @@
 		<tr>
 			<td>Location:</td>
 			<td><h:outputText value="#{location.name}" /></td>
-		</tr>		
+		</tr>
+		<tr>
+			<!--<h:panelGrid rendered="#{!empty event.poster}">-->
+				<td>Foto:</td>
+				<td><h:graphicImage id="image" height="130" url="/image?id=#{event.nr}" /></td>
+		</tr>
 		<h:panelGrid rendered="#{event.ticketsTotal != 0}">
 		<tr>						
 			<td>Anzahl Tickets:</td>
@@ -91,7 +96,7 @@
 	
 <h:panelGrid rendered="#{!empty eventsToThisDate.eventsAtThisDate()}">	
 	<div>
-	<h3>Events zu diesem Datum:</h3>
+	<h3>Andere Events zu diesem Datum:</h3>
 		<h:dataTable value="#{eventsToThisDate.eventsAtThisDate()}" var="e">
 			<h:column>
 				<f:facet name="header">Bezeichnung</f:facet>
@@ -115,11 +120,15 @@
 				<f:facet name="header">Ort</f:facet>
 				#{e.location.place.place}
 			</h:column>
+			<h:column>
+				<f:facet name="header">Kurzbeschreibung</f:facet>
+				#{e.description}
+			</h:column>
 			
 		</h:dataTable>
 	</div>
 </h:panelGrid>
-
+</h:form>
 <h:form>
 	<div>
 		<h:commandButton id="btn" value="Daten ändern"

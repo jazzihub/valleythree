@@ -24,6 +24,11 @@ public class Navigation implements Serializable
 		return "userRegistry.xhtml";
 	}
 	
+	public String updateEvent()
+	{
+		return "updateEvent";
+	}
+	
 	public String showDataUserRegistry()
 	{
 		return "showDataUserRegistry.xhtml";

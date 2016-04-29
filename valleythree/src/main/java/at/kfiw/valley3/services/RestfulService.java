@@ -43,8 +43,7 @@ public class RestfulService
 		try
 		{
 			date = sdf.parse(tempdate);
-			//System.out.println("Tempdate: " + tempdate);
-			//System.out.println("Date :" + date);
+			
 		} catch (ParseException e)
 		{
 			

@@ -84,6 +84,22 @@ public class Service
 
 		return null;
 	}
+	
+	public Event getEventById(int nr)
+	{
+		try
+		{
+			TypedQuery<Event> query = entityManager.createNamedQuery(
+					Event.NQ_GET_EVENT_BY_ID, Event.class);
+			query.setParameter("nr", nr);
+			return query.getSingleResult();
+		} catch (Throwable t)
+		{
+			logger.error("Fehler: getEventById", t);
+		}
+
+		return null;
+	}
 
 	public List<Event> getEventByBeginAndEnd(Date begin, Date end)
 	{
@@ -270,6 +286,22 @@ public class Service
 		{
 			logger.error(
 					"Fehler Service.updateEvent: Event konnte nicht geändert werden",
+					t);
+		}
+	}
+	
+	public void updateEvent(int nr)
+	{
+		try
+		{
+			Event e = entityManager.getReference(Event.class, nr);
+			entityManager.merge(e);
+			logger.info("Service.updateEvent ok");
+
+		} catch (Throwable t)
+		{
+			logger.error(
+					"Fehler Service.updateEvent(int nr): Event konnte nicht geändert werden",
 					t);
 		}
 	}

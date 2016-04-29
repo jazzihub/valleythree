@@ -99,11 +99,12 @@ public class EventController implements Serializable
 			} catch (Throwable t)
 			{
 				logger.error(
-						"Fehler EventController.addEvent(): Event konnte nicht hinzugef�gt werden",
+						"Fehler EventController.addEvent(): Event konnte nicht hinzugefügt werden",
 						t);
 
 			} finally
 			{
+				//Inhalt der Felder löschen
 				clear();
 			}
 		} else
@@ -139,14 +140,13 @@ public class EventController implements Serializable
 			logger.info("EventController.getEventsFromNow ok");
 			return service.getEventFromNow();
 
-		} catch (Throwable t)
+		} catch (Exception t)
 		{
 			logger.error(
-					"Fehler Controller: Event konnte nicht hinzugef�gt werden",
+					"Fehler EventController: Events konnte nicht angezeigt werden",
 					t);
-		}
-
-		return null;
+			return null;			
+		}		
 	}
 
 	public List<Event> getEventsFromOrganizer()
@@ -169,9 +169,10 @@ public class EventController implements Serializable
 			logger.error(
 					"Fehler Controller: Event konnte nicht hinzugef�gt werden",
 					t);
+			return null;
 		}
 
-		return null;
+		
 	}
 
 	public void removeEvent(Event event)
@@ -185,6 +186,22 @@ public class EventController implements Serializable
 		{
 			logger.error(
 					"Fehler EventController.removeEvent: Event konnte nicht gelöscht werden",
+					t);
+		}
+	}
+	
+	public void updateEvent()
+	{
+		try
+		{
+			System.out.println(e.getNr());
+			service.updateEvent(e.getNr());
+			logger.info("EventController.updateEvent ok");
+
+		} catch (Throwable t)
+		{
+			logger.error(
+					"Fehler EventController.updateEvent: Event konnte nicht aktualisiert werden",
 					t);
 		}
 	}
@@ -206,6 +223,7 @@ public class EventController implements Serializable
 	//
 	// }
 
+	//Getter/Setter
 	public Event getE()
 	{
 		return e;

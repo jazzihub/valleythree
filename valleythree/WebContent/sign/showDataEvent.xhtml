@@ -69,9 +69,10 @@
 			<td><h:outputText value="#{location.name}" /></td>
 		</tr>
 		<tr>
-			<!--<h:panelGrid rendered="#{!empty event.poster}">-->
+			<h:panelGrid rendered="#{!empty event.poster}">
 				<td>Foto:</td>
-				<td><h:graphicImage id="image" height="130" url="/image?id=#{event.nr}" /></td>
+				<td><h:graphicImage id="image" height="130" url="/imageAddEvent?id=#{event.poster}" /></td>
+			</h:panelGrid>
 		</tr>
 		<h:panelGrid rendered="#{event.ticketsTotal != 0}">
 		<tr>						

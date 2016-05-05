@@ -48,6 +48,13 @@ public class SearchEvent implements Serializable
 
 		String term;
 		String sql = "SELECT e FROM Event e ";
+		
+		if(place.isEmpty() && date == null && name.isEmpty())
+		{
+			events = service.getEventFromNow();
+			return "searchResult.xhtml";
+		}
+		
 
 		if (!place.isEmpty())
 		{

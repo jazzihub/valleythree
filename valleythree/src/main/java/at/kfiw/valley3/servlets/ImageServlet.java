@@ -14,40 +14,51 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import at.kfiw.valley3.entities.Event;
+
 import at.kfiw.valley3.services.Service;
 
 @WebServlet("/image")
-public class ImageServlet extends HttpServlet {
+public class ImageServlet extends HttpServlet
+{
 	private static final long serialVersionUID = 1L;
-       
-    @EJB
-    Service service;
-    
-	public ImageServlet() {
-        super();
-    }
 
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-		String number = request.getParameter("id");
-		int nr = Integer.parseInt(number);
-		Event e = service.getEventById(nr);
-		
-		if(e.getPoster() != null)
-		{
-			//response.setContentType("image/jpeg"); //Browser mitteilen, welches Format er erwarten kann
-			byte[] imageBytes = e.getPoster();
-			
-//			ByteArrayInputStream input = new ByteArrayInputStream(imageBytes);
-//			BufferedImage img = ImageIO.read(input);
-//			ImageIO.write(img, "JPG", response.getOutputStream()); //alles in Bild umwandeln
-			
-			response.getOutputStream().write(imageBytes);
-			response.getOutputStream().close();
-		}
-		
+	@EJB
+	Service service;
+
+	public ImageServlet()
+	{
+		super();
 	}
 
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException
+	{
+
+		String number = request.getParameter("id");
+		int nr = Integer.parseInt(number);
+		Event e = null;
+
+		if (nr != 0)
+		{
+			// try-catch
+			e = service.getEventById(nr);
+
+			if (e.getPoster() != null)
+			{
+				// response.setContentType("image/jpeg"); //Browser mitteilen,
+				// welches Format er erwarten kann
+				byte[] imageBytes = e.getPoster();
+
+				// ByteArrayInputStream input = new
+				// ByteArrayInputStream(imageBytes);
+				// BufferedImage img = ImageIO.read(input);
+				// ImageIO.write(img, "JPG", response.getOutputStream());
+				// //alles in Bild umwandeln
+
+				response.getOutputStream().write(imageBytes);
+				response.getOutputStream().close();
+			}
+		} 
+
+	}
 }

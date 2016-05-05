@@ -104,8 +104,8 @@
 				#{e.description}
 				</h:column>
 			<h:column>
-				<h:panelGrid rendered="#{!empty e.poster}">
-					<f:facet name="foto">Foto</f:facet>
+				<f:facet name="foto">Foto</f:facet>
+				<h:panelGrid rendered="#{!empty e.poster}">					
 				 		<h:graphicImage id="image" height="130" url="/image?id=#{e.nr}" />
 				 </h:panelGrid>
 				</h:column>

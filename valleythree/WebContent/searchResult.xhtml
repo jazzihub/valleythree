@@ -64,6 +64,12 @@
 				#{e.detail}
 				</h:column>
 			<h:column>
+				<f:facet name="foto">Foto</f:facet>
+					<h:panelGrid rendered="#{!empty e.poster}">					
+					 		<h:graphicImage id="image" height="130" url="/image?id=#{e.nr}" />
+					 </h:panelGrid>
+			</h:column>	
+			<h:column>
 				<f:facet name="street">Straße</f:facet>
 				#{e.location.street}
 				</h:column>

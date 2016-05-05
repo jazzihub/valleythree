@@ -29,11 +29,11 @@
 		<h:dataTable value="#{reservationController.reservations}" var="r">
 		
 			<h:column>
-				<f:facet name="header">Kunde Nachname</f:facet>
+				<f:facet name="header">Nachname</f:facet>
 				#{r.visitor.lastname}
 				</h:column>
 			<h:column>
-				<f:facet name="header">Kunde Vorname</f:facet>
+				<f:facet name="header">Vorname</f:facet>
 				#{r.visitor.firstname}			
 				</h:column>
 				

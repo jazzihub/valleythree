@@ -13,7 +13,6 @@ import javax.servlet.http.Part;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import at.kfiw.valley3.services.Service;
 
 @ManagedBean
 @RequestScoped

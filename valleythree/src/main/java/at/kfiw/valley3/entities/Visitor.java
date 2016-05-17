@@ -48,12 +48,12 @@ public class Visitor implements Serializable
 	private String firstname;
 
 	// bi-directional many-to-one association to Reservation
-	@OneToMany(mappedBy = "visitor", cascade = CascadeType.PERSIST)
-	private List<Reservation> reservations;
+//	@OneToMany(mappedBy = "visitor", cascade = CascadeType.PERSIST)
+//	private List<Reservation> reservations;
 
 	public Visitor()
 	{
-		reservations = new ArrayList<Reservation>();
+		//reservations = new ArrayList<Reservation>();
 	}
 
 	public int getNr()
@@ -106,30 +106,30 @@ public class Visitor implements Serializable
 		this.firstname = firstname;
 	}
 
-	public List<Reservation> getReservations()
-	{
-		return this.reservations;
-	}
+//	public List<Reservation> getReservations()
+//	{
+//		return this.reservations;
+//	}
+//
+//	public void setReservations(List<Reservation> reservations)
+//	{
+//		this.reservations = reservations;
+//	}
 
-	public void setReservations(List<Reservation> reservations)
-	{
-		this.reservations = reservations;
-	}
-
-	public Reservation addReservation(Reservation reservation)
-	{
-		getReservations().add(reservation);
-		reservation.setVisitor(this);
-
-		return reservation;
-	}
-
-	public Reservation removeReservation(Reservation reservation)
-	{
-		getReservations().remove(reservation);
-		reservation.setVisitor(null);
-
-		return reservation;
-	}
+//	public Reservation addReservation(Reservation reservation)
+//	{
+//		getReservations().add(reservation);
+//		reservation.setVisitor(this);
+//
+//		return reservation;
+//	}
+//
+//	public Reservation removeReservation(Reservation reservation)
+//	{
+//		getReservations().remove(reservation);
+//		reservation.setVisitor(null);
+//
+//		return reservation;
+//	}
 
 }

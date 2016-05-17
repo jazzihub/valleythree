@@ -91,6 +91,10 @@ public class SearchEvent implements Serializable
 					String dateNew = formatDate(date);
 					sql = sql + "AND e.begin = '" + dateNew + "' AND '" + dateNew + "' >= CURRENT_DATE";
 				}
+				else
+				{
+					sql = sql + " AND e.begin >= CURRENT_DATE";
+				}
 			}
 
 		} else

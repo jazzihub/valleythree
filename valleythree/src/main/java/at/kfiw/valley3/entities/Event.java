@@ -88,9 +88,9 @@ public class Event implements Serializable
 	//@OneToMany(mappedBy = "event")
 	//private List<Comment> comments;
 
-	// bi-directional many-to-one association to Reservation
-	@OneToMany(fetch=FetchType.EAGER, mappedBy = "event", cascade = CascadeType.ALL)
-	private List<Reservation> reservations;
+	// bi-directional many-to-one association to Reservation  //geändert am 17.05.: von Eager auf Lazy
+//	@OneToMany(fetch=FetchType.LAZY, mappedBy = "event", cascade = CascadeType.ALL)
+//	private List<Reservation> reservations;
 
 	// bi-directional many-to-one association to Location
 	@ManyToOne//(cascade = CascadeType.PERSIST)
@@ -106,7 +106,7 @@ public class Event implements Serializable
 
 	public Event()
 	{
-		reservations = new ArrayList<Reservation>();
+//		reservations = new ArrayList<Reservation>();
 	}
 
 	public int getNr()
@@ -219,31 +219,31 @@ public class Event implements Serializable
 		this.poster = poster;
 	}
 
-	public List<Reservation> getReservations()
-	{
-		return this.reservations;
-	}
+//	public List<Reservation> getReservations()
+//	{
+//		return this.reservations;
+//	}
+//
+//	public void setReservations(List<Reservation> reservations)
+//	{
+//		this.reservations = reservations;
+//	}
 
-	public void setReservations(List<Reservation> reservations)
-	{
-		this.reservations = reservations;
-	}
-
-	public Reservation addReservation(Reservation reservation)
-	{
-		getReservations().add(reservation);
-		reservation.setEvent(this);
-
-		return reservation;
-	}
-
-	public Reservation removeReservation(Reservation reservation)
-	{
-		getReservations().remove(reservation);
-		reservation.setEvent(null);
-
-		return reservation;
-	}
+//	public Reservation addReservation(Reservation reservation)
+//	{
+//		getReservations().add(reservation);
+//		reservation.setEvent(this);
+//
+//		return reservation;
+//	}
+//
+//	public Reservation removeReservation(Reservation reservation)
+//	{
+//		getReservations().remove(reservation);
+//		reservation.setEvent(null);
+//
+//		return reservation;
+//	}
 
 	public Location getLocation()
 	{

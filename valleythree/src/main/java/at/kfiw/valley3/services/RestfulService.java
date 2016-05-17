@@ -39,10 +39,12 @@ public class RestfulService
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		final List<Event> events;
 		System.out.println(place);
+		System.out.println(tempdate);
 		Date date = null;
 		try
 		{
-			date = sdf.parse(tempdate);
+			if(tempdate != null)
+			 date = sdf.parse(tempdate);
 			
 		} catch (ParseException e)
 		{
@@ -120,6 +122,10 @@ public class RestfulService
 					
 					String dateNew = sdf.format(date);
 					sql = sql + " WHERE e.begin = '" + dateNew + "' AND '" + dateNew + "' >= CURRENT_DATE";
+				}
+				else
+				{
+					sql = sql + " AND e.begin >= CURRENT_DATE";
 				}
 			}
 		}

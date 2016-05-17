@@ -1,18 +1,11 @@
 package at.kfiw.valley3.entities;
 
 import java.io.Serializable;
-
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.persistence.*;
 import javax.transaction.Transactional;
 
-
-/**
- * The persistent class for the r_reservierungen database table.
- * 
- */
 @Entity
 @SessionScoped
 @ManagedBean
@@ -23,12 +16,10 @@ import javax.transaction.Transactional;
 })
 		
 @Transactional
-public class Reservation implements Serializable {
+public class Reservation implements Serializable 
+{
 	private static final long serialVersionUID = 1L;
 
-//	@EmbeddedId
-//	private ReservationPK id;
-	
 	public static final String NQ_GET_RESERVATIONS_FROM_EVENT = "Reservation.getReservationsFromOrganizer";
 	
 	@Id
@@ -52,14 +43,6 @@ public class Reservation implements Serializable {
 	public Reservation() {
 		
 	}
-
-//	public ReservationPK getId() {
-//		return this.id;
-//	}
-//
-//	public void setId(ReservationPK id) {
-//		this.id = id;
-//	}
 
 	public short getNumberTickets() {
 		return this.numberTickets;
@@ -95,6 +78,4 @@ public class Reservation implements Serializable {
 		this.nr = nr;
 	}
 	
-	
-
 }

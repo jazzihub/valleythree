@@ -20,17 +20,15 @@ import at.kfiw.valley3.services.Service;
 
 @ManagedBean
 @RequestScoped
-public class FileUploadController 
+public class FileUploadController
 {
 	private Part tempPoster;
 	InputStream input = null;
 
 	private static final Logger logger = LoggerFactory.getLogger(Service.class);
-	private FacesContext fc;
-	
+
 	public FileUploadController()
 	{
-		fc  = FacesContext.getCurrentInstance();
 	}
 
 	public void upload() throws IOException
@@ -41,18 +39,23 @@ public class FileUploadController
 		{
 			if (tempPoster != null)
 			{
-				
+
 				input = tempPoster.getInputStream();
 				byte[] bytes = IOUtils.toByteArray(input);
 				event.setPoster(bytes);
-				
+
 				logger.info("FileUploadController.upload() ok");
-				
-			} 
+			}
 
 		} catch (IOException ex)
 		{
 			logger.error("Fehler: FileUploadController.upload()", ex);
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN,
+							"Fehler beim Upload der Datei",
+							"Versuchen Sie es nocheinmal!"));
+
 		} finally
 		{
 			if (input != null)
@@ -61,7 +64,6 @@ public class FileUploadController
 			}
 		}
 	}
-	
 
 	public Part getTempPoster()
 	{
@@ -70,8 +72,10 @@ public class FileUploadController
 
 	public void setTempPoster(Part tempPoster)
 	{
-		this.tempPoster = tempPoster;
+		if (tempPoster != null)
+		{
+			this.tempPoster = tempPoster;
+		}
 	}
-	
-	
+
 }

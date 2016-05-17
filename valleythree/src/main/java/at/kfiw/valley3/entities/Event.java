@@ -1,23 +1,14 @@
 package at.kfiw.valley3.entities;
 
 import java.io.Serializable;
-
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.persistence.*;
 import javax.transaction.Transactional;
-import javax.xml.bind.annotation.XmlRootElement;
-
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * The persistent class for the vg_veranstaltungen database table.
- * 
- */
 @SessionScoped
 @ManagedBean
 @Entity
@@ -123,18 +114,6 @@ public class Event implements Serializable
 		return this.nr;
 	}
 	
-	
-	
-//	public Part getTempPoster()
-//	{
-//		return tempPoster;
-//	}
-//
-//	public void setTempPoster(Part tempPoster)
-//	{
-//		this.tempPoster = tempPoster;
-//	}
-
 	public void setNr(int nr)
 	{
 		this.nr = nr;
@@ -239,32 +218,6 @@ public class Event implements Serializable
 	{
 		this.poster = poster;
 	}
-
-//	public List<Comment> getComments()
-//	{
-//		return this.comments;
-//	}
-//
-//	public void setComments(List<Comment> comments)
-//	{
-//		this.comments = comments;
-//	}
-//
-//	public Comment addComment(Comment comment)
-//	{
-//		getComments().add(comment);
-//		comment.setEvent(this);
-//
-//		return comment;
-//	}
-//
-//	public Comment removeComment(Comment comment)
-//	{
-//		getComments().remove(comment);
-//		comment.setEvent(null);
-//
-//		return comment;
-//	}
 
 	public List<Reservation> getReservations()
 	{

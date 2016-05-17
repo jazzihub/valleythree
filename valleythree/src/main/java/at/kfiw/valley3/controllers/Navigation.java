@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import at.kfiw.valley3.entities.Event;
+
 @ManagedBean
 @SessionScoped
 public class Navigation implements Serializable
@@ -24,9 +26,9 @@ public class Navigation implements Serializable
 		return "userRegistry.xhtml";
 	}
 	
-	public String updateEvent()
+	public String updateEvent(Event e)
 	{
-		return "updateEvent";
+		return "updateEvent?id=#{e}";
 	}
 	
 	public String showDataUserRegistry()

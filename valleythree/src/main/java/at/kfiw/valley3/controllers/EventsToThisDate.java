@@ -22,30 +22,23 @@ public class EventsToThisDate
 	@EJB
 	Service service;
 	
-	private int count;
-	
-	
-//		if (count > 0)
-//		{
-//						
-//			FacesContext.getCurrentInstance().addMessage(null , new FacesMessage("form:date", "Hinweis: An diesem Tag finden bereits " + count + " Veranstaltungen statt"));
-//		
-//		}
-
-	
 	public List<Event> eventsAtThisDate()
 	{
-				
-		Event e = (Event) FacesContext.getCurrentInstance()
-				.getExternalContext().getSessionMap().get("event");
-		
-		Date date = e.getBegin();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String formatDate = sdf.format(date);
-		
-		List<Event> events = new ArrayList<Event>();		
-		events = service.getEventsbyDate(formatDate);
-		count = events.size();
-		return events;
+		try
+		{
+			Event e = (Event) FacesContext.getCurrentInstance()
+					.getExternalContext().getSessionMap().get("event");
+			
+			Date date = e.getBegin();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			String formatDate = sdf.format(date);
+			
+			List<Event> events = new ArrayList<Event>();		
+			events = service.getEventsbyDate(formatDate);
+			return events;
+		} catch (Exception e)
+		{
+			return null;
+		}
 	}
 }

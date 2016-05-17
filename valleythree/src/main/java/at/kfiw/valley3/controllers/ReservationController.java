@@ -27,10 +27,15 @@ public class ReservationController
 
 	public String allReservations(Event e)
 	{
-		
-		reservationlist = service.getReservationsByEvent(e.getNr());
-		logger.info("ReservationController.allReservations ok");
-		return "reservations";
+		try
+		{
+			reservationlist = service.getReservationsByEvent(e.getNr());
+			logger.info("ReservationController.allReservations ok");
+			return "reservations";
+		} catch (Exception ex)
+		{
+			return "errorReservations";
+		}
 	}
 	
 	public List<Reservation> getReservations()

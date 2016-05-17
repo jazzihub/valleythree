@@ -94,24 +94,27 @@ public class EventController implements Serializable
 				e.setOrganizer(o);
 				service.addEvent(e);
 				logger.info("EventController.addEvent ok");
+				clear();
 				return "organizerArea";
 
-			} catch (Throwable t)
+			} catch (Exception e)
 			{
-				logger.error(
+				logger.info(
 						"Fehler EventController.addEvent(): Event konnte nicht hinzugefügt werden",
-						t);
+						e);
+				return "errorAddEvent";
 
-			} finally
-			{
-				//Inhalt der Felder löschen
-				clear();
-			}
+			} 
+//			finally
+//			{
+//				//Inhalt der Felder löschen
+//				clear();
+//			}
 		} else
 		{
 			return "errorAddEvent";
 		}
-		return null;
+		
 	}
 
 	public void clear()
@@ -164,32 +167,41 @@ public class EventController implements Serializable
 			logger.info("EventController.getEventsFromOrganizer ok");
 			return service.getEventFromOrganizer(o.getNr());
 
-		} catch (Throwable t)
+		} catch (Exception e)
 		{
 			logger.error(
-					"Fehler Controller: Event konnte nicht hinzugef�gt werden",
-					t);
+					"Fehler EventController.getEventsFromOrganizer()",
+					e);
 			return null;
 		}
 
 		
 	}
 
-	public void removeEvent(Event event)
+	public String removeEvent(Event event)
 	{
 		try
 		{
 			service.removeEvent(event.getNr());
 			logger.info("EventController.removeEvent ok");
+			return null;
 
-		} catch (Throwable t)
+		} catch (Exception e)
 		{
 			logger.error(
 					"Fehler EventController.removeEvent: Event konnte nicht gelöscht werden",
-					t);
+					e);
+			return "errorRemoveEvent";
 		}
 	}
 	
+	//?
+	public void fillText(Event e)
+	{
+		//Redirekt
+	}
+	
+	//Exceptionhandling
 	public void updateEvent()
 	{
 		try

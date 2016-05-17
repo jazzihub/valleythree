@@ -33,9 +33,9 @@
 				
 				<h:outputText value="Datei erfolgreich hochgeladen"
 					rendered="#{fileUploadController.tempPoster != null}"></h:outputText>
-				<h:message for="file"></h:message>
+				<h:message for="file"/>
 			</div> 
-</h:form>
+	</h:form>
 	<h:form id="form" prependId = "false" enctype="multipart/form-data">
 		<div>
 			<label>Name</label>
@@ -117,7 +117,7 @@
 		</div>
 		<div>
 			<label for="anzahlTickets">Anzahl Tickets</label>
-			<h:inputText id="anzahlTickets" value="#{event.ticketsTotal}" p:pattern="^[0-9]*$">
+			<h:inputText id="anzahlTickets" value="#{event.ticketsTotal}" p:pattern="^[0-9]*$" requiredMessage="Bitte ganze Zahlen eingeben">
 			</h:inputText>
 			<h:message for="anzahlTickets"></h:message>
 		</div>

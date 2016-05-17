@@ -1,16 +1,10 @@
 package at.kfiw.valley3.entities;
 
 import java.io.Serializable;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.persistence.*;
 import javax.transaction.Transactional;
-
-import java.util.ArrayList;
-import java.util.List;
-
-
 
 @ManagedBean
 @SessionScoped
@@ -114,28 +108,6 @@ public class Organizer implements Serializable {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
-
-//	public List<Event> getEvents() {
-//		return this.events;
-//	}
-//
-//	public void setEvents(List<Event> events) {
-//		this.events = events;
-//	}
-//
-//	public Event addEvent(Event event) {
-//		getEvents().add(event);
-//		event.setOrganizer(this);
-//
-//		return event;
-//	}
-//
-//	public Event removeEvent(Event event) {
-//		getEvents().remove(event);
-//		event.setOrganizer(null);
-//
-//		return event;
-//	}
 
 	public Profil getProfil() {
 		return this.profil;

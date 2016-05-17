@@ -3,11 +3,6 @@ package at.kfiw.valley3.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
-
-/**
- * The persistent class for the vp_profile database table.
- * 
- */
 @Entity
 @Table(name="vp_profile")
 @NamedQuery(name="Profil.findAll", query="SELECT p FROM Profil p")

@@ -61,11 +61,11 @@ public class OrganizerController
 			} catch (Exception t)
 			{
 				logger.error("Fehler OrganizerController: Veranstalter konnte nicht hinzugefügt werden");
-				return "denyRegistry";
+				return "errorRegistry";
 			}
 		} else
 		{
-			return "denyRegistry";
+			return "errorRegistry";
 		}
 	}
 }

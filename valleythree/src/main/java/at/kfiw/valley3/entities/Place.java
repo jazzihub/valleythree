@@ -1,22 +1,11 @@
 package at.kfiw.valley3.entities;
 
 import java.io.Serializable;
-
-import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.persistence.*;
 import javax.transaction.Transactional;
-import javax.xml.bind.annotation.XmlRootElement;
 
-import java.util.ArrayList;
-import java.util.List;
-
-/**
- * The persistent class for the o_orte database table.
- * 
- */
 @ManagedBean
 @SessionScoped
 @Entity

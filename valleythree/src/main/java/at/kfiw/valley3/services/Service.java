@@ -129,9 +129,10 @@ public class Service
 		} catch (Throwable t)
 		{
 			logger.error("Fehler: getEventFromNow", t);
+			return new ArrayList<Event>();
 		}
 
-		return new ArrayList<Event>();
+		
 	}
 
 	public List<Event> getEventFromNow()
@@ -181,7 +182,7 @@ public class Service
 		return new ArrayList<Event>();
 	}
 
-	public void addEvent(Event e)
+	public void addEvent(Event e) throws Exception
 	{
 		try
 		{
@@ -194,11 +195,12 @@ public class Service
 			entityManager.persist(e);
 			
 			logger.info("Service.addEvent ok");
-		} catch (Throwable t)
+		} catch (Exception ex)
 		{
 			logger.error(
 					"Fehler Service.addEvent: Event konnte nicht hinzugef�gt werden",
-					t);
+					ex);
+			throw new Exception();
 		}
 	}
 
@@ -257,7 +259,7 @@ public class Service
 		
 	
 	
-	public void removeEvent(int nr)
+	public void removeEvent(int nr) throws Exception
 	{
 		try
 		{
@@ -270,6 +272,7 @@ public class Service
 			logger.error(
 					"Fehler Service.removeEvent: Event konnte nicht gelöscht werden",
 					t);
+			throw new Exception();
 		}
 	}
 
@@ -327,7 +330,7 @@ public class Service
 		}
 	}
 	
-	public List<Reservation> getReservationsByEvent(int nr)
+	public List<Reservation> getReservationsByEvent(int nr) throws NoResultException, Exception
 	{
 		try
 		{
@@ -336,12 +339,15 @@ public class Service
 					.setParameter("nr", nr);
 			System.out.println("Größe der Ergebnisliste: " + query.getResultList().size());
 			return query.getResultList();
-		} catch (Throwable t)
+		} catch(NoResultException ne)
 		{
-			logger.error("Fehler: Service.getReservationsByEvent", t);
+			return null;
 		}
-		
-		return new ArrayList<Reservation>();
+		catch (Exception e)
+		{
+			logger.error("Fehler: Service.getReservationsByEvent", e);
+			throw new Exception();
+		}
 	}
 	
 	
@@ -466,7 +472,7 @@ public class Service
 	}
 
 	// Organizer
-	public void addOrganizer(Organizer o)
+	public void addOrganizer(Organizer o) throws Exception
 	{
 		try
 		{
@@ -477,11 +483,12 @@ public class Service
 			}
 			// entityManager.getTransaction().commit();
 			System.out.println("Service.addOrganizer ok");
-		} catch (Throwable t)
+		} catch (Exception e)
 		{
 			logger.error(
 					"Fehler Service.addOrganizer: Organizer konnte nicht hinzugef�gt werden",
-					t);
+					e);
+			throw new Exception();
 		}
 	}
 
@@ -508,27 +515,25 @@ public class Service
 		try
 		{
 			o = (Organizer) query.getSingleResult();
+			return o;
 		} catch (NoResultException e)
 		{
 			return null;
 		}
-
-		return o;
-
 	}
 
 	public boolean getOrganizerByEmailAndPassword(String email, String password)
 	{
-
-		TypedQuery<Organizer> query = entityManager.createNamedQuery(
-				Organizer.NQ_GET_ORGANIZER_BY_EMAIL_AND_PASSWORD,
-				Organizer.class);
-		query.setParameter("email", email);
-		query.setParameter("password", password);
-
-		Organizer o;
+		
+		Organizer o = null;
 		try
 		{
+			TypedQuery<Organizer> query = entityManager.createNamedQuery(
+					Organizer.NQ_GET_ORGANIZER_BY_EMAIL_AND_PASSWORD,
+					Organizer.class);
+			query.setParameter("email", email);
+			query.setParameter("password", password);
+
 			o = (Organizer) query.getSingleResult();
 		} catch (NoResultException e)
 		{
@@ -540,7 +545,7 @@ public class Service
 	}
 
 	// Place
-	public void addPlace(Place p)
+	public void addPlace(Place p) throws Exception
 	{
 		try
 		{
@@ -554,27 +559,35 @@ public class Service
 			}
 
 			logger.info("Service.addPlace ok");
-		} catch (Throwable t)
+		} catch (Exception e)
 		{
 			logger.error(
 					"Fehler Service.addPlace: Place konnte nicht hinzugef�gt werden",
-					t);
+					e);
+			throw new Exception();
 		}
 	}
 
-	public Place getPlaceByPlz(short plz)
+	public Place getPlaceByPlz(short plz) throws Exception
 	{
 
-		Place place = entityManager.find(Place.class, plz);
-		if (place == null)
-			return null;
+		try
+		{
+			Place place = entityManager.find(Place.class, plz);
+			if (place == null)
+				return null;
 
-		else
-			return place;
+			else
+				return place;
+		} catch (Exception e)
+		{
+			logger.info("Fehler Service.getPlaceByPlz");
+			throw new Exception();
+		}
 	}
 
 	// Location
-	public int addLocation(Location l)
+	public int addLocation(Location l) throws Exception
 	{
 		try
 		{
@@ -584,16 +597,17 @@ public class Service
 			}
 			entityManager.persist(l);
 
-		} catch (Throwable t)
+		} catch (Exception e)
 		{
 			logger.error(
 					"Fehler Service.addLocation: Location konnte nicht hinzugef�gt werden",
-					t);
+					e);
+			throw new Exception();
 		}
 		return 1;
 	}
 
-	public Location getLocationByNameAndPlz(String name, short plz)
+	public Location getLocationByNameAndPlz(String name, short plz) throws Exception
 	{
 
 		TypedQuery<Location> query = entityManager.createNamedQuery(

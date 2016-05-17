@@ -1,23 +1,11 @@
 package at.kfiw.valley3.entities;
 
 import java.io.Serializable;
-
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
-import javax.inject.Named;
 import javax.persistence.*;
 import javax.transaction.Transactional;
-import javax.xml.bind.annotation.XmlRootElement;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
-/**
- * The persistent class for the l_location database table.
- * 
- */
 @ManagedBean
 @SessionScoped
 @Entity
@@ -122,27 +110,5 @@ public class Location implements Serializable {
 	public void setPlace(Place place) {
 		this.place = place;
 	}
-
-//	public List<Event> getEvents() {
-//		return this.events;
-//	}
-//
-//	public void setEvents(List<Event> events) {
-//		this.events = events;
-//	}
-//
-//	public Event addEvent(Event event) {
-//		getEvents().add(event);
-//		event.setLocation(this);
-//
-//		return event;
-//	}
-//
-//	public Event removeEvent(Event event) {
-//		getEvents().remove(event);
-//		event.setLocation(null);
-//
-//		return event;
-//	}
 
 }

@@ -48,8 +48,7 @@ public class ImageServletAddEvent extends HttpServlet
 			HttpServletResponse response) throws ServletException, IOException
 	{
 
-		//String poster = request.getParameter("id");
-		
+				
 		Event event = (Event) request.getSession().getAttribute("event");
 		
 

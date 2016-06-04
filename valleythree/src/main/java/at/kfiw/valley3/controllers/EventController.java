@@ -10,13 +10,16 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import at.kfiw.valley3.entities.Event;
 import at.kfiw.valley3.entities.Location;
 import at.kfiw.valley3.entities.Organizer;
 import at.kfiw.valley3.entities.Place;
 import at.kfiw.valley3.services.Service;
+
 
 @ManagedBean
 @RequestScoped
@@ -36,7 +39,7 @@ public class EventController implements Serializable
 	@ManagedProperty(value = "#{place}")
 	private Place p;
 
-	private static final Logger logger = LoggerFactory.getLogger(Service.class);
+	private static final Logger logger = LoggerFactory.getLogger(EventController.class);
 
 	public String addEvent()
 	{
@@ -195,11 +198,7 @@ public class EventController implements Serializable
 		}
 	}
 	
-	//?
-	public void fillText(Event e)
-	{
-		//Redirekt
-	}
+	
 	
 	//Exceptionhandling
 	public void updateEvent()
@@ -218,23 +217,7 @@ public class EventController implements Serializable
 		}
 	}
 
-	// public void updateEvent(Event event)
-	// {
-	// try
-	// {
-	//
-	// service.updateEvent(event.getNr());
-	// logger.info("EventController.updateEvent ok");
-	//
-	//
-	// } catch (Throwable t)
-	// {
-	// logger.error("Fehler EventController.updateEvent: Event konnte nicht geändert werden",
-	// t);
-	// }
-	//
-	// }
-
+	
 	//Getter/Setter
 	public Event getE()
 	{

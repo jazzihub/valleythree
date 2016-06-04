@@ -43,16 +43,22 @@ public class Ticket
 		}
 		else
 		{
-			r.setEvent(event);
-			r.setVisitor(v);
-			
-			service.addVisitor(v);
-			service.addReservation(r);
-		
-			short number = (short) (event.getTicketsTotal() - r.getNumberTickets());
-			service.updateEvent(event.getNr(), number);
-			logger.info("Tickets übrig: " + number + ", Tickets abgezogen: " + r.getNumberTickets());
-			return "commitTicketReservation.xhtml";
+			try
+			{
+				r.setEvent(event);
+				r.setVisitor(v);
+				
+				service.addVisitor(v);
+				service.addReservation(r);
+
+				short number = (short) (event.getTicketsTotal() - r.getNumberTickets());
+				service.updateEvent(event.getNr(), number);
+				logger.info("Tickets übrig: " + number + ", Tickets abgezogen: " + r.getNumberTickets());
+				return "commitTicketReservation.xhtml";
+			} catch (Exception e)
+			{
+				return "errorReservationUser.xhtml";
+			}
 		}
 	}
 	

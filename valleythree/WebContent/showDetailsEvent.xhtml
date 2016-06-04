@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+<f:metadata>
+    <f:viewParam name="detail" value="#{event}" />
+</f:metadata>
+</h:head> 
+<body> 
+
+<h:form enctype="multipart/form-data">
+
+	<table>
+		<tr>
+			<td>Name</td>
+			<td><h:outputText value="#{event.name}" /></td>
+		</tr>
+		<tr>
+			<td>Datum:</td>
+			<td>
+				<h:outputText value="#{event.begin}">
+					<f:convertDateTime pattern="dd.MM.yyyy" timeZone="Europe/Berlin"/>
+				</h:outputText>
+			</td>
+		</tr>		
+		<tr>
+			<td>Uhrzeit:</td>
+			<td>
+				<h:outputText value="#{event.time}">
+						<f:convertDateTime pattern="HH:mm" timeZone="Europe/Berlin"/>
+				</h:outputText>
+			</td>
+		</tr>
+		<tr>
+			<td>Art:</td>
+			<td><h:outputText value="#{event.kind}" /></td>
+		</tr>
+		<tr>
+			<td>Detailbeschreibung:</td>
+			<td><h:outputText value="#{event.detail}" /></td>
+		</tr>
+		<tr>
+			<td>Kurzbeschreibung</td>
+			<td><h:outputText value="#{event.description}" /></td>
+		</tr>
+		<tr>
+			<td>Straße:</td>
+			<td><h:outputText value="#{location.street}" /></td>
+		</tr>
+		<tr>
+			<td>PLZ:</td>
+			<td><h:outputText value="#{place.plz}" /></td>
+		</tr>
+		<tr>
+			<td>Ort:</td>
+			<td><h:outputText value="#{place.place}" /></td>
+		</tr>
+		<tr>
+			<td>Location:</td>
+			<td><h:outputText value="#{location.name}" /></td>
+		</tr>
+		
+		<h:panelGrid rendered="#{!empty event.poster}">
+			<tr>
+				<td>Foto:</td>
+				<td><h:graphicImage id="image" height="180" url="/imageAddEvent" /></td>
+				</tr>
+		</h:panelGrid>
+		
+		<h:panelGrid rendered="#{event.ticketsTotal != 0}">
+		<tr>						
+			<td>Anzahl Tickets:</td>
+			<td><h:outputText value="#{event.ticketsTotal}" /></td>
+		</tr>
+		</h:panelGrid>
+		<h:panelGrid rendered="#{!empty event.ticketInfo}">	
+		<tr>	
+			<td>Ticketinfo:</td>
+			<td><h:outputText value="#{event.ticketInfo}" /></td>
+		</tr>
+		</h:panelGrid>
+		<h:panelGrid rendered="#{!empty event.contributor}">	
+		<tr>
+			<td>Mitwirkende</td>
+			<td><h:outputText value="#{event.contributor}" /></td>
+		</tr>
+		</h:panelGrid>
+		
+	</table>
+</h:form>
+
+</body> 
+</html>

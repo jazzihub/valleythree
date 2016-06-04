@@ -38,7 +38,7 @@
         <div>
         <label for="plz">PLZ:</label>            
             <h:inputText id="plz" value="#{place.plz}"  p:placeholder="1234"  required="true" p:pattern="^[0-9]+$"
-            			requiredMessage="Geben Sie die PLZ ein">
+            			requiredMessage="Geben Sie die PLZ ein" validatorMessage="Feld darf max. 5 Zahlen enthalten">
             <f:validateLongRange minimum="1000" maximum="99999" />	
             </h:inputText>
             <h:message for="plz"></h:message><br/>
@@ -72,7 +72,7 @@
         <label for="pw">Passwort:</label>            
             <h:inputSecret id="pw" value="#{organizer.password}" p:placeholder="min. 6 Zeichen" required="true"
             			requiredMessage="Geben Sie ein Passwort ein">
-            <f:validateLength minimum="6" maximum="15" />
+            <f:validateLength minimum="6" maximum="10" />
             </h:inputSecret>
             <h:message for="pw"></h:message><br/>
         </div>
@@ -81,7 +81,7 @@
             <h:inputSecret id="pw2" value="password2" p:placeholder="min. 6 Zeichen" required="true"
             			requiredMessage="Geben Sie ein Passwort ein">
             	<f:validator validatorId="passwordValidator" /> 
-            	<f:validateLength minimum="6" maximum="15" />
+            	<f:validateLength minimum="6" maximum="10" />
             </h:inputSecret>
             <h:message for="pw2"></h:message><br/>
         </div><br/>

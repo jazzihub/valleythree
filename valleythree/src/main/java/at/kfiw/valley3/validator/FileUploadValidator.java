@@ -32,10 +32,10 @@ public class FileUploadValidator implements Validator
  
             if (file==null || file.getSize()<=0 || file.getContentType().isEmpty() )
                 message=new FacesMessage("Bitte wählen Sie eine Datei aus");
-            else if (!file.getContentType().toLowerCase().endsWith("jpeg") && !file.getContentType().toLowerCase().endsWith("jpg") && !file.getContentType().toLowerCase().endsWith("gif") && !file.getContentType().toLowerCase().endsWith("png"))
+            else if (!file.getContentType().toLowerCase().endsWith("jpeg") && !file.getContentType().toLowerCase().endsWith("jpg") && !file.getContentType().toLowerCase().endsWith("gif"))
             {
             	System.out.println(file.getContentType());
-            	message=new FacesMessage("erlaubte Formate: jpeg, png, gif");
+            	message=new FacesMessage("erlaubte Formate: jpeg, gif");
             	logger.info("kein erlaubtes Format");
             }
             else if (file.getSize()>2000000)

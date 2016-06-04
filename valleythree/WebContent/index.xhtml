@@ -39,7 +39,7 @@
 				<h:outputText value="Sie sind ausgeloggt" />
 			</h:panelGrid>
 		</div>
-		<br><h:messages /></br>
+		
 	</h:form>
 
 	<h:form>
@@ -53,7 +53,7 @@
 		</div>
 		<div>
 			<label>Wann</label>
-			<h:inputText id="wann" value="#{searchEvent.date}" requiredMessage="Format: dd.MM.yyyy" p:placeholder="dd.MM.yyyy">
+			<h:inputText id="wann" value="#{searchEvent.date}" requiredMessage="Format: dd.MM.yyyy" p:placeholder="dd.MM.yyyy" converterMessage="Geben Sie ein gültiges Datum ein">
 				<f:convertDateTime pattern="dd.MM.yyyy" />
 			</h:inputText>
 			<h:message for="wann"></h:message>
@@ -139,8 +139,13 @@
 				<f:facet name="header">Ticket Info</f:facet>
 				#{e.ticketInfo}
 				</h:column>
-				
-				<h:column>
+				<!-- > 
+			<h:column>
+				<h:link outcome="#{navigation.showDetailsEvent()}"  value="mehr ..." />
+					<f:param name="detail" value="e"/>
+				</h:column>
+				-->
+			<h:column>
 				<h:panelGrid rendered="#{e.ticketsTotal != 0}">						
 					<h:commandLink action="#{ticket.Event(e)}"  value="Ticket reservieren" />
 				</h:panelGrid>

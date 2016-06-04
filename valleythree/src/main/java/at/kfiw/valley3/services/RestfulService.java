@@ -37,9 +37,7 @@ public class RestfulService
 	{	
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		final List<Event> events;
-		System.out.println(place);
-		System.out.println(tempdate);
+		final List<Event> events;		
 		Date date = null;
 		try
 		{

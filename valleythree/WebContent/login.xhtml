@@ -24,7 +24,10 @@
 		<div>
 			<label for="pw">Passwort:</label>
 			<h:inputSecret id="pw" value="#{organizer.password}" required="true"
-				requiredMessage="Geben Sie eine Passwort ein"></h:inputSecret>
+				requiredMessage="Geben Sie eine Passwort ein" validatorMessage="Passwortlänge muss zwischen 6 und 10 sein">
+				<f:validateLength minimum="6" maximum="10" />
+			</h:inputSecret>
+				
 			<!-- <h:message for="pw"></h:message>  -->
 			<br />
 		</div>

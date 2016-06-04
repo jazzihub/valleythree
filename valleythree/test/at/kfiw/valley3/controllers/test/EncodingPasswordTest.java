@@ -1,16 +1,21 @@
 package at.kfiw.valley3.controllers.test;
 
-import static org.junit.Assert.*;
+
+import javax.ejb.EJB;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import at.kfiw.valley3.controllers.EncodingPassword;
+import at.kfiw.valley3.services.Service;
 
 public class EncodingPasswordTest
 {
 	EncodingPassword ep;
+	
+	@EJB
+	Service service;
 	
 	@Before
 	public void setUp()

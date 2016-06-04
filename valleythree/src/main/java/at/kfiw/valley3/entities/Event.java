@@ -89,8 +89,8 @@ public class Event implements Serializable
 	//private List<Comment> comments;
 
 	// bi-directional many-to-one association to Reservation  //geändert am 17.05.: von Eager auf Lazy
-//	@OneToMany(fetch=FetchType.LAZY, mappedBy = "event", cascade = CascadeType.ALL)
-//	private List<Reservation> reservations;
+	@OneToMany(fetch=FetchType.LAZY, mappedBy = "event", cascade = CascadeType.ALL)
+	private List<Reservation> reservations;
 
 	// bi-directional many-to-one association to Location
 	@ManyToOne//(cascade = CascadeType.PERSIST)

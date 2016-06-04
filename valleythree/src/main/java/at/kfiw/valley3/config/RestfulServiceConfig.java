@@ -7,7 +7,5 @@ import javax.ws.rs.core.Application;
 public class RestfulServiceConfig extends Application
 {
 	public RestfulServiceConfig()
-	{
-		//System.out.println("test1");
-	}
+	{}
 }

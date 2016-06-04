@@ -65,4 +65,9 @@ public class Navigation implements Serializable
 	{
 		return "showDataEvent";
 	}
+	
+	public String showDetailsEvent()
+	{
+		return "showDetailsEvent";
+	}
 }

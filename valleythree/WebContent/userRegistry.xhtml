@@ -37,7 +37,7 @@
         
         <div>
         <label for="tel">Telefon:</label>            
-            <h:inputText id="tel" value="#{visitor.tel}" required="true" p:placeholder="+43 660 1111111"
+            <h:inputText id="tel" value="#{visitor.tel}" required="true" p:placeholder="+43 660 1111111" p:pattern="^\+(?:[0-9] ?){6,14}[0-9]$"
             			requiredMessage="Geben Sie eine gueltige Telefonnummer ein"  >
             <f:validateLength minimum="4" maximum="45" />	
             </h:inputText>
@@ -56,7 +56,7 @@
 		</div>
 		<div>
 		<label for="ticket">Anzahl der Tickets, die Sie reservieren möchten:</label>            
-            <h:inputText id ="ticket" value="#{reservation.numberTickets}" required="true"  requiredMessage="Geben Sie eine ganze Zahl ein">
+            <h:inputText id ="ticket" value="#{reservation.numberTickets}" required="true" p:pattern="[1-9][0-9]?" requiredMessage="Geben Sie eine ganze Zahl ein">
             </h:inputText>
        		<h:message for="ticket"></h:message><br/>
 		</div>

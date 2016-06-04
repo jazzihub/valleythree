@@ -45,15 +45,8 @@ public class ImageServlet extends HttpServlet
 
 			if (e.getPoster() != null)
 			{
-				// response.setContentType("image/jpeg"); //Browser mitteilen,
-				// welches Format er erwarten kann
+				
 				byte[] imageBytes = e.getPoster();
-
-				// ByteArrayInputStream input = new
-				// ByteArrayInputStream(imageBytes);
-				// BufferedImage img = ImageIO.read(input);
-				// ImageIO.write(img, "JPG", response.getOutputStream());
-				// //alles in Bild umwandeln
 
 				response.getOutputStream().write(imageBytes);
 				response.getOutputStream().close();

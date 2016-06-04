@@ -18,7 +18,7 @@
 
 <h:body>
 <h1>Veranstaltung hinzufügen</h1>
-	<h:form id="formFoto" prependId = "false" enctype="multipart/form-data">
+	<h:form id="formFoto" prependId="false" enctype="multipart/form-data">
 		<div>
 				<label>Foto</label>
 				
@@ -46,14 +46,14 @@
 		</div>
 		<div>
 			<label>Datum</label>
-			<h:inputText id="date" p:type="date" value="#{event.begin}" p:placeholder="dd.MM.yyyy" required="true" requiredMessage="Geben Sie das Datum im Format dd.MM.yyyy ein">
+			<h:inputText id="date" p:type="date" value="#{event.begin}" p:placeholder="dd.MM.yyyy" required="true" converterMessage="Geben Sie ein gültiges Datum ein" requiredMessage="Geben Sie das Datum im Format dd.MM.yyyy ein">
 				<f:convertDateTime pattern="dd.MM.yyyy" timeZone="Europe/Berlin"/>
 			</h:inputText>
 			<h:message for="date"/>
 		</div>
 		<div>
 			<label>Uhrzeit</label>
-			<h:inputText id="time" p:type="date" p:placeholder="hh:mm" value="#{event.time}" requiredMessage="Geben Sie die Uhrzeit im Format HH.mm ein" required="true">
+			<h:inputText id="time" p:type="date" p:placeholder="hh:mm" value="#{event.time}" requiredMessage="Geben Sie die Uhrzeit im Format HH.mm ein" required="true" converterMessage="Geben Sie eine gültige Uhrzeit ein">
 				<f:convertDateTime pattern="HH:mm" timeZone="Europe/Berlin"/>
 			</h:inputText>
 			<h:message for="time"/>
@@ -92,7 +92,7 @@
 			<label for="plz">PLZ:</label>
 			<h:inputText id="plz" value="#{place.plz}" p:placeholder="1234"
 				required="true" p:pattern="^[0-9]*$"
-				requiredMessage="Geben Sie die PLZ ein">
+				requiredMessage="Geben Sie die PLZ ein" validatorMessage="Bitte geben Sie eine gültige PLZ ein (max. 5 Zahlen)">
 				<f:validateLongRange minimum="1000" maximum="99999" />
 			</h:inputText>
 			<h:message for="plz"></h:message>

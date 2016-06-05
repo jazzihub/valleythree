@@ -5,7 +5,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:pr="http://primefaces.org/ui">
 
 
 <h:head>
@@ -94,7 +95,15 @@
 				 	<h:commandLink value="Bearbeiten" action="#{navigation.updateEvent(e)}" ></h:commandLink>
 				 </h:column> -->
 				<h:column>
-					<h:commandLink value="Löschen" action="#{eventController.removeEvent(e)}" ></h:commandLink>
+					<pr:commandLink value="Löschen" type="button" onclick="PF('confirmation').show()" ></pr:commandLink>
+					
+					<pr:confirmDialog message="Möchten Sie die Veranstaltung wirklich löschen?"  header="Löschen"  widgetVar="confirmation">  
+    					<pr:commandButton value="Ja"  onclick="confirmation.hide()"  actionListener="#{eventController.removeEvent(e)}" >
+        						
+    					</pr:commandButton>  
+    					<pr:commandButton value="Nein" onclick="confirmation.hide()" type="button" />   
+					</pr:confirmDialog>
+					
 				</h:column>
 				
 				<h:column>

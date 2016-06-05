@@ -187,7 +187,7 @@ public class EventController implements Serializable
 		{
 			service.removeEvent(event.getNr());
 			logger.info("EventController.removeEvent ok");
-			return null;
+			return "organizerArea.xhtml";
 
 		} catch (Exception e)
 		{
